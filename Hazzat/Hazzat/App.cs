@@ -12,7 +12,7 @@ namespace Hazzat
         public App()
         {
             // The root page of your application
-            MainPage = new NavigationPage(new MainMenu());
+            MainPage = new MainMenu();
           
         }
 

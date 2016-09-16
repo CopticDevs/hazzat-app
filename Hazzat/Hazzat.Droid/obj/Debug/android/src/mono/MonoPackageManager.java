@@ -130,6 +130,12 @@ class MonoPackageManager_Resources {
 		"System.ServiceModel.Internals.dll",
 		"System.Text.RegularExpressions.dll",
 		"System.Resources.ResourceManager.dll",
+		"System.Diagnostics.Tools.dll",
+		"System.Runtime.Serialization.Primitives.dll",
+		"System.ServiceModel.Primitives.dll",
+		"System.ComponentModel.EventBasedAsync.dll",
+		"System.Net.Primitives.dll",
+		"System.ServiceModel.Http.dll",
 		"System.Collections.Concurrent.dll",
 		"System.Runtime.InteropServices.dll",
 	};

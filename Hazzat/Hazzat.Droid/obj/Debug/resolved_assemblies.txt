@@ -39,5 +39,12 @@ C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Droid\obj\Debug\android
 C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Droid\obj\Debug\android\assets\System.ServiceModel.Internals.dll
 C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Droid\obj\Debug\android\assets\System.Text.RegularExpressions.dll
 C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Droid\obj\Debug\android\assets\System.Resources.ResourceManager.dll
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Droid\obj\Debug\android\assets\System.Diagnostics.Tools.dll
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Droid\obj\Debug\android\assets\System.Runtime.Serialization.Primitives.dll
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Droid\obj\Debug\android\assets\System.ServiceModel.Primitives.dll
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Droid\obj\Debug\android\assets\System.ServiceModel.dll
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Droid\obj\Debug\android\assets\System.ComponentModel.EventBasedAsync.dll
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Droid\obj\Debug\android\assets\System.Net.Primitives.dll
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Droid\obj\Debug\android\assets\System.ServiceModel.Http.dll
 C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Droid\obj\Debug\android\assets\System.Collections.Concurrent.dll
 C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Droid\obj\Debug\android\assets\System.Runtime.InteropServices.dll
