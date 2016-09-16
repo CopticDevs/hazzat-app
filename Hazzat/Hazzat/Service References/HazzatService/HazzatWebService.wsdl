@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://hazzat.com/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://hazzat.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://hazzat.com/">
+      <s:element name="GetSeasons">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="isDateSpecific" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSeasonsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSeasonsResult" type="tns:ArrayOfSeasonInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSeasonInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SeasonInfo" nillable="true" type="tns:SeasonInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SeasonInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ItemId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ServiceHymnsCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Verse" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Season_Order" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Reason_ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reason_Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date_Specific" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSeasonServices">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="seasonId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSeasonServicesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSeasonServicesResult" type="tns:ArrayOfStructureInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfStructureInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="StructureInfo" nillable="true" type="tns:StructureInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StructureInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ItemId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Season_ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Season_Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Season_Verse" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Reason_ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Service_Order" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Service_ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Service_Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Has_Text" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Has_Hazzat" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Has_VerticalHazzat" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Has_Music" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Has_Audio" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Has_Video" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Has_Information" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Text_Count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Hazzat_Count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="VerticalHazzat_Count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Music_Count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Audio_Count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Video_Count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Information_Count" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSeasonServiceHymns">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="structureId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSeasonServiceHymnsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSeasonServiceHymnsResult" type="tns:ArrayOfServiceHymnInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfServiceHymnInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ServiceHymnInfo" nillable="true" type="tns:ServiceHymnInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ServiceHymnInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ItemId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Structure_ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Season_ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Season_Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Season_Verse" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Reason_ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Structure_Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Service_Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Hymn_Order" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceHymn_LongTitle" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Has_Text" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Has_Hazzat" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Has_VerticalHazzat" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Has_Music" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Has_Audio" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Has_Video" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Has_Information" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Text_Count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Hazzat_Count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="VerticalHazzat_Count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Music_Count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Audio_Count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Video_Count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Information_Count" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSeasonServiceHymnText">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ServiceHymnId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSeasonServiceHymnTextResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSeasonServiceHymnTextResult" type="tns:ArrayOfServiceHymnsContentInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfServiceHymnsContentInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ServiceHymnsContentInfo" nillable="true" type="tns:ServiceHymnsContentInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ServiceHymnsContentInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ItemId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Structure_Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ServiceHymn_ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceHymn_Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Content_ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Format_ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Format_Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Type_ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type_Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tune_ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tune_Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Content_English" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Content_Coptic" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Content_Arabic" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Updated_TimeStamp" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetSeasonsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSeasons" />
+  </wsdl:message>
+  <wsdl:message name="GetSeasonsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSeasonsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSeasonServicesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSeasonServices" />
+  </wsdl:message>
+  <wsdl:message name="GetSeasonServicesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSeasonServicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSeasonServiceHymnsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSeasonServiceHymns" />
+  </wsdl:message>
+  <wsdl:message name="GetSeasonServiceHymnsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSeasonServiceHymnsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSeasonServiceHymnTextSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSeasonServiceHymnText" />
+  </wsdl:message>
+  <wsdl:message name="GetSeasonServiceHymnTextSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSeasonServiceHymnTextResponse" />
+  </wsdl:message>
+  <wsdl:portType name="HazzatWebServiceSoap">
+    <wsdl:operation name="GetSeasons">
+      <wsdl:input message="tns:GetSeasonsSoapIn" />
+      <wsdl:output message="tns:GetSeasonsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSeasonServices">
+      <wsdl:input message="tns:GetSeasonServicesSoapIn" />
+      <wsdl:output message="tns:GetSeasonServicesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSeasonServiceHymns">
+      <wsdl:input message="tns:GetSeasonServiceHymnsSoapIn" />
+      <wsdl:output message="tns:GetSeasonServiceHymnsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSeasonServiceHymnText">
+      <wsdl:input message="tns:GetSeasonServiceHymnTextSoapIn" />
+      <wsdl:output message="tns:GetSeasonServiceHymnTextSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HazzatWebServiceSoap" type="tns:HazzatWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSeasons">
+      <soap:operation soapAction="http://hazzat.com/GetSeasons" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSeasonServices">
+      <soap:operation soapAction="http://hazzat.com/GetSeasonServices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSeasonServiceHymns">
+      <soap:operation soapAction="http://hazzat.com/GetSeasonServiceHymns" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSeasonServiceHymnText">
+      <soap:operation soapAction="http://hazzat.com/GetSeasonServiceHymnText" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="HazzatWebServiceSoap12" type="tns:HazzatWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSeasons">
+      <soap12:operation soapAction="http://hazzat.com/GetSeasons" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSeasonServices">
+      <soap12:operation soapAction="http://hazzat.com/GetSeasonServices" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSeasonServiceHymns">
+      <soap12:operation soapAction="http://hazzat.com/GetSeasonServiceHymns" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSeasonServiceHymnText">
+      <soap12:operation soapAction="http://hazzat.com/GetSeasonServiceHymnText" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HazzatWebService">
+    <wsdl:port name="HazzatWebServiceSoap" binding="tns:HazzatWebServiceSoap">
+      <soap:address location="http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="HazzatWebServiceSoap12" binding="tns:HazzatWebServiceSoap12">
+      <soap12:address location="http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
