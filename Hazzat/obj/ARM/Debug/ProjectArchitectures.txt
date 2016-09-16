@@ -1,1 +1,0 @@
-c:\users\beshoy\documents\visual studio 2015\Projects\Hazzat\Hazzat\Hazzat.csproj;arm
