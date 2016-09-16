@@ -1,0 +1,12 @@
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\bin\Debug\Hazzat.dll
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\bin\Debug\Hazzat.pdb
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\bin\Debug\Xamarin.Forms.Core.dll
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\bin\Debug\Xamarin.Forms.Platform.dll
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\bin\Debug\Xamarin.Forms.Xaml.dll
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\bin\Debug\Xamarin.Forms.Core.xml
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\bin\Debug\Xamarin.Forms.Xaml.xml
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\obj\Debug\Hazzat.csprojResolveAssemblyReference.cache
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\obj\Debug\Hazzat.dll
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\obj\Debug\Hazzat.pdb
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\obj\Debug\Hazzat.dll.mdb
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\bin\Debug\Hazzat.dll.mdb
