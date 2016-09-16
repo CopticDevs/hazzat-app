@@ -1,0 +1,2 @@
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Windows\Hazzat.Windows.csproj;arm
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\Hazzat.csproj;neutral

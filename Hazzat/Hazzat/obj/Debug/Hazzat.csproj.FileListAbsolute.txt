@@ -8,5 +8,4 @@ C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\bin\Debug\Xamarin.Forms
 C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\obj\Debug\Hazzat.csprojResolveAssemblyReference.cache
 C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\obj\Debug\Hazzat.dll
 C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\obj\Debug\Hazzat.pdb
-C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\obj\Debug\Hazzat.dll.mdb
-C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\bin\Debug\Hazzat.dll.mdb
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\obj\Debug\Hazzat.MainMenu.xaml.g.cs

@@ -1,0 +1,7 @@
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.UWP\obj\x86\Debug\Hazzat.UWP.csprojResolveAssemblyReference.cache
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.UWP\obj\x86\Debug\App.g.i.cs
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.UWP\obj\x86\Debug\App.g.cs
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.UWP\obj\x86\Debug\App.xaml
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.UWP\obj\x86\Debug\MainPage.xaml
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.UWP\obj\x86\Debug\App.xbf
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.UWP\obj\x86\Debug\MainPage.xbf
