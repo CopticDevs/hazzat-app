@@ -17,8 +17,12 @@ namespace Hazzat {
     public partial class MainMenu : global::Xamarin.Forms.ContentPage {
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
+        private global::Xamarin.Forms.StackLayout MenuStack;
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private void InitializeComponent() {
             this.LoadFromXaml(typeof(MainMenu));
+            MenuStack = this.FindByName<global::Xamarin.Forms.StackLayout>("MenuStack");
         }
     }
 }

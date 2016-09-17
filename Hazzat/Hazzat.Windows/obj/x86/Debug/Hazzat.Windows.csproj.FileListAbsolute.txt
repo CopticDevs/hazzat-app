@@ -45,3 +45,6 @@ C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Windows\obj\x86\Debug\X
 C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Windows\obj\x86\Debug\Xamarin.Forms.Platform.WinRT.Tablet.pri.xml
 C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Windows\obj\x86\Debug\ProjectArchitectures.txt
 C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Windows\obj\x86\Debug\Hazzat.Windows.csprojResolveAssemblyReference.cache
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Windows\bin\x86\Debug\GalaSoft.MvvmLight.dll
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Windows\bin\x86\Debug\GalaSoft.MvvmLight.pdb
+C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Windows\bin\x86\Debug\GalaSoft.MvvmLight.xml

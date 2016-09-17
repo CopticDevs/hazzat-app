@@ -43,6 +43,9 @@
     <AppxPackagedFile Include="C:\Users\besho\Source\Repos\hazzat.com-2.0\packages\Xamarin.Forms.2.0.0.6482\lib\win81\Xamarin.Forms.Xaml.dll">
       <PackagePath>Xamarin.Forms.Xaml.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\bin\Debug\GalaSoft.MvvmLight.dll">
+      <PackagePath>GalaSoft.MvvmLight.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Windows\Assets\Logo.scale-100.png">
       <PackagePath>Assets\Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>

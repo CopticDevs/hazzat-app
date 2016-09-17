@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="GetSeasonsResponse" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>Hazzat.HazzatService.GetSeasonsResponse</TypeInfo>
+   <TypeInfo>Hazzat.HazzatService.GetSeasonsResponse, Service References.HazzatService.Reference.cs.dll, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>
