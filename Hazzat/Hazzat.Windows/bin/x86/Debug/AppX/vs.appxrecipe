@@ -34,11 +34,11 @@
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat.Windows\bin\x86\Debug\Hazzat.Windows.exe">
       <PackagePath>Hazzat.Windows.exe</PackagePath>
-      <Modified>2016-09-17T17:20:17.321</Modified>
+      <Modified>2016-09-17T23:40:28.773</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\besho\Source\Repos\hazzat.com-2.0\Hazzat\Hazzat\bin\Debug\Hazzat.dll">
       <PackagePath>Hazzat.dll</PackagePath>
-      <Modified>2016-09-17T17:19:27.415</Modified>
+      <Modified>2016-09-17T23:40:26.650</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\besho\Source\Repos\hazzat.com-2.0\packages\Xamarin.Forms.2.0.0.6482\lib\win81\Xamarin.Forms.Core.dll">
       <PackagePath>Xamarin.Forms.Core.dll</PackagePath>
