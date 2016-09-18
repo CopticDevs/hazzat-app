@@ -26,7 +26,8 @@ namespace Hazzat
 
             // Loop through the Color structure fields.     
             foreach (FieldInfo info in typeof(Color).GetRuntimeFields())
-            {             // Skip the obsolete (i.e. misspelled) colors.      
+            {
+                // Skip the obsolete (i.e. misspelled) colors.      
                 if (info.GetCustomAttribute<ObsoleteAttribute>() != null)
                     continue;
 
@@ -51,4 +52,4 @@ namespace Hazzat
         }
     }
 }
-    
+
