@@ -1,1 +1,3 @@
-core.autocrlf = input 
+[core]
+  autocrlf = false 
+  eol = native
