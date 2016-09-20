@@ -1,4 +1,1 @@
-[core]
-  autocrlf = true
-  safecrlf = true
-  eol = native
+* text=auto
