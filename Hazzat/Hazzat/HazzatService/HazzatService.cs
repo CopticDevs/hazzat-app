@@ -95,7 +95,7 @@ namespace HazzatService
 
             catch (Exception ex)
             {
-                //Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
 
@@ -118,7 +118,7 @@ namespace HazzatService
 
             catch (Exception ex)
             {
-                //Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
 
@@ -174,7 +174,7 @@ public class BySeasonHymnInfoHymnMainViewModel
         }
         catch (Exception ex)
         {
-            // Debug.WriteLine(ex.Message);
+            Debug.WriteLine(ex.Message);
         }
     }
 
