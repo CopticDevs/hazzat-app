@@ -6,6 +6,8 @@ using System.Text;
 
 using Xamarin.Forms;
 
+
+
 namespace Hazzat
 {
     public class App : Application
@@ -44,12 +46,12 @@ namespace Hazzat
 
         protected override void OnStart()
         {
-            // Handle when your app starts
+            App.CurrentLanguage = (App.HymnLanguage)Enum.Parse(typeof(App.HymnLanguage), Application.Current.Properties?["AppLanguage"] as string);
         }
 
         protected override void OnSleep()
         {
-            // Handle when your app sleeps
+            Application.Current.Properties["AppLanguage"] = CurrentLanguage.ToString();
         }
 
         protected override void OnResume()

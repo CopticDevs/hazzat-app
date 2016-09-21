@@ -14,8 +14,6 @@ namespace Hazzat
         public MainMenu()
         {
             InitializeComponent();
-            App.CurrentLanguage = App.HymnLanguage.English; //Save this setting in app memory
-            BindingContext = App.NameViewModel.HymnsBySeason;
 
             colorStack();
         }
