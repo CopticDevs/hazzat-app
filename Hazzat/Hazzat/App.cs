@@ -46,7 +46,20 @@ namespace Hazzat
 
         protected override void OnStart()
         {
-            App.CurrentLanguage = (App.HymnLanguage)Enum.Parse(typeof(App.HymnLanguage), Application.Current.Properties?["AppLanguage"] as string);
+            InitializeDefaultAppSettings();
+
+            App.CurrentLanguage = (App.HymnLanguage)Enum.Parse(typeof(App.HymnLanguage), Application.Current.Properties["AppLanguage"] as string);
+        }
+
+        /// <summary>
+        /// Sets default app settings
+        /// </summary>
+        private void InitializeDefaultAppSettings()
+        {
+            if (!Application.Current.Properties.ContainsKey("AppLanguage"))
+            {
+                Application.Current.Properties["AppLanguage"] = App.HymnLanguage.English.ToString();
+            }
         }
 
         protected override void OnSleep()
