@@ -17,8 +17,8 @@ namespace Hazzat
         {
             InitializeComponent();
 
-            Messenger.Default.Register<NotificationMessage>(this, HandleStatusMessage);
-            App.NameViewModel.createSeasonsViewModel(true);
+            //Messenger.Default.Register<NotificationMessage>(this, HandleStatusMessage);
+            //App.NameViewModel.createSeasonsViewModel(true);
         }
 
 
@@ -26,12 +26,11 @@ namespace Hazzat
         {
             if (msg.Notification.Equals("Done"))
             {
-
                 if (App.NameViewModel.Seasons.Count() != 0)
                 {
                     foreach (SeasonInfo Season in App.NameViewModel.Seasons)
                     {
-                        MenuStack.Children.Add(CreateItemView(Color.White, Season.Name));
+                        //MenuStack.Children.Add(CreateItemView(Color.White, Season.Name));
                     }
                 }
             }
