@@ -1,5 +1,5 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using hazzat.com;
+﻿using hazzat.com;
+using HazzatService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,30 +15,34 @@ namespace Hazzat
     {
         public MainMenu()
         {
-            InitializeComponent();
+            SubscribeMessage();
 
-            Messenger.Default.Register<NotificationMessage>(this, HandleStatusMessage);
             App.NameViewModel.createSeasonsViewModel(true);
+
+            InitializeComponent();
         }
 
-
-        private void HandleStatusMessage(NotificationMessage msg)
+        private void SubscribeMessage()
         {
-            if (msg.Notification.Equals("Done"))
+            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "Done", (sender) =>
             {
-
-                if (App.NameViewModel.Seasons.Count() != 0)
+                if (App.NameViewModel?.Seasons != null)
                 {
-                    foreach (SeasonInfo Season in App.NameViewModel.Seasons)
+                    if (App.NameViewModel.Seasons.Count() > 0)
                     {
-                        MenuStack.Children.Add(CreateItemView(Color.White, Season.Name));
+                        foreach (SeasonInfo Season in App.NameViewModel.Seasons)
+                        {
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                MenuStack.Children.Add(CreateItemView(Color.White, Season.Name));
+                            });
+                        }
                     }
                 }
-            }
+            });
         }
 
-
-        View CreateItemView(Color color, string name)
+        public View CreateItemView(Color color, string name)
         {
             return new Frame
             {
@@ -46,15 +50,17 @@ namespace Hazzat
                 Padding = new Thickness(5),
                 Content = new StackLayout
                 {
-                    Orientation = StackOrientation.Horizontal,
+                    Orientation = StackOrientation.Vertical,
                     Spacing = 15,
                     Children =
                     {
                         new BoxView
                         {
+                            HeightRequest= 200,
                             Color = color
                         }, new Label
-                        { Text = name,
+                        {
+                            Text = name,
                             FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
                             VerticalOptions = LayoutOptions.Center,
                             HorizontalOptions = LayoutOptions.StartAndExpand
