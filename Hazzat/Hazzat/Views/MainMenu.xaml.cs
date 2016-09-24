@@ -15,11 +15,11 @@ namespace Hazzat
     {
         public MainMenu()
         {
+            InitializeComponent();
+
             SubscribeMessage();
 
             App.NameViewModel.createSeasonsViewModel(true);
-
-            InitializeComponent();
         }
 
         private void SubscribeMessage()
@@ -46,19 +46,17 @@ namespace Hazzat
         {
             return new Frame
             {
-                OutlineColor = Color.Accent,
-                Padding = new Thickness(5),
+                OutlineColor = Color.Transparent,
+                TranslationX = 12,
+                BackgroundColor = Color.Default,
+                Padding = new Thickness(10),
                 Content = new StackLayout
                 {
                     Orientation = StackOrientation.Vertical,
                     Spacing = 15,
                     Children =
                     {
-                        new BoxView
-                        {
-                            HeightRequest= 200,
-                            Color = color
-                        }, new Label
+                        new Label
                         {
                             Text = name,
                             FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
