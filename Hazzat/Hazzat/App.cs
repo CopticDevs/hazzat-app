@@ -26,18 +26,6 @@ namespace Hazzat
                 return nameViewModel;
             }
         }
-        private static BySeasonHymnInfoHymnMainViewModel seasonViewModel = null;
-        internal static BySeasonHymnInfoHymnMainViewModel SeasonViewModel
-        {
-            get
-            {
-                if (seasonViewModel == null)
-                {
-                    seasonViewModel = new BySeasonHymnInfoHymnMainViewModel();
-                }
-                return seasonViewModel;
-            }
-        }
         public App()
         {
             // The root page of your application

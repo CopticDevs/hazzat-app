@@ -4,8 +4,7 @@
              x:Class="Hazzat.MainMenu">
   <ContentPage.Content>
     <ScrollView>
-      <StackLayout Spacing="10" x:Name="MenuStack">
-
+      <StackLayout Spacing="10" x:Name="MenuStack" x:LayoutParams="85,85" >
       </StackLayout>
     </ScrollView>
   </ContentPage.Content>

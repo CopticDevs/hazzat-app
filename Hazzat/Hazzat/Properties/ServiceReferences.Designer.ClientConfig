@@ -1,4 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
 <configuration>
-    <configSections>
-    </configSections>
+  <system.serviceModel>
+    <bindings>
+      <basicHttpBinding>
+        <binding name="HazzatWebServiceSoap" maxBufferSize="2147483647"
+            maxReceivedMessageSize="2147483647">
+          <security mode="None" />
+        </binding>
+      </basicHttpBinding>
+    </bindings>
+    <client>
+      <endpoint address="http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"
+          binding="basicHttpBinding" bindingConfiguration="HazzatWebServiceSoap"
+          contract="HazzatWebServiceSoap" name="HazzatWebServiceSoap" />
+    </client>
+    <extensions />
+  </system.serviceModel>
 </configuration>
