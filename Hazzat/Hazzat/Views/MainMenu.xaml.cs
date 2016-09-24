@@ -15,26 +15,31 @@ namespace Hazzat
     {
         public MainMenu()
         {
-            InitializeComponent();
+            SubscribeMessage();
 
-            //Messenger.Default.Register<NotificationMessage>(this, HandleStatusMessage);
-            //App.NameViewModel.createSeasonsViewModel(true);
+            App.NameViewModel.createSeasonsViewModel(true);
+
+            InitializeComponent();
         }
 
-
-        private void HandleStatusMessage(NotificationMessage msg)
+        private void SubscribeMessage()
         {
-            if (msg.Notification.Equals("Done"))
+            MessagingCenter.Subscribe<MainMenu>(this, "Done", (sender) =>
             {
-                if (App.NameViewModel.Seasons.Count() != 0)
+
+                if (App.NameViewModel?.Seasons != null)
                 {
-                    foreach (SeasonInfo Season in App.NameViewModel.Seasons)
+                    if (App.NameViewModel.Seasons.Count() > 0)
                     {
-                        //MenuStack.Children.Add(CreateItemView(Color.White, Season.Name));
+                        foreach (SeasonInfo Season in App.NameViewModel.Seasons)
+                        {
+                            MenuStack.Children.Add(CreateItemView(Color.White, Season.Name));
+                        }
                     }
                 }
-            }
+            });
         }
+
 
 
         View CreateItemView(Color color, string name)

@@ -3,7 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Hazzat.MainMenu">
   <ContentPage.Content>
-    <Label Text="hazzat.com"> </Label>
-    
+    <StackLayout>
+      <Label Text="hazzat.com"> </Label>
+      <ScrollView>
+        <StackLayout Spacing="10" x:Name="MenuStack" x:LayoutParams="85,85" >
+        </StackLayout>
+      </ScrollView>
+    </StackLayout>
   </ContentPage.Content>
 </ContentPage>

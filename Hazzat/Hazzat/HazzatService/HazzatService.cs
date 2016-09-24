@@ -5,6 +5,7 @@ using hazzat.com;
 using System.Diagnostics;
 using GalaSoft.MvvmLight.Messaging;
 using System.ServiceModel;
+using Xamarin.Forms;
 
 namespace HazzatService
 {
@@ -82,7 +83,7 @@ namespace HazzatService
 
         public void createSeasonsViewModel(bool isDateSpecific)
         {
-            Messenger.Default.Send(new NotificationMessage("Loading"));
+            MessagingCenter.Send(this, "Loading");
             try
             {
                 HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding(), new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
@@ -99,7 +100,7 @@ namespace HazzatService
         {
             Seasons = e.Result;
             IsDataLoaded = true;
-            Messenger.Default.Send(new NotificationMessage("Done"));
+            MessagingCenter.Send(this, "Done");
         }
 
 
