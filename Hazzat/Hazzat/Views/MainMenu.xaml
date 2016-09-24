@@ -6,7 +6,7 @@
     <StackLayout>
       <Label Text="hazzat.com"> </Label>
       <ScrollView>
-        <StackLayout Spacing="10" x:Name="MenuStack" x:LayoutParams="85,85" >
+        <StackLayout Spacing="10" x:Name="MenuStack" >
         </StackLayout>
       </ScrollView>
     </StackLayout>
