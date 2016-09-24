@@ -30,13 +30,11 @@ namespace Hazzat
                 {
                     if (App.NameViewModel.Seasons.Count() > 0)
                     {
-
                         foreach (SeasonInfo Season in App.NameViewModel.Seasons)
                         {
                             Device.BeginInvokeOnMainThread(() =>
                             {
                                 MenuStack.Children.Add(CreateItemView(Color.White, Season.Name));
-
                             });
                         }
                     }
@@ -44,7 +42,7 @@ namespace Hazzat
             });
         }
 
-        View CreateItemView(Color color, string name)
+        public View CreateItemView(Color color, string name)
         {
             return new Frame
             {
@@ -58,9 +56,11 @@ namespace Hazzat
                     {
                         new BoxView
                         {
+                            HeightRequest= 200,
                             Color = color
                         }, new Label
-                        { Text = name,
+                        {
+                            Text = name,
                             FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
                             VerticalOptions = LayoutOptions.Center,
                             HorizontalOptions = LayoutOptions.StartAndExpand
