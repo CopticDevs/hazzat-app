@@ -3,8 +3,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using hazzat.com;
 using System.Diagnostics;
-using GalaSoft.MvvmLight.Messaging;
 using System.ServiceModel;
+using Xamarin.Forms;
 
 namespace HazzatService
 {
@@ -82,7 +82,7 @@ namespace HazzatService
 
         public void createSeasonsViewModel(bool isDateSpecific)
         {
-            Messenger.Default.Send(new NotificationMessage("Loading"));
+            //MessagingCenter.Send(this, "Loading");
             try
             {
                 HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding(), new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
@@ -99,7 +99,7 @@ namespace HazzatService
         {
             Seasons = e.Result;
             IsDataLoaded = true;
-            Messenger.Default.Send(new NotificationMessage("Done"));
+            MessagingCenter.Send(this, "Done");
         }
 
 
@@ -108,7 +108,7 @@ namespace HazzatService
 
         public void createViewModelBySeason(int Season)
         {
-            Messenger.Default.Send(new NotificationMessage("Loading"));
+            MessagingCenter.Send(this, "Loading");
             try
             {
                 HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient();
@@ -125,12 +125,12 @@ namespace HazzatService
         public void GetCompletedStructBySeason(object sender, GetSeasonServicesCompletedEventArgs e)
         {
             HymnsBySeason = e.Result;
-            Messenger.Default.Send(new NotificationMessage("Done"));
+            MessagingCenter.Send(this, "Done");
         }
 
         public void createViewModelHymns(int StructId)
         {
-            Messenger.Default.Send(new NotificationMessage("Loading"));
+            MessagingCenter.Send(this, "Loading");
             try
             {
                 HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient();
@@ -147,13 +147,13 @@ namespace HazzatService
         public void GetCompletedHymnsBySeason(object sender, GetSeasonServiceHymnsCompletedEventArgs e)
         {
             HazzatHymns = e.Result;
-            Messenger.Default.Send(new NotificationMessage("Done"));
+            MessagingCenter.Send(this, "Done");
         }
 
 
         public void createHymnTextViewModel(int itemId)
         {
-            Messenger.Default.Send(new NotificationMessage("Loading"));
+            MessagingCenter.Send(this, "Loading");
             try
             {
                 HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient();
@@ -170,7 +170,7 @@ namespace HazzatService
         {
             HymnContentInfo = e.Result;
             IsDataLoaded = true;
-            Messenger.Default.Send(new NotificationMessage("DoneWithContent"));
+            MessagingCenter.Send(this, "DoneWithContent");
         }
     }
 }
