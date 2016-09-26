@@ -28,7 +28,10 @@ namespace Hazzat
             {
                 if (App.NameViewModel?.Seasons != null)
                 {
-                    MenuStack.ItemsSource = App.NameViewModel.Seasons;
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        MenuStack.ItemsSource = App.NameViewModel.Seasons;
+                    });
                 }
             });
         }

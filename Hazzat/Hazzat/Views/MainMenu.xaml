@@ -7,15 +7,17 @@
   <ContentPage Title="Seasons">
     <StackLayout>
       <ListView x:Name="MenuStack">
-        <ListView.ItemTemplate >
+        <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-              <Frame HasShadow="True" OutlineColor="{Binding accent}">                
-                <StackLayout Orientation="Horizontal" Padding="10,10,10,10">
-                  <Label FontSize="Medium" Text="{Binding Name}" ></Label>
-                  <Label FontSize="Medium" Text="{Binding ServiceHymnsCount, StringFormat='({0})'}" HorizontalOptions="StartAndExpand"></Label>
-                </StackLayout>
-              </Frame>
+              <StackLayout>
+                <Frame HasShadow="True" OutlineColor="Silver">
+                  <StackLayout Orientation="Horizontal" Spacing="15">
+                    <Label FontSize="Medium" Text="{Binding Name}" TextColor="{Binding accent}"></Label>
+                    <Label FontSize="Medium" Text="{Binding ServiceHymnsCount, StringFormat='({0})'}" TextColor="{Binding accent}" HorizontalOptions="StartAndExpand"></Label>
+                  </StackLayout>
+                </Frame>
+              </StackLayout>
             </ViewCell>
           </DataTemplate>
         </ListView.ItemTemplate>
@@ -24,34 +26,12 @@
   </ContentPage>
   <ContentPage Title="Types">
     <StackLayout>
-      <ListView>
-        <ListView.ItemTemplate >
-          <DataTemplate>
-            <ViewCell>
-              <StackLayout Orientation="Horizontal" Padding="10,10,10,10">
-                <Label FontSize="Medium" Text="{Binding Type}" ></Label>
-                <Label FontSize="Medium" Text="{Binding ServiceHymnsCount, StringFormat='({0})'}" HorizontalOptions="StartAndExpand"></Label>
-              </StackLayout>
-            </ViewCell>
-          </DataTemplate>
-        </ListView.ItemTemplate>
-      </ListView>
+      <!--Code Here-->
     </StackLayout>
   </ContentPage>
   <ContentPage Title="Tunes">
     <StackLayout>
-      <ListView>
-        <ListView.ItemTemplate >
-          <DataTemplate>
-            <ViewCell>
-              <StackLayout Orientation="Horizontal" Padding="10,10,10,10">
-                <Label FontSize="Medium" Text="{Binding Tunes}" ></Label>
-                <Label FontSize="Medium" Text="{Binding ServiceHymnsCount, StringFormat='({0})'}" HorizontalOptions="StartAndExpand"></Label>
-              </StackLayout>
-            </ViewCell>
-          </DataTemplate>
-        </ListView.ItemTemplate>
-      </ListView>
+      <!--Code Here-->
     </StackLayout>
   </ContentPage>
 </TabbedPage>
