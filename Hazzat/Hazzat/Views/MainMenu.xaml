@@ -10,9 +10,9 @@
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-              <StackLayout>
-                <Frame HasShadow="True" OutlineColor="Silver">
-                  <StackLayout Orientation="Horizontal" Spacing="15">
+              <StackLayout Padding="10,10,10,10">            
+                <Frame HasShadow="True" OutlineColor="Silver" Padding="2.5,2.5,2.5,2.5">
+                  <StackLayout Orientation="Horizontal">
                     <Label FontSize="Medium" Text="{Binding Name}" TextColor="{Binding accent}"></Label>
                     <Label FontSize="Medium" Text="{Binding ServiceHymnsCount, StringFormat='({0})'}" TextColor="{Binding accent}" HorizontalOptions="StartAndExpand"></Label>
                   </StackLayout>
