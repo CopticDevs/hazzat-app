@@ -1,4 +1,5 @@
 ﻿using hazzat.com;
+using Hazzat.Views;
 using HazzatService;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,10 @@ namespace Hazzat
                     });
                 }
             });
+        }
+
+        public async void SeasonSelected(object sender, SelectedItemChangedEventArgs e) {
+            await Navigation.PushModalAsync(new SectionMenu());
         }
     }
 }
