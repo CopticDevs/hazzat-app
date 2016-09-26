@@ -34,7 +34,7 @@ namespace Hazzat
                         {
                             Device.BeginInvokeOnMainThread(() =>
                             {
-                                MenuStack.Children.Add(CreateItemView(Color.White, Season.Name));
+                                MenuStack.Add(CreateItemView(Season.Name, $"({Season.ServiceHymnsCount.ToString()}) hymns"));
                             });
                         }
                     }
@@ -42,29 +42,12 @@ namespace Hazzat
             });
         }
 
-        public View CreateItemView(Color color, string name)
+        public TextCell CreateItemView(string name, string description)
         {
-            return new Frame
+            return new TextCell
             {
-                OutlineColor = Color.Transparent,
-                TranslationX = 12,
-                BackgroundColor = Color.Default,
-                Padding = new Thickness(10),
-                Content = new StackLayout
-                {
-                    Orientation = StackOrientation.Vertical,
-                    Spacing = 15,
-                    Children =
-                    {
-                        new Label
-                        {
-                            Text = name,
-                            FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
-                            VerticalOptions = LayoutOptions.Center,
-                            HorizontalOptions = LayoutOptions.StartAndExpand
-                        },
-                    }
-                }
+                Text = name,
+                Detail = description
             };
         }
     }

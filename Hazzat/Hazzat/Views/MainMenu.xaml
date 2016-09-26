@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Hazzat.MainMenu">
+             x:Class="Hazzat.MainMenu"
+             Padding="{StaticResource padding}">
   <ContentPage.Content>
     <StackLayout>
-      <Label Text="hazzat.com"> </Label>
-      <ScrollView>
-        <StackLayout Spacing="10" x:Name="MenuStack" >
-        </StackLayout>
-      </ScrollView>
+      <Label Text="hazzat.com" FontSize="Large" TextColor="{StaticResource accent}"></Label>
+      <TableView Intent="Menu">
+        <TableRoot Title="Seasons" >
+          <TableSection x:Name="MenuStack">
+          </TableSection>
+        </TableRoot>
+      </TableView>
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>
