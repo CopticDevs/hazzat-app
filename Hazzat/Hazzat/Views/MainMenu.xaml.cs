@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace Hazzat
 {
-    public partial class MainMenu : ContentPage
+    public partial class MainMenu : TabbedPage
     {
         public MainMenu()
         {
@@ -28,27 +28,9 @@ namespace Hazzat
             {
                 if (App.NameViewModel?.Seasons != null)
                 {
-                    if (App.NameViewModel.Seasons.Count() > 0)
-                    {
-                        foreach (SeasonInfo Season in App.NameViewModel.Seasons)
-                        {
-                            Device.BeginInvokeOnMainThread(() =>
-                            {
-                                MenuStack.Add(CreateItemView(Season.Name, $"({Season.ServiceHymnsCount.ToString()}) hymns"));
-                            });
-                        }
-                    }
+                    MenuStack.ItemsSource = App.NameViewModel.Seasons;
                 }
             });
-        }
-
-        public TextCell CreateItemView(string name, string description)
-        {
-            return new TextCell
-            {
-                Text = name,
-                Detail = description
-            };
         }
     }
 }
