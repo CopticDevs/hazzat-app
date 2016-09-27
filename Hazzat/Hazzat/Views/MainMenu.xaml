@@ -6,7 +6,7 @@
             Title="hazzat.com">
   <ContentPage Title="Seasons">
     <StackLayout>
-      <ListView x:Name="MenuStack" ItemSelected="SeasonSelected">
+      <ListView x:Name="MenuStack" ItemTapped="SeasonSelected">
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>

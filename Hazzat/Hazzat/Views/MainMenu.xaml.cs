@@ -37,7 +37,7 @@ namespace Hazzat
             });
         }
 
-        public async void SeasonSelected(object sender, SelectedItemChangedEventArgs e) {
+        public async void SeasonSelected(object sender, ItemTappedEventArgs e) {
             await Navigation.PushModalAsync(new SectionMenu());
         }
     }
