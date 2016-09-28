@@ -1,4 +1,5 @@
 ﻿using hazzat.com;
+using Hazzat.Views;
 using HazzatService;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,15 @@ using Xamarin.Forms;
 
 namespace Hazzat
 {
-    public partial class MainMenu : ContentPage
+    public partial class MainMenu : TabbedPage
     {
         public MainMenu()
         {
+            InitializeComponent();
+
             SubscribeMessage();
 
             App.NameViewModel.createSeasonsViewModel(true);
-
-            InitializeComponent();
         }
 
         private void SubscribeMessage()
@@ -28,47 +29,20 @@ namespace Hazzat
             {
                 if (App.NameViewModel?.Seasons != null)
                 {
-                    if (App.NameViewModel.Seasons.Count() > 0)
+                    Device.BeginInvokeOnMainThread(() =>
                     {
-                        foreach (SeasonInfo Season in App.NameViewModel.Seasons)
-                        {
-                            Device.BeginInvokeOnMainThread(() =>
-                            {
-                                MenuStack.Children.Add(CreateItemView(Color.White, Season.Name));
-                            });
-                        }
-                    }
+                        MenuStack.ItemsSource = App.NameViewModel.Seasons;
+                    });
                 }
             });
         }
 
-        public View CreateItemView(Color color, string name)
-        {
-            return new Frame
-            {
-                OutlineColor = Color.Accent,
-                Padding = new Thickness(5),
-                Content = new StackLayout
-                {
-                    Orientation = StackOrientation.Vertical,
-                    Spacing = 15,
-                    Children =
-                    {
-                        new BoxView
-                        {
-                            HeightRequest= 200,
-                            Color = color
-                        }, new Label
-                        {
-                            Text = name,
-                            FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
-                            VerticalOptions = LayoutOptions.Center,
-                            HorizontalOptions = LayoutOptions.StartAndExpand
-                        },
-                    }
-                }
-            };
+        void OnToolbarItemClicked(object sender, EventArgs args) { ToolbarItem toolbarItem = (ToolbarItem)sender; DisplayAlert("Yo!","ToolbarItem '" + toolbarItem.Text + "' clicked","okay"); }
+
+        public async void SeasonSelected(object sender, ItemTappedEventArgs e) {
+            await Navigation.PushAsync(new SectionMenu());
         }
+
     }
 }
 

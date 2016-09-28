@@ -26,10 +26,27 @@ namespace Hazzat
                 return nameViewModel;
             }
         }
+
+
+
         public App()
         {
-            // The root page of your application
-            MainPage = new MainMenu();
+            Resources = new ResourceDictionary();
+
+            //Define global app styles here
+            Resources.Add(new Style(typeof(ContentPage))
+            {
+                Setters = {
+                    new Setter
+                    {
+                        Property = ContentPage.PaddingProperty,
+                        Value = Device.OnPlatform(new Thickness(10, 10, 0, 0), new Thickness(10), new Thickness(15, 15, 0, 0))
+                    }
+                }
+            });
+            Resources.Add("accent", Color.Accent);
+            Resources.Add("default", Color.Default);
+            MainPage = new NavigationPage(new MainMenu()); //Temp fix for insulation. NavigationPage -> TabbedPage 
         }
 
         protected override void OnStart()

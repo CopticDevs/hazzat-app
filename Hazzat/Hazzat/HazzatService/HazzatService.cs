@@ -72,7 +72,7 @@ namespace HazzatService
     public class ByNameMainViewModel
     {
         /// <summary>
-        /// A collection for SeasonName objects
+        /// A collection of hazzat.com objects
         /// </summary>
         public SeasonInfo[] Seasons { get; private set; }
         public HymnStructNameViewModel[] Hymns { get; private set; }
@@ -82,7 +82,7 @@ namespace HazzatService
 
         public void createSeasonsViewModel(bool isDateSpecific)
         {
-            //MessagingCenter.Send(this, "Loading");
+            MessagingCenter.Send(this, "Loading");
             try
             {
                 HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding(), new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
@@ -101,8 +101,6 @@ namespace HazzatService
             IsDataLoaded = true;
             MessagingCenter.Send(this, "Done");
         }
-
-
 
         public bool IsDataLoaded { get; set; }
 
