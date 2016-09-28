@@ -26,9 +26,15 @@ namespace Hazzat
                 return nameViewModel;
             }
         }
+
+
+
         public App()
         {
-            // The root page of your application
+            Resources = new ResourceDictionary();
+            Resources.Add("padding",Device.OnPlatform(new Thickness(10,35,0,10), new Thickness(10), new Thickness(15,15,0,0)));
+            Resources.Add("accent", Color.Accent);
+            Resources.Add("default", Color.Default);
             MainPage = new MainMenu();
         }
 
