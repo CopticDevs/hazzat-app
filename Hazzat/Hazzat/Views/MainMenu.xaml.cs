@@ -37,9 +37,12 @@ namespace Hazzat
             });
         }
 
+        void OnToolbarItemClicked(object sender, EventArgs args) { ToolbarItem toolbarItem = (ToolbarItem)sender; DisplayAlert("Yo!","ToolbarItem '" + toolbarItem.Text + "' clicked","okay"); }
+
         public async void SeasonSelected(object sender, ItemTappedEventArgs e) {
-            await Navigation.PushModalAsync(new SectionMenu());
+            await Navigation.PushAsync(new SectionMenu());
         }
+
     }
 }
 
