@@ -1,4 +1,5 @@
-﻿using HazzatService;
+﻿using hazzat.com;
+using HazzatService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,13 @@ namespace Hazzat.Views
                     });
                 }
             });
+        }
+
+        public async void HymnSelected(object sender, ItemTappedEventArgs e)
+        {
+            ServiceHymnInfo item = (ServiceHymnInfo)e.Item;
+
+            await Navigation.PushAsync(new HymnPage(item.Title, item.ItemId));
         }
     }
 }
