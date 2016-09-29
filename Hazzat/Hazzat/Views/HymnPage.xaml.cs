@@ -31,7 +31,7 @@ namespace Hazzat.Views
                     Device.BeginInvokeOnMainThread(() =>
                     {
                         HymnText.Text = App.NameViewModel.HymnContentInfo[0].Content_English;
-                        Title = $"{Title} - {App.NameViewModel.HymnContentInfo[0].Type_Name}";
+                        Title = $"{Title} - Tune {App.NameViewModel.HymnContentInfo[0].Type_Name}";
                     });
                 }
             });
