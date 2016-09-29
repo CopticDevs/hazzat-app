@@ -37,7 +37,7 @@ namespace Hazzat.Views
             });
         }
 
-        protected async void ServiceSelected (object sender, ItemTappedEventArgs e)
+        protected async void ServiceSelected(object sender, ItemTappedEventArgs e)
         {
             StructureInfo item = (StructureInfo) e.Item;
 
