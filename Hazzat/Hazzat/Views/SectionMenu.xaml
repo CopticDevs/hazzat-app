@@ -2,5 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Hazzat.Views.SectionMenu">
-  <Label Text="Section Menu" VerticalOptions="Center" HorizontalOptions="Center" />
+  <ListView x:Name="StructList" ItemTapped="ServiceSelected"> 
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <TextCell Text="{Binding Service_Name}" Detail="{Binding Text_Count, StringFormat='({0})'}">
+        </TextCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
 </ContentPage>
