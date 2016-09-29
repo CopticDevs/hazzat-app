@@ -2,5 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Hazzat.Views.HymnsView">
-  <Label Text="HymnsView" VerticalOptions="Center" HorizontalOptions="Center" />
+  <ListView x:Name="HymnList">
+    <ItemTemplate>
+      <DataTemplate>
+        <TextCell>
+
+        </TextCell>
+      </DataTemplate>
+    </ItemTemplate>
+  </ListView>
 </ContentPage>
