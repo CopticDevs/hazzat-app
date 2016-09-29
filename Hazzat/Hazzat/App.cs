@@ -32,10 +32,21 @@ namespace Hazzat
         public App()
         {
             Resources = new ResourceDictionary();
-            Resources.Add("padding",Device.OnPlatform(new Thickness(10,35,0,10), new Thickness(10), new Thickness(15,15,0,0)));
+
+            //Define global app styles here
+            Resources.Add(new Style(typeof(ContentPage))
+            {
+                Setters = {
+                    new Setter
+                    {
+                        Property = ContentPage.PaddingProperty,
+                        Value = Device.OnPlatform(new Thickness(10, 10, 0, 0), new Thickness(10), new Thickness(15, 15, 0, 0))
+                    }
+                }
+            });
             Resources.Add("accent", Color.Accent);
             Resources.Add("default", Color.Default);
-            MainPage = new MainMenu();
+            MainPage = new NavigationPage(new MainMenu()); //Temp fix for insulation. NavigationPage -> TabbedPage 
         }
 
         protected override void OnStart()

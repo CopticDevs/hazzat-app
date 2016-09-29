@@ -72,7 +72,7 @@ namespace HazzatService
     public class ByNameMainViewModel
     {
         /// <summary>
-        /// A collection for SeasonName objects
+        /// A collection of hazzat.com objects
         /// </summary>
         public SeasonInfo[] Seasons { get; private set; }
         public HymnStructNameViewModel[] Hymns { get; private set; }
@@ -82,7 +82,7 @@ namespace HazzatService
 
         public void createSeasonsViewModel(bool isDateSpecific)
         {
-            //MessagingCenter.Send(this, "Loading");
+            MessagingCenter.Send(this, "Loading");
             try
             {
                 HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding(), new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
@@ -98,20 +98,15 @@ namespace HazzatService
         public void client_GetCompleted(object sender, GetSeasonsCompletedEventArgs e)
         {
             Seasons = e.Result;
-            IsDataLoaded = true;
             MessagingCenter.Send(this, "Done");
         }
-
-
-
-        public bool IsDataLoaded { get; set; }
 
         public void createViewModelBySeason(int Season)
         {
             MessagingCenter.Send(this, "Loading");
             try
             {
-                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient();
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding(), new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
                 client.GetSeasonServicesCompleted += new EventHandler<GetSeasonServicesCompletedEventArgs>(GetCompletedStructBySeason);
                 client.GetSeasonServicesAsync(Season);
             }
@@ -133,7 +128,7 @@ namespace HazzatService
             MessagingCenter.Send(this, "Loading");
             try
             {
-                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient();
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding(), new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
                 client.GetSeasonServiceHymnsCompleted += new EventHandler<GetSeasonServiceHymnsCompletedEventArgs>(GetCompletedHymnsBySeason);
                 client.GetSeasonServiceHymnsAsync(StructId);
             }
@@ -156,7 +151,7 @@ namespace HazzatService
             MessagingCenter.Send(this, "Loading");
             try
             {
-                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient();
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding(), new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
                 client.GetSeasonServiceHymnTextCompleted += new EventHandler<GetSeasonServiceHymnTextCompletedEventArgs>(client_GetCompletedHymnInfo);
                 client.GetSeasonServiceHymnTextAsync(itemId);
             }
@@ -169,7 +164,6 @@ namespace HazzatService
         public void client_GetCompletedHymnInfo(object sender, GetSeasonServiceHymnTextCompletedEventArgs e)
         {
             HymnContentInfo = e.Result;
-            IsDataLoaded = true;
             MessagingCenter.Send(this, "DoneWithContent");
         }
     }
