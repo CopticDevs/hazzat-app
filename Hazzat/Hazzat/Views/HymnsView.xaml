@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Hazzat.Views.HymnsView">
   <ListView x:Name="HymnList">
-    <ItemTemplate>
+    <ListView.ItemTemplate>
       <DataTemplate>
-        <TextCell>
+        <TextCell Text="{Binding Title}">
 
         </TextCell>
       </DataTemplate>
-    </ItemTemplate>
+    </ListView.ItemTemplate>
   </ListView>
 </ContentPage>

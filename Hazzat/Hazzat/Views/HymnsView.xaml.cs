@@ -14,7 +14,7 @@ namespace Hazzat.Views
         public HymnsView(string ServiceName, int ServiceId)
         {
             InitializeComponent();
-
+            Title = ServiceName;
             SubscribeMessage();
 
             App.NameViewModel.createViewModelHymns(ServiceId);
