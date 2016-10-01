@@ -1,7 +1,9 @@
 ﻿using hazzat.com;
+using Hazzat.HazzatService;
 using HazzatService;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +14,13 @@ namespace Hazzat.Views
 {
     public partial class SectionMenu : ContentPage
     {
+        private ObservableCollection<ServiceDetails> serviceList { get; set; }
+
         public SectionMenu(string Season, int SeasonId)
         {
             Title = Season;
+
+            serviceList = new ObservableCollection<ServiceDetails>();
 
             InitializeComponent();
 
@@ -29,19 +35,50 @@ namespace Hazzat.Views
             {
                 if (App.NameViewModel?.HymnsBySeason != null)
                 {
+                    LoadServiceHymns(App.NameViewModel.HymnsBySeason);
+
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        StructList.ItemsSource = App.NameViewModel.HymnsBySeason;
+                        StructList.ItemsSource = serviceList;
                     });
                 }
             });
         }
 
-        protected async void ServiceSelected(object sender, ItemTappedEventArgs e)
+        private void LoadServiceHymns(StructureInfo[] hymnsBySeason)
         {
-            StructureInfo item = (StructureInfo) e.Item;
+            foreach (var structInfo in hymnsBySeason.OrderBy(s => s.Service_Order))
+            {
+                serviceList.Add(new ServiceDetails()
+                {
+                    ServiceName = structInfo.Service_Name,
+                    StructureId = structInfo.ItemId
+                });
 
-            await Navigation.PushAsync(new HymnsView(item.Service_Name, item.ItemId));
+                App.NameViewModel.fetchServiceHymns(structInfo.ItemId, GetCompletedHymnsBySeason);
+            }
+        }
+
+        private void GetCompletedHymnsBySeason(object sender, GetSeasonServiceHymnsCompletedEventArgs e)
+        {
+            var fetchedHymns = e.Result;
+
+            if (fetchedHymns.Length != 0)
+            {
+                var serviceInfo = this.serviceList.First(s => s.StructureId == fetchedHymns[0].Structure_ID);                    
+
+                foreach (var hymnInfo in fetchedHymns)
+                {
+                    serviceInfo.Add(hymnInfo);
+                }
+            }
+        }
+
+        protected async void ServiceHymnTapped(object sender, ItemTappedEventArgs e)
+        {
+            ServiceHymnInfo item = (ServiceHymnInfo)e.Item;
+
+            await Navigation.PushAsync(new HymnPage(item.Title, item.ItemId));
         }
     }
 }
