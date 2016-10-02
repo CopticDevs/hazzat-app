@@ -26,7 +26,7 @@ namespace Hazzat.Views
         {
             MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithContent", (sender) =>
             {
-                if (App.NameViewModel?.HazzatHymns != null)
+                if (App.NameViewModel?.HymnContentInfo != null)
                 {
                     Device.BeginInvokeOnMainThread(() =>
                     {

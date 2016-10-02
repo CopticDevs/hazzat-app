@@ -139,6 +139,23 @@ namespace HazzatService
             }
         }
 
+
+        public void fetchServiceHymns(int StructId, Action<object, GetSeasonServiceHymnsCompletedEventArgs> getCompletedHymnsBySeason)
+        {
+            MessagingCenter.Send(this, "LoadingServiceHymns");
+            try
+            {
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding(), new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
+                client.GetSeasonServiceHymnsCompleted += new EventHandler<GetSeasonServiceHymnsCompletedEventArgs>(getCompletedHymnsBySeason);
+                client.GetSeasonServiceHymnsAsync(StructId);
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
         public void GetCompletedHymnsBySeason(object sender, GetSeasonServiceHymnsCompletedEventArgs e)
         {
             HazzatHymns = e.Result;
