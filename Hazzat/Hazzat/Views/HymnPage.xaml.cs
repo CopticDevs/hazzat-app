@@ -18,8 +18,8 @@ namespace Hazzat.Views
         {
             InitializeComponent();
 
-            Title = HymnName;
             navigationTitle = breadcrumbName;
+            Title = HymnName;
 
             SubscribeMessage();
 
@@ -34,7 +34,38 @@ namespace Hazzat.Views
                 {
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        HymnText.Text = App.NameViewModel.HymnContentInfo[0].Content_English;
+                        var fullText = new StringBuilder();
+                         
+                        foreach (var hymnContent in App.NameViewModel.HymnContentInfo)
+                        {
+                            if (!string.IsNullOrWhiteSpace(hymnContent.Content_English))
+                            {
+                                fullText.Append(hymnContent.Content_English);
+                                fullText.Append(Environment.NewLine);
+                                fullText.Append(Environment.NewLine);
+                            }
+
+                            if (!string.IsNullOrWhiteSpace(hymnContent.Content_Coptic))
+                            {
+                                fullText.Append(hymnContent.Content_Coptic);
+                                fullText.Append(Environment.NewLine);
+                                fullText.Append(Environment.NewLine);
+                            }
+
+                            if (!string.IsNullOrWhiteSpace(hymnContent.Content_Arabic))
+                            {
+                                fullText.Append(hymnContent.Content_Arabic);
+                                fullText.Append(Environment.NewLine);
+                                fullText.Append(Environment.NewLine);
+                            }
+
+                            // hymn content separator
+                            fullText.Append(Environment.NewLine);
+                            fullText.Append(Environment.NewLine);
+                            fullText.Append("------------------------" + Environment.NewLine);
+                        }
+
+                        HymnText.Text = fullText.ToString();
                         Title = $"{navigationTitle} - {Title}";
                     });
                 }
@@ -46,8 +77,38 @@ namespace Hazzat.Views
                 {
                     HtmlWebViewSource source = new HtmlWebViewSource();
 
-                    source.Html = $"{App.NameViewModel.HazzatHymnContentInfo[0].Content_Coptic}";
+                    var html = new StringBuilder();
 
+                    foreach(var hymnContent in App.NameViewModel.HazzatHymnContentInfo)
+                    {
+                        if (!string.IsNullOrWhiteSpace(hymnContent.Content_English))
+                        {
+                            html.Append(hymnContent.Content_English);
+                            html.Append("<br /><br />");
+                            html.Append("<br /><br />");
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(hymnContent.Content_Coptic))
+                        {
+                            html.Append(hymnContent.Content_Coptic);
+                            html.Append("<br /><br />");
+                            html.Append("<br /><br />");
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(hymnContent.Content_Arabic))
+                        {
+                            html.Append(hymnContent.Content_Arabic);
+                            html.Append("<br /><br />");
+                            html.Append("<br /><br />");
+                        }
+
+                        // hymn content separator
+                        html.Append("<br /><br />");
+                        html.Append("<br /><br />");
+                        html.Append("<hr /><br />");
+                    }
+
+                    source.Html = html.ToString();
                     HazzatWebView.Source = source;
                 }
             });
@@ -58,8 +119,38 @@ namespace Hazzat.Views
                 {
                     HtmlWebViewSource source = new HtmlWebViewSource();
 
-                    source.Html = $"{App.NameViewModel.VerticalHazzatHymnContent[0].Content_Coptic}";
+                    var html = new StringBuilder();
 
+                    foreach (var hymnContent in App.NameViewModel.HazzatHymnContentInfo)
+                    {
+                        if (!string.IsNullOrWhiteSpace(hymnContent.Content_English))
+                        {
+                            html.Append(hymnContent.Content_English);
+                            html.Append("<br /><br />");
+                            html.Append("<br /><br />");
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(hymnContent.Content_Coptic))
+                        {
+                            html.Append(hymnContent.Content_Coptic);
+                            html.Append("<br /><br />");
+                            html.Append("<br /><br />");
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(hymnContent.Content_Arabic))
+                        {
+                            html.Append(hymnContent.Content_Arabic);
+                            html.Append("<br /><br />");
+                            html.Append("<br /><br />");
+                        }
+
+                        // hymn content separator
+                        html.Append("<br /><br />");
+                        html.Append("<br /><br />");
+                        html.Append("<hr /><br />");
+                    }
+
+                    source.Html = html.ToString();
                     VerticalHazzatWebView.Source = source;
                 }
             });
