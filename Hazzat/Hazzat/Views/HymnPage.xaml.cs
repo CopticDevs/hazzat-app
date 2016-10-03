@@ -12,11 +12,14 @@ namespace Hazzat.Views
 {
     public partial class HymnPage : TabbedPage
     {
-        public HymnPage(string HymnName, int HymnId)
+        private string navigationTitle { get; set; }
+
+        public HymnPage(string breadcrumbName, string HymnName, int HymnId)
         {
             InitializeComponent();
 
             Title = HymnName;
+            navigationTitle = breadcrumbName;
 
             SubscribeMessage();
 
@@ -32,7 +35,7 @@ namespace Hazzat.Views
                     Device.BeginInvokeOnMainThread(() =>
                     {
                         HymnText.Text = App.NameViewModel.HymnContentInfo[0].Content_English;
-                        Title = $"{Title} - Tune {App.NameViewModel.HymnContentInfo[0].Type_Name}";
+                        Title = $"{navigationTitle} - {Title}";
                     });
                 }
             });

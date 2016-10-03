@@ -78,7 +78,7 @@ namespace Hazzat.Views
         {
             ServiceHymnInfo item = (ServiceHymnInfo)e.Item;
 
-            await Navigation.PushAsync(new HymnPage(item.Title, item.ItemId));
+            await Navigation.PushAsync(new HymnPage(item.Structure_Name, item.Title, item.ItemId));
         }
     }
 }
