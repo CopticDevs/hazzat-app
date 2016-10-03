@@ -1,6 +1,8 @@
-﻿using HazzatService;
+﻿using Hazzat.Abstract;
+using HazzatService;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -12,14 +14,11 @@ namespace Hazzat.Views
 {
     public partial class HymnPage : TabbedPage
     {
-        private string navigationTitle { get; set; }
-
         public HymnPage(string breadcrumbName, string HymnName, int HymnId)
         {
             InitializeComponent();
 
-            navigationTitle = breadcrumbName;
-            Title = HymnName;
+            Title = $"{breadcrumbName} - {HymnName}";
 
             SubscribeMessage();
 
@@ -66,7 +65,6 @@ namespace Hazzat.Views
                         }
 
                         HymnText.Text = fullText.ToString();
-                        Title = $"{navigationTitle} - {Title}";
                     });
                 }
             });
@@ -78,8 +76,30 @@ namespace Hazzat.Views
                     HtmlWebViewSource source = new HtmlWebViewSource();
 
                     var html = new StringBuilder();
-
-                    foreach(var hymnContent in App.NameViewModel.HazzatHymnContentInfo)
+                    source.BaseUrl = DependencyService.Get<IWebAssets>().Get();
+                    //Append Coptic Font css
+                    html.Append($@"<html><body>
+                                    <style>
+                                        @font-face {{
+                                            font-family:Hazzat;
+                                            src:url('Fonts/hazzat1_10a.ttf');
+                                        }}
+                                        @font-face{{
+                                            font-family:'CS Copt';
+                                            src:url('Fonts/CSCopt.ttf');
+                                        }}
+                                        .CopticFont
+                                        {{
+                                           font-family: 'CS Copt';
+                                           color: orange;
+                                        }}
+                                        .HazzatFont
+                                        {{
+                                           font-family: Hazzat;
+                                           color: green;
+                                        }}
+                                   </style>");
+                    foreach (var hymnContent in App.NameViewModel.HazzatHymnContentInfo)
                     {
                         if (!string.IsNullOrWhiteSpace(hymnContent.Content_English))
                         {
@@ -107,8 +127,7 @@ namespace Hazzat.Views
                         html.Append("<br /><br />");
                         html.Append("<hr /><br />");
                     }
-
-                    source.Html = html.ToString();
+                    source.Html = html.Append("</body></html>").ToString();
                     HazzatWebView.Source = source;
                 }
             });

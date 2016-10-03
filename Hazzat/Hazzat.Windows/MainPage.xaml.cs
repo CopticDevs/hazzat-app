@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Hazzat.Abstract;
+using Hazzat.Windows;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,9 +14,14 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(BaseUrl))]
 namespace Hazzat.Windows
 {
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
     public sealed partial class MainPage
     {
         public MainPage()
@@ -22,6 +29,13 @@ namespace Hazzat.Windows
             this.InitializeComponent();
 
             LoadApplication(new Hazzat.App());
+        }
+    }
+    public class BaseUrl : IWebAssets
+    {
+        public string Get()
+        {
+            return "ms-appx-web:///";
         }
     }
 }

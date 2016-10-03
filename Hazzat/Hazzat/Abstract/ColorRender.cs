@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace Hazzat.Abstract
 {
-    interface IColorRender { string GetDefault(); string GetAccent(); }
+    public interface IColorRender { string GetDefault(); string GetAccent(); }
 }

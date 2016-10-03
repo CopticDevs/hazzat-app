@@ -6,6 +6,5 @@ using System.Threading.Tasks;
 
 namespace Hazzat.Abstract
 {
-    interface IResources {string Get(); }
-    
+    public interface IWebAssets { string Get(); }
 }
