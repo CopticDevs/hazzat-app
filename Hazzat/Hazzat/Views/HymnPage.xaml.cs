@@ -121,7 +121,7 @@ namespace Hazzat.Views
 
                     var html = new StringBuilder();
 
-                    foreach (var hymnContent in App.NameViewModel.HazzatHymnContentInfo)
+                    foreach (var hymnContent in App.NameViewModel.VerticalHazzatHymnContent)
                     {
                         if (!string.IsNullOrWhiteSpace(hymnContent.Content_English))
                         {

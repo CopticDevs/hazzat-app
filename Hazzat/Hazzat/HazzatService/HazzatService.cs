@@ -183,7 +183,7 @@ namespace HazzatService
         private void client_GetCompletedHymnVerticalHazzat(object sender, GetSeasonServiceHymnVerticalHazzatCompletedEventArgs e)
         {
             VerticalHazzatHymnContent = e.Result;
-            MessagingCenter.Send(this, "DoneWithHazzat");
+            MessagingCenter.Send(this, "DoneWithVerticalHazzat");
         }
     }
 }
