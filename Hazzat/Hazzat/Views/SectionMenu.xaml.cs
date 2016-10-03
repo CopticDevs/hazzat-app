@@ -55,7 +55,7 @@ namespace Hazzat.Views
                     StructureId = structInfo.ItemId
                 });
 
-                App.NameViewModel.fetchServiceHymns(structInfo.ItemId, GetCompletedHymnsBySeason);
+                App.NameViewModel.FetchServiceHymns(structInfo.ItemId, GetCompletedHymnsBySeason);
             }
         }
 
