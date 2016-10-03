@@ -35,6 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ColorRender.cs" />
+    <Compile Include="Abstract\WebAssets.cs" />
     <Compile Include="App.cs" />
     <Compile Include="HazzatService\HazzatService.cs" />
     <Compile Include="HazzatService\HazzatServiceExtensions.cs" />
