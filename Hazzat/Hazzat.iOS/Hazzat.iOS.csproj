@@ -98,6 +98,14 @@
     <None Include="packages.config" />
     <BundleResource Include="Resources\Fonts\hazzat1_10a.ttf" />
     <BundleResource Include="Resources\Fonts\CSCopt.ttf" />
+    <BundleResource Include="Resources\Fonts\cscopt-webfont.woff" />
+    <BundleResource Include="Resources\Fonts\cscopt-webfont.woff2" />
+    <BundleResource Include="Resources\Fonts\cscopt-webfont.eot" />
+    <BundleResource Include="Resources\Fonts\cscopt-webfont.ttf" />
+    <BundleResource Include="Resources\Fonts\hazzat1_10a-webfont.ttf" />
+    <BundleResource Include="Resources\Fonts\hazzat1_10a-webfont.woff" />
+    <BundleResource Include="Resources\Fonts\hazzat1_10a-webfont.woff2" />
+    <BundleResource Include="Resources\Fonts\hazzat1_10a-webfont.eot" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />

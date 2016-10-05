@@ -38,7 +38,7 @@ namespace Hazzat.UWP
         {
             public string Get()
             {
-                return "ms-appx-web:///";
+                return "ms-appx-web:///Assets";
             }
         }
 }

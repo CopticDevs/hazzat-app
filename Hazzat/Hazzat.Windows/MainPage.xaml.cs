@@ -35,7 +35,7 @@ namespace Hazzat.Windows
     {
         public string Get()
         {
-            return "ms-appx-web:///";
+            return "ms-appx-web:///Assets";
         }
     }
 }
