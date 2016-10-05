@@ -91,7 +91,6 @@ namespace Hazzat.Views
                                                  url('Fonts/hazzat1_10a-webfont.ttf') format('truetype');
                                             font-weight: normal;
                                             font-style: normal;
-
                                         }}
                                         @font-face {{
                                             font-family: 'cs_coptregular';
@@ -104,7 +103,6 @@ namespace Hazzat.Views
                                                  url('Fonts/cscopt-webfont.ttf') format('truetype');
                                             font-weight: normal;
                                             font-style: normal;
-
                                         }}
                                         .CopticFont
                                         {{
