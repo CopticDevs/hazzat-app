@@ -20,6 +20,7 @@ using Xamarin.Forms;
 
 
 [assembly: Dependency(typeof(BaseUrl))]
+[assembly: Dependency(typeof(ColorScheme))]
 namespace Hazzat.UWP
 {
     /// <summary>
@@ -34,11 +35,34 @@ namespace Hazzat.UWP
             LoadApplication(new Hazzat.App());
         }
     }
-        public class BaseUrl : IWebAssets
+    public class BaseUrl : IWebAssets
+    {
+        public string Get()
         {
-            public string Get()
-            {
-                return "ms-appx-web:///Assets";
-            }
+            return "ms-appx-web:///Assets";
         }
+    }
+    public class ColorScheme : IColorRender
+    {
+        public String GetAccent()
+        {
+
+            Windows.UI.Color color = (Windows.UI.Color)Windows.UI.Xaml.Application.Current.Resources["SystemAccentColor"];
+
+            return $"{color.R},{color.B},{color.G}";
+
+        }
+
+        public string GetDefault()
+        {
+            Windows.UI.Color color = (Windows.UI.Color)Windows.UI.Xaml.Application.Current.Resources["SystemBaseHighColor"];
+            return $"{color.R},{color.B},{color.G}";
+        }
+
+        public String GetBackground()
+        {
+            Windows.UI.Color color = (Windows.UI.Color)Windows.UI.Xaml.Application.Current.Resources["SystemAltHighColor"];
+            return $"{color.R},{color.B},{color.G}";
+        }
+    }
 }

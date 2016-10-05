@@ -27,5 +27,24 @@ namespace Hazzat.iOS
                 return NSBundle.MainBundle.BundlePath;
             }
         }
+
+        public class ColorScheme : IColorRender
+        {
+            public String GetAccent()
+            {
+                return $"0,122,255";
+            }
+
+            public string GetDefault()
+            {
+                return $"0,0,0";
+            }
+
+            public String GetBackground()
+            {
+                return $"255,255,255";
+            }
+        }
+
     }
 }

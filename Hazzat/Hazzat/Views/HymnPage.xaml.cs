@@ -77,6 +77,9 @@ namespace Hazzat.Views
 
                     var html = new StringBuilder();
                     source.BaseUrl = DependencyService.Get<IWebAssets>().Get();
+
+                    string foreground = DependencyService.Get<IColorRender>().GetDefault();
+                     string background = DependencyService.Get<IColorRender>().GetBackground();
                     //Append Coptic Font css
                     html.Append($@"<html><body>
                                     <style>
@@ -103,6 +106,11 @@ namespace Hazzat.Views
                                                  url('Fonts/cscopt-webfont.ttf') format('truetype');
                                             font-weight: normal;
                                             font-style: normal;
+                                        }}
+                                        body
+                                        {{ 
+                                            background-color: rgb({background}); 
+                                            color: rgb({foreground});
                                         }}
                                         .CopticFont
                                         {{

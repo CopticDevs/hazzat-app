@@ -9,8 +9,11 @@ using Android.OS;
 using Xamarin.Forms;
 using Hazzat.Droid.WorkingWithWebview.Android;
 using Hazzat.Abstract;
+using static Hazzat.Droid.MainActivity;
+using Hazzat.Droid;
 
 [assembly: Dependency(typeof(BaseUrl_Android))]
+[assembly: Dependency(typeof(ColorScheme))]
 namespace Hazzat.Droid
 {
     [Activity(Label = "Hazzat", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
@@ -23,6 +26,7 @@ namespace Hazzat.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
         }
+
     }
     namespace WorkingWithWebview.Android
     {
@@ -32,6 +36,26 @@ namespace Hazzat.Droid
             {
                 return "file:///android_asset/";
             }
+        }
+    }
+
+    public class ColorScheme : IColorRender
+    {
+        public String GetAccent()
+        {
+
+            return $"92,92,255";
+
+        }
+
+        public string GetDefault()
+        {
+            return $"76,76,76";
+        }
+
+        public String GetBackground()
+        {
+            return $"0,0,0";
         }
     }
 }
