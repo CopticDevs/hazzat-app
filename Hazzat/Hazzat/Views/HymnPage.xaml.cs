@@ -14,18 +14,27 @@ namespace Hazzat.Views
 {
     public partial class HymnPage : TabbedPage
     {
+        public int HymnID;
+
         public HymnPage(string breadcrumbName, string HymnName, int HymnId)
         {
             InitializeComponent();
 
             Title = $"{breadcrumbName} - {HymnName}";
 
-            SubscribeMessage();
-
-            App.NameViewModel.CreateHymnTextViewModel(HymnId);
+            this.HymnID = HymnId;
         }
 
-        private void SubscribeMessage()
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            IReadOnlyList<Page> navStack = Navigation.NavigationStack;
+
+            Navigation.RemovePage(navStack[1]);              
+        }
+
+        public void SubscribeMessage()
         {
             MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithHymnText", (sender) =>
             {
