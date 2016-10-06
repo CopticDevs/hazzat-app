@@ -7,8 +7,8 @@
     <ProjectGuid>{21C0EC91-BEC9-4EEE-9239-85828A751C3C}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hazzat.Windows</RootNamespace>
-    <AssemblyName>Hazzat.Windows</AssemblyName>
+    <RootNamespace>Hazzat.Windows8</RootNamespace>
+    <AssemblyName>Hazzat.Windows8</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
@@ -117,6 +117,16 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Assets\Fonts\CSCopt.ttf" />
+    <Content Include="Assets\Fonts\hazzat1_10a.ttf" />
+    <None Include="Assets\Fonts\cscopt-webfont.eot" />
+    <Content Include="Assets\Fonts\cscopt-webfont.ttf" />
+    <None Include="Assets\Fonts\cscopt-webfont.woff" />
+    <None Include="Assets\Fonts\cscopt-webfont.woff2" />
+    <None Include="Assets\Fonts\hazzat1_10a-webfont.eot" />
+    <Content Include="Assets\Fonts\hazzat1_10a-webfont.ttf" />
+    <None Include="Assets\Fonts\hazzat1_10a-webfont.woff" />
+    <None Include="Assets\Fonts\hazzat1_10a-webfont.woff2" />
     <None Include="packages.config" />
     <None Include="Windows_TemporaryKey.pfx" />
   </ItemGroup>

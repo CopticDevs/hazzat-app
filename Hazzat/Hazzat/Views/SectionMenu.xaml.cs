@@ -14,22 +14,18 @@ namespace Hazzat.Views
 {
     public partial class SectionMenu : ContentPage
     {
-        private ObservableCollection<ServiceDetails> serviceList { get; set; }
+        private ObservableCollection<ServiceDetails> serviceList;
 
         public SectionMenu(string Season, int SeasonId)
         {
+            InitializeComponent();
+
             Title = Season;
 
             serviceList = new ObservableCollection<ServiceDetails>();
-
-            InitializeComponent();
-
-            SubscribeMessage();
-
-            App.NameViewModel.createViewModelBySeason(SeasonId);
         }
 
-        private void SubscribeMessage()
+        public void SubscribeMessage()
         {
             MessagingCenter.Subscribe<ByNameMainViewModel>(this, "Done", (sender) =>
             {
@@ -55,7 +51,7 @@ namespace Hazzat.Views
                     StructureId = structInfo.ItemId
                 });
 
-                App.NameViewModel.fetchServiceHymns(structInfo.ItemId, GetCompletedHymnsBySeason);
+                App.NameViewModel.FetchServiceHymns(structInfo.ItemId, GetCompletedHymnsBySeason);
             }
         }
 
@@ -69,7 +65,10 @@ namespace Hazzat.Views
 
                 foreach (var hymnInfo in fetchedHymns)
                 {
-                    serviceInfo.Add(hymnInfo);
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        serviceInfo.Add(hymnInfo);
+                    });
                 }
             }
         }
@@ -78,7 +77,13 @@ namespace Hazzat.Views
         {
             ServiceHymnInfo item = (ServiceHymnInfo)e.Item;
 
-            await Navigation.PushAsync(new HymnPage(item.Title, item.ItemId));
+            HymnPage HymnPage = new HymnPage(item.Structure_Name, item.Title, item.ItemId);
+
+            await Navigation.PushAsync(HymnPage, true);
+
+            HymnPage.SubscribeMessage();
+
+            App.NameViewModel.CreateHymnTextViewModel(item.ItemId);
         }
     }
 }

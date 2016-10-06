@@ -17,6 +17,11 @@ namespace Hazzat
         public MainMenu()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
 
             SubscribeMessage();
 
@@ -37,14 +42,22 @@ namespace Hazzat
             });
         }
 
-        protected void OnToolbarItemClicked(object sender, EventArgs args) {
-            ToolbarItem toolbarItem = (ToolbarItem)sender; DisplayAlert("Yo!","ToolbarItem '" + toolbarItem.Text + "' clicked","okay");
+        protected void OnToolbarItemClicked(object sender, EventArgs args)
+        {
+            ToolbarItem toolbarItem = (ToolbarItem)sender; DisplayAlert("Yo!", "ToolbarItem '" + toolbarItem.Text + "' clicked", "okay");
         }
 
-        protected async void SeasonSelected(object sender, ItemTappedEventArgs e) {
-            SeasonInfo item = (SeasonInfo) e.Item;
+        protected async void SeasonSelected(object sender, ItemTappedEventArgs e)
+        {
+            SeasonInfo item = (SeasonInfo)e.Item;
 
-            await Navigation.PushAsync(new SectionMenu(item.Name, item.ItemId));
+            SectionMenu menu = new SectionMenu(item.Name, item.ItemId);
+
+            await Navigation.PushAsync(menu, true);
+
+            menu.SubscribeMessage();
+
+            App.NameViewModel.createViewModelBySeason(item.ItemId);
         }
 
     }

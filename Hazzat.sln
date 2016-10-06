@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hazzat.Droid", "Hazzat\Hazz
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hazzat.iOS", "Hazzat\Hazzat.iOS\Hazzat.iOS.csproj", "{409FCAF8-AF47-4AE4-91B0-8A8D13E962DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hazzat.Windows", "Hazzat\Hazzat.Windows\Hazzat.Windows.csproj", "{21C0EC91-BEC9-4EEE-9239-85828A751C3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hazzat.Windows8", "Hazzat\Hazzat.Windows\Hazzat.Windows8.csproj", "{21C0EC91-BEC9-4EEE-9239-85828A751C3C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hazzat", "Hazzat\Hazzat\Hazzat.csproj", "{C41085A1-13D4-4CA8-963F-E5BA140ADEF0}"
 EndProject
