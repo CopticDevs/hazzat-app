@@ -65,10 +65,7 @@ namespace Hazzat.Views
 
                 foreach (var hymnInfo in fetchedHymns)
                 {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
                         serviceInfo.Add(hymnInfo);
-                    });
                 }
             }
         }

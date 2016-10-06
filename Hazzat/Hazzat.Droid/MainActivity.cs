@@ -2,28 +2,28 @@
 
 using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 using Xamarin.Forms;
 using Hazzat.Droid.WorkingWithWebview.Android;
 using Hazzat.Abstract;
-using static Hazzat.Droid.MainActivity;
 using Hazzat.Droid;
+using Xamarin.Forms.Platform.Android;
 
 [assembly: Dependency(typeof(BaseUrl_Android))]
 [assembly: Dependency(typeof(ColorScheme))]
 namespace Hazzat.Droid
 {
     [Activity(Label = "Hazzat", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
+    public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
+            TabLayoutResource = Resource.Layout.tabs;
+            ToolbarResource = Resource.Layout.toolbar;
+
             base.OnCreate(bundle);
 
-            global::Xamarin.Forms.Forms.Init(this, bundle);
+            Forms.Init(this, bundle);
             LoadApplication(new App());
         }
 
@@ -44,18 +44,18 @@ namespace Hazzat.Droid
         public String GetAccent()
         {
 
-            return $"92,92,255";
+            return $"33,150,243";
 
         }
 
         public string GetDefault()
         {
-            return $"76,76,76";
+            return $"0,0,0";
         }
 
         public String GetBackground()
         {
-            return $"0,0,0";
+            return $"245,245,245";
         }
     }
 }
