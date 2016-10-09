@@ -89,16 +89,28 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Content Include="Assets\Fonts\CSCopt.ttf" />
+    <Content Include="Assets\Fonts\fonts.css" />
     <Content Include="Assets\Fonts\hazzat1_10a.ttf" />
-    <None Include="Assets\Fonts\cscopt-webfont.eot" />
-    <Content Include="Assets\Fonts\cscopt-webfont.ttf" />
-    <None Include="Assets\Fonts\cscopt-webfont.woff" />
-    <None Include="Assets\Fonts\cscopt-webfont.woff2" />
+    <None Include="Assets\Fonts\cs_avva_shenouda.eot" />
+    <Content Include="Assets\Fonts\cs_avva_shenouda.ttf" />
+    <None Include="Assets\Fonts\cs_avva_shenouda.woff" />
+    <None Include="Assets\Fonts\cs_avva_shenouda.woff2" />
     <None Include="Assets\Fonts\hazzat1_10a-webfont.eot" />
     <Content Include="Assets\Fonts\hazzat1_10a-webfont.ttf" />
     <None Include="Assets\Fonts\hazzat1_10a-webfont.woff" />
     <None Include="Assets\Fonts\hazzat1_10a-webfont.woff2" />
+    <None Include="Assets\Fonts\hazzata.eot" />
+    <Content Include="Assets\Fonts\hazzata.ttf" />
+    <None Include="Assets\Fonts\hazzata.woff" />
+    <None Include="Assets\Fonts\hazzata.woff2" />
+    <None Include="Assets\Fonts\hazzatv.eot" />
+    <Content Include="Assets\Fonts\hazzatv.ttf" />
+    <None Include="Assets\Fonts\hazzatv.woff" />
+    <None Include="Assets\Fonts\hazzatv.woff2" />
+    <None Include="Assets\Fonts\hazzatva.eot" />
+    <Content Include="Assets\Fonts\hazzatva.ttf" />
+    <None Include="Assets\Fonts\hazzatva.woff" />
+    <None Include="Assets\Fonts\hazzatva.woff2" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
