@@ -63,9 +63,13 @@ namespace Hazzat.Views
             {
                 var serviceInfo = this.serviceList.First(s => s.StructureId == fetchedHymns[0].Structure_ID);                    
 
-                foreach (var hymnInfo in fetchedHymns)
+                // Adding a lock on serviceList since multiple services could be modifying the collection
+                lock (serviceList)
                 {
+                    foreach (var hymnInfo in fetchedHymns)
+                    {
                         serviceInfo.Add(hymnInfo);
+                    }
                 }
             }
         }

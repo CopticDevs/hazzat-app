@@ -89,16 +89,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Content Include="Assets\Fonts\CSCopt.ttf" />
-    <Content Include="Assets\Fonts\hazzat1_10a.ttf" />
-    <None Include="Assets\Fonts\cscopt-webfont.eot" />
-    <Content Include="Assets\Fonts\cscopt-webfont.ttf" />
-    <None Include="Assets\Fonts\cscopt-webfont.woff" />
-    <None Include="Assets\Fonts\cscopt-webfont.woff2" />
-    <None Include="Assets\Fonts\hazzat1_10a-webfont.eot" />
-    <Content Include="Assets\Fonts\hazzat1_10a-webfont.ttf" />
-    <None Include="Assets\Fonts\hazzat1_10a-webfont.woff" />
-    <None Include="Assets\Fonts\hazzat1_10a-webfont.woff2" />
+    <Content Include="Assets\Fonts\fonts.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>

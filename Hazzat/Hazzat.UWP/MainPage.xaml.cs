@@ -39,7 +39,7 @@ namespace Hazzat.UWP
     {
         public string Get()
         {
-            return "ms-appx-web:///Assets";
+            return "ms-appx-web:///Assets/";
         }
     }
     public class ColorScheme : IColorRender

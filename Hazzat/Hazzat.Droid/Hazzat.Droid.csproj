@@ -117,17 +117,22 @@
     <AndroidAsset Include="Assets\Fonts\hazzat1_10a.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AndroidAsset>
-    <AndroidAsset Include="Assets\Fonts\CSCopt.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AndroidAsset>
-    <AndroidAsset Include="Assets\Fonts\hazzat1_10a-webfont.woff" />
-    <AndroidAsset Include="Assets\Fonts\hazzat1_10a-webfont.woff2" />
-    <AndroidAsset Include="Assets\Fonts\hazzat1_10a-webfont.eot" />
-    <AndroidAsset Include="Assets\Fonts\hazzat1_10a-webfont.ttf" />
-    <AndroidAsset Include="Assets\Fonts\cscopt-webfont.ttf" />
-    <AndroidAsset Include="Assets\Fonts\cscopt-webfont.woff" />
-    <AndroidAsset Include="Assets\Fonts\cscopt-webfont.woff2" />
-    <AndroidAsset Include="Assets\Fonts\cscopt-webfont.eot" />
+    <AndroidAsset Include="Assets\Fonts\cs_avva_shenouda.eot" />
+    <AndroidAsset Include="Assets\Fonts\cs_avva_shenouda.ttf" />
+    <AndroidAsset Include="Assets\Fonts\cs_avva_shenouda.woff" />
+    <AndroidAsset Include="Assets\Fonts\cs_avva_shenouda.woff2" />
+    <AndroidAsset Include="Assets\Fonts\hazzata.eot" />
+    <AndroidAsset Include="Assets\Fonts\hazzata.ttf" />
+    <AndroidAsset Include="Assets\Fonts\hazzata.woff" />
+    <AndroidAsset Include="Assets\Fonts\hazzata.woff2" />
+    <AndroidAsset Include="Assets\Fonts\hazzatv.eot" />
+    <AndroidAsset Include="Assets\Fonts\hazzatv.ttf" />
+    <AndroidAsset Include="Assets\Fonts\hazzatv.woff" />
+    <AndroidAsset Include="Assets\Fonts\hazzatv.woff2" />
+    <AndroidAsset Include="Assets\Fonts\hazzatva.eot" />
+    <AndroidAsset Include="Assets\Fonts\hazzatva.ttf" />
+    <AndroidAsset Include="Assets\Fonts\hazzatva.woff" />
+    <AndroidAsset Include="Assets\Fonts\hazzatva.woff2" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <AndroidResource Include="Resources\Layout\tabs.axml">
@@ -162,6 +167,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values-v21\style.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\Fonts\fonts.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AndroidAsset>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
