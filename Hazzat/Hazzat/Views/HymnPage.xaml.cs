@@ -14,7 +14,7 @@ namespace Hazzat.Views
 {
     public partial class HymnPage : TabbedPage
     {
-        private const string HtmlHeaderFormatString = @"
+        private string HtmlHeaderFormatString = @"
                                   <html><body>
                                     <style>
                                         body
@@ -23,8 +23,7 @@ namespace Hazzat.Views
                                             color: rgb({1});
                                         }}
                                    </style>
-                                    <link href=""Fonts/fonts.css"" rel=""stylesheet"" type=""text/css"" />
-";
+                                    <link href=""Fonts/fonts.css"" rel=""stylesheet"" type=""text/css"" />";
 
         public int HymnID;
 
@@ -55,7 +54,6 @@ namespace Hazzat.Views
                     HtmlWebViewSource source = new HtmlWebViewSource();
                     var html = new StringBuilder();
                     source.BaseUrl = DependencyService.Get<IWebAssets>().Get();
-
                     string foreground = DependencyService.Get<IColorRender>().GetDefault();
                     string background = DependencyService.Get<IColorRender>().GetBackground();
                     //Append Coptic Font css
@@ -155,7 +153,7 @@ namespace Hazzat.Views
                     HtmlWebViewSource source = new HtmlWebViewSource();
 
                     var html = new StringBuilder();
-
+                    source.BaseUrl = DependencyService.Get<IWebAssets>().Get();
                     string foreground = DependencyService.Get<IColorRender>().GetDefault();
                     string background = DependencyService.Get<IColorRender>().GetBackground();
 
