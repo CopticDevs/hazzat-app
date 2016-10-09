@@ -87,7 +87,7 @@ namespace HazzatService
             MessagingCenter.Send(this, "Loading");
             try
             {
-                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding(), new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding() { MaxReceivedMessageSize = 2147483647, MaxBufferSize = 2147483647, MaxBufferPoolSize = 2147483647 }, new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
                 client.GetSeasonsCompleted += new EventHandler<GetSeasonsCompletedEventArgs>(client_GetCompleted);
                 client.GetSeasonsAsync(isDateSpecific);
             }
@@ -108,7 +108,7 @@ namespace HazzatService
             MessagingCenter.Send(this, "Loading");
             try
             {
-                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding(), new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding() { MaxReceivedMessageSize = 2147483647, MaxBufferSize = 2147483647, MaxBufferPoolSize = 2147483647 }, new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
                 client.GetSeasonServicesCompleted += new EventHandler<GetSeasonServicesCompletedEventArgs>(GetCompletedStructBySeason);
                 client.GetSeasonServicesAsync(Season);
             }
@@ -130,7 +130,7 @@ namespace HazzatService
             MessagingCenter.Send(this, "LoadingServiceHymns");
             try
             {
-                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding(), new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding() { MaxReceivedMessageSize = 2147483647, MaxBufferSize = 2147483647, MaxBufferPoolSize = 2147483647 }, new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
                 client.GetSeasonServiceHymnsCompleted += new EventHandler<GetSeasonServiceHymnsCompletedEventArgs>(GetCompletedHymnsBySeason);
                 client.GetSeasonServiceHymnsAsync(StructId);
             }
@@ -152,7 +152,7 @@ namespace HazzatService
             MessagingCenter.Send(this, "Loading");
             try
             {
-                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding(), new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding() { MaxReceivedMessageSize = 2147483647, MaxBufferSize = 2147483647, MaxBufferPoolSize = 2147483647 }, new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
 
                 client.GetSeasonServiceHymnTextCompleted += new EventHandler<GetSeasonServiceHymnTextCompletedEventArgs>(client_GetCompletedHymnInfo);
                 client.GetSeasonServiceHymnHazzatCompleted += new EventHandler<GetSeasonServiceHymnHazzatCompletedEventArgs>(client_GetCompletedHymnHazzat);
