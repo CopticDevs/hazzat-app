@@ -9,7 +9,7 @@ using Xamarin.Forms;
 namespace HazzatService
 {
     public class HymnStructNameViewModel : INotifyPropertyChanged
-    {
+    {        
         private string _name;
         public string Name
         {
@@ -71,6 +71,24 @@ namespace HazzatService
 
     public class ByNameMainViewModel
     {
+        private const string HazzatServiceEndpoint = "http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx";
+        private const int HazzatServiceMaxReceivedMessageSize = 2147483647;
+        private const int HazzatServiceMaxBufferPoolSize = 2147483647;
+        private const int HazzatServiceMaxBufferSize = 2147483647;
+
+        private BasicHttpBinding HazzatServiceBinding
+        {
+            get
+            {
+                return new BasicHttpBinding()
+                {
+                    MaxReceivedMessageSize = HazzatServiceMaxReceivedMessageSize,
+                    MaxBufferSize = HazzatServiceMaxBufferSize,
+                    MaxBufferPoolSize = HazzatServiceMaxBufferPoolSize
+                };
+            }
+        }
+
         /// <summary>
         /// A collection of hazzat.com objects
         /// </summary>
@@ -87,7 +105,7 @@ namespace HazzatService
             MessagingCenter.Send(this, "Loading");
             try
             {
-                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding() { MaxReceivedMessageSize = 2147483647, MaxBufferSize = 2147483647, MaxBufferPoolSize = 2147483647 }, new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
                 client.GetSeasonsCompleted += new EventHandler<GetSeasonsCompletedEventArgs>(client_GetCompleted);
                 client.GetSeasonsAsync(isDateSpecific);
             }
@@ -108,7 +126,7 @@ namespace HazzatService
             MessagingCenter.Send(this, "Loading");
             try
             {
-                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding() { MaxReceivedMessageSize = 2147483647, MaxBufferSize = 2147483647, MaxBufferPoolSize = 2147483647 }, new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
                 client.GetSeasonServicesCompleted += new EventHandler<GetSeasonServicesCompletedEventArgs>(GetCompletedStructBySeason);
                 client.GetSeasonServicesAsync(Season);
             }
@@ -130,7 +148,7 @@ namespace HazzatService
             MessagingCenter.Send(this, "LoadingServiceHymns");
             try
             {
-                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding() { MaxReceivedMessageSize = 2147483647, MaxBufferSize = 2147483647, MaxBufferPoolSize = 2147483647 }, new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
                 client.GetSeasonServiceHymnsCompleted += new EventHandler<GetSeasonServiceHymnsCompletedEventArgs>(GetCompletedHymnsBySeason);
                 client.GetSeasonServiceHymnsAsync(StructId);
             }
@@ -152,7 +170,7 @@ namespace HazzatService
             MessagingCenter.Send(this, "Loading");
             try
             {
-                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(new BasicHttpBinding() { MaxReceivedMessageSize = 2147483647, MaxBufferSize = 2147483647, MaxBufferPoolSize = 2147483647 }, new EndpointAddress("http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx"));
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
 
                 client.GetSeasonServiceHymnTextCompleted += new EventHandler<GetSeasonServiceHymnTextCompletedEventArgs>(client_GetCompletedHymnInfo);
                 client.GetSeasonServiceHymnHazzatCompleted += new EventHandler<GetSeasonServiceHymnHazzatCompletedEventArgs>(client_GetCompletedHymnHazzat);
