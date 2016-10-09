@@ -96,16 +96,25 @@
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork@2x" />
     <None Include="packages.config" />
-    <BundleResource Include="Resources\Fonts\hazzat1_10a.ttf" />
-    <BundleResource Include="Resources\Fonts\CSCopt.ttf" />
-    <BundleResource Include="Resources\Fonts\cscopt-webfont.woff" />
-    <BundleResource Include="Resources\Fonts\cscopt-webfont.woff2" />
-    <BundleResource Include="Resources\Fonts\cscopt-webfont.eot" />
-    <BundleResource Include="Resources\Fonts\cscopt-webfont.ttf" />
-    <BundleResource Include="Resources\Fonts\hazzat1_10a-webfont.ttf" />
-    <BundleResource Include="Resources\Fonts\hazzat1_10a-webfont.woff" />
-    <BundleResource Include="Resources\Fonts\hazzat1_10a-webfont.woff2" />
-    <BundleResource Include="Resources\Fonts\hazzat1_10a-webfont.eot" />
+    <AndroidAsset Include="Resources\Fonts\cs_avva_shenouda.eot" />
+    <AndroidAsset Include="Resources\Fonts\cs_avva_shenouda.ttf" />
+    <AndroidAsset Include="Resources\Fonts\cs_avva_shenouda.woff" />
+    <AndroidAsset Include="Resources\Fonts\cs_avva_shenouda.woff2" />
+    <AndroidAsset Include="Resources\Fonts\hazzat1_10a.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Include="Resources\Fonts\hazzata.eot" />
+    <AndroidAsset Include="Resources\Fonts\hazzata.ttf" />
+    <AndroidAsset Include="Resources\Fonts\hazzata.woff" />
+    <AndroidAsset Include="Resources\Fonts\hazzata.woff2" />
+    <AndroidAsset Include="Resources\Fonts\hazzatv.eot" />
+    <AndroidAsset Include="Resources\Fonts\hazzatv.ttf" />
+    <AndroidAsset Include="Resources\Fonts\hazzatv.woff" />
+    <AndroidAsset Include="Resources\Fonts\hazzatv.woff2" />
+    <AndroidAsset Include="Resources\Fonts\hazzatva.eot" />
+    <AndroidAsset Include="Resources\Fonts\hazzatva.ttf" />
+    <AndroidAsset Include="Resources\Fonts\hazzatva.woff" />
+    <AndroidAsset Include="Resources\Fonts\hazzatva.woff2" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -158,6 +167,11 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\bookmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Resources\Fonts\fonts.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AndroidAsset>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

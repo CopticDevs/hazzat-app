@@ -117,10 +117,6 @@
     <AndroidAsset Include="Assets\Fonts\hazzat1_10a.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AndroidAsset>
-    <AndroidAsset Include="Assets\Fonts\hazzat1_10a-webfont.woff" />
-    <AndroidAsset Include="Assets\Fonts\hazzat1_10a-webfont.woff2" />
-    <AndroidAsset Include="Assets\Fonts\hazzat1_10a-webfont.eot" />
-    <AndroidAsset Include="Assets\Fonts\hazzat1_10a-webfont.ttf" />
     <AndroidAsset Include="Assets\Fonts\cs_avva_shenouda.eot" />
     <AndroidAsset Include="Assets\Fonts\cs_avva_shenouda.ttf" />
     <AndroidAsset Include="Assets\Fonts\cs_avva_shenouda.woff" />
