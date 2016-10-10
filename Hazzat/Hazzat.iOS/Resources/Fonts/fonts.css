@@ -1,0 +1,107 @@
+﻿/*
+================================
+Embedded fonts
+================================
+*/
+@font-face  {
+    font-family: 'CS Avva Shenouda';
+    src: url('cs_avva_shenouda.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal; 
+}
+@font-face {
+    font-family: 'Hazzat';
+    src: url('hazzat1_10a.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Hazzat Vertical';
+    src: url('hazzatv.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Hazzat Arabic';
+    src: url('hazzata.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Hazzat Vertical Arabic';
+    src: url('hazzatva.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*
+================================
+Hymn text Styles
+================================
+*/
+.CopticFont {
+    text-decoration: none;
+    font-family: 'CS Avva Shenouda';
+    font-size: 18px;
+    color:greenyellow;
+}
+.HazzatFont {
+    text-decoration: none;
+    font-family: 'Hazzat';
+    font-size: 18px;
+}
+.HazzatVFont {
+    text-decoration: none;
+    font-family: 'Hazzat Vertical';
+    font-size: 18px;
+
+}
+.HazzatAFont {
+    text-decoration: none;
+    font-family: 'Hazzat Arabic';
+    font-size: 22px;
+    text-align: right;
+    direction: rtl;
+}
+.HazzatVAFont {
+    text-decoration: none;
+    font-family: 'Hazzat Vertical Arabic';
+    font-size: 22px;
+    text-align: right;
+    direction: rtl;
+}
+.EnglishFont {
+    text-decoration: none;
+    font-family: ARIAL,verdana;
+    font-size: 18px;
+}
+.ArabicFont {
+    text-decoration: none;
+    font-family: 'Arabic Transparent';
+    font-size: 22px;
+    text-align: right;
+    direction: rtl;
+}
+.EnglishComment {
+    color: red; /* Need to translate to resource */
+    text-decoration: none;
+    font-family: ARIAL,verdana;
+    font-size: 14px;
+    font-style: italic;
+}
+.CopticComment {
+    color: red; /* Need to translate to resource */
+    text-decoration: none;
+    font-family: 'CS Avva Shenouda';
+    font-size: 14px;
+    font-style: italic;
+}
+.ArabicComment {
+    color: red; /* Need to translate to resource */
+    text-decoration: none;
+    font-family: 'Arabic Transparent';
+    font-size: 16px;
+    font-style: italic;
+    text-align: right;
+    direction: rtl;
+}

@@ -39,8 +39,8 @@ namespace Hazzat
                 Setters = {
                     new Setter
                     {
-                        Property = ContentPage.PaddingProperty,
-                        Value = Device.OnPlatform(new Thickness(10, 10, 0, 0), new Thickness(10), new Thickness(15, 15, 0, 0))
+                        Property = Page.PaddingProperty,
+                        Value = Device.OnPlatform(new Thickness(10), new Thickness(10), new Thickness(10))
                     }
                 }
             });
