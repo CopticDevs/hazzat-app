@@ -36,13 +36,13 @@ namespace Hazzat.Views
             this.HymnID = HymnId;
         }
 
-        protected override void OnAppearing()
+        protected override void OnDisappearing()
         {
-            base.OnAppearing();
+            base.OnDisappearing();
 
-            IReadOnlyList<Page> navStack = Navigation.NavigationStack;
-
-            Navigation.RemovePage(navStack[1]);
+            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "DoneWithHymnText");
+            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "DoneWithHazzat");
+            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "DoneWithVerticalHazzat");
         }
 
         public void SubscribeMessage()
