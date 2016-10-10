@@ -1,9 +1,11 @@
 ﻿using HazzatService;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Xamarin.Forms;
 
 
@@ -12,8 +14,10 @@ namespace Hazzat
 {
     public class App : Application
     {
-        public enum HymnLanguage { Arabic, Coptic, English };
-        public static HymnLanguage CurrentLanguage { get; set; }
+        private static Dictionary<string, Dictionary<string, List<string>>> AppDataCache { get; set; }    // Designed for BySeasons ViewModel
+        public static bool isDataCacheBuilding { get; set; } = false;
+
+
         private static ByNameMainViewModel nameViewModel = null;
         internal static ByNameMainViewModel NameViewModel
         {
@@ -27,6 +31,26 @@ namespace Hazzat
             }
         }
 
+        public static string Serialize(Dictionary<string, Dictionary<string, List<string>>> viewModel)
+        {
+            XmlSerializer serialize = new XmlSerializer(typeof(Dictionary<string, Dictionary<string, List<string>>>));
+
+            using (var stringWriter = new StringWriter())
+            {
+                serialize.Serialize(stringWriter, viewModel);
+                return stringWriter.GetStringBuilder().ToString();
+            }
+        }
+        public static Dictionary<string, Dictionary<string, List<string>>> Deserialize(string viewModel)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Dictionary<string, Dictionary<string, List<string>>>));
+
+            using (var stringReader = new StringReader(viewModel))
+            {
+                Dictionary<string, Dictionary<string, List<string>>> model = (Dictionary<string, Dictionary<string, List<string>>>)serializer.Deserialize(stringReader);
+                return model;
+            }
+        }
 
 
         public App()
@@ -51,25 +75,31 @@ namespace Hazzat
 
         protected override void OnStart()
         {
-            InitializeDefaultAppSettings();
-
-            App.CurrentLanguage = (App.HymnLanguage)Enum.Parse(typeof(App.HymnLanguage), Application.Current.Properties["AppLanguage"] as string);
+            if (Properties.ContainsKey("AppDataCache"))
+            {
+                try
+                {
+                    Deserialize(Properties["AppDataCache"] as string);
+                }
+                catch
+                {
+                    Task.Run(BuildDataCache()); 
+                }
+            }
         }
 
-        /// <summary>
-        /// Sets default app settings
-        /// </summary>
-        private void InitializeDefaultAppSettings()
+        private Action BuildDataCache()
         {
-            if (!Application.Current.Properties.ContainsKey("AppLanguage"))
-            {
-                Application.Current.Properties["AppLanguage"] = App.HymnLanguage.English.ToString();
-            }
+            isDataCacheBuilding = true;
+
+            Dictionary<string, Dictionary<string, List<string>>> tempcache = new Dictionary<string, Dictionary<string, List<string>>>();
+
+            return null;
         }
 
         protected override void OnSleep()
         {
-            Application.Current.Properties["AppLanguage"] = CurrentLanguage.ToString();
+
         }
 
         protected override void OnResume()

@@ -25,6 +25,13 @@ namespace Hazzat.Views
             serviceList = new ObservableCollection<ServiceDetails>();
         }
 
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "Done");
+        }
+
         public void SubscribeMessage()
         {
             MessagingCenter.Subscribe<ByNameMainViewModel>(this, "Done", (sender) =>
@@ -61,7 +68,7 @@ namespace Hazzat.Views
 
             if (fetchedHymns.Length != 0)
             {
-                var serviceInfo = this.serviceList.First(s => s.StructureId == fetchedHymns[0].Structure_ID);                    
+                var serviceInfo = this.serviceList.First(s => s.StructureId == fetchedHymns[0].Structure_ID);
 
                 // Adding a lock on serviceList since multiple services could be modifying the collection
                 lock (serviceList)

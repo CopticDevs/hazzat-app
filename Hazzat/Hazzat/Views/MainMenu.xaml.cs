@@ -17,6 +17,11 @@ namespace Hazzat
         public MainMenu()
         {
             InitializeComponent();
+
+            while (App.isDataCacheBuilding)
+            {
+                // loader = true
+            }
         }
 
         protected override void OnAppearing()
@@ -26,6 +31,13 @@ namespace Hazzat
             SubscribeMessage();
 
             App.NameViewModel.createSeasonsViewModel(true);
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "Done");
         }
 
         private void SubscribeMessage()
@@ -59,7 +71,6 @@ namespace Hazzat
 
             App.NameViewModel.createViewModelBySeason(item.ItemId);
         }
-
     }
 }
 
