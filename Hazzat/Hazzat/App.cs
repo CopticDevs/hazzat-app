@@ -83,8 +83,12 @@ namespace Hazzat
                 }
                 catch
                 {
-                    Task.Run(BuildDataCache()); 
+                    Task.Run(BuildDataCache());
                 }
+            }
+            else
+            {
+                Task.Run(BuildDataCache());
             }
         }
 
@@ -99,7 +103,7 @@ namespace Hazzat
 
         protected override void OnSleep()
         {
-
+            Properties["AppDataCache"] = Serialize(AppDataCache);
         }
 
         protected override void OnResume()
