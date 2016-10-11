@@ -48,9 +48,12 @@ namespace Hazzat
         {
             SeasonInfo item = (SeasonInfo)e.Item;
 
-            NavigationPage menu = new NavigationPage (new SectionMenu(item.Name, item.ItemId));
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                NavigationPage menu = new NavigationPage(new SectionMenu(item.Name, item.ItemId));
 
-            MasterDetailMenu.Menu = menu;
+                MasterDetailMenu.Menu = menu;
+            });
         }
     }
 }

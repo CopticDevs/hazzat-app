@@ -20,8 +20,10 @@ namespace Hazzat.Views
         {
             InitializeComponent();
 
-            Detail = Menu = new NavigationPage(new SectionMenu("Annual", 1));
-
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                Detail = Menu = new NavigationPage(new SectionMenu("Annual", 1));
+            });
             Menu.PropertyChanged += ChangeSectionMenu();
         }
 
