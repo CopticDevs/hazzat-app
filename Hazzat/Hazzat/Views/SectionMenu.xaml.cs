@@ -23,6 +23,10 @@ namespace Hazzat.Views
             Title = Season;
 
             serviceList = new ObservableCollection<ServiceDetails>();
+
+            App.NameViewModel.createViewModelBySeason(SeasonId);
+
+            SubscribeMessage();
         }
 
         protected override void OnDisappearing()
