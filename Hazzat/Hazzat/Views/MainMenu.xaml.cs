@@ -48,7 +48,7 @@ namespace Hazzat
         {
             SeasonInfo item = (SeasonInfo)e.Item;
 
-            SectionMenu menu = new SectionMenu(item.Name, item.ItemId);
+            NavigationPage menu = new NavigationPage (new SectionMenu(item.Name, item.ItemId));
 
             MasterDetailMenu.Menu = menu;
         }
