@@ -33,12 +33,12 @@ namespace Hazzat.Views
         {
             base.OnDisappearing();
 
-            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "Done");
+            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "DoneSeason");
         }
 
         public void SubscribeMessage()
         {
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "Done", (sender) =>
+            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneSeason", (sender) =>
             {
                 if (App.NameViewModel?.HymnsBySeason != null)
                 {

@@ -27,10 +27,13 @@ namespace Hazzat.Views
 
         public PropertyChangedEventHandler ChangeSectionMenu()
         {
-            Device.BeginInvokeOnMainThread(() =>
+            if (Detail != Menu)
             {
-                Detail = new NavigationPage(Menu);
-            });
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    Detail = Menu;
+                });
+            }
             return PropertyChange;
         }
 
