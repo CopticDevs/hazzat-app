@@ -12,29 +12,16 @@ namespace Hazzat.Views
 {
     public partial class MasterDetailMenu : MasterDetailPage, INotifyPropertyChanged
     {
-        public static NavigationPage Menu { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChange;
+        public static SectionMenu Menu { get; set; }
 
         public MasterDetailMenu()
         {
             InitializeComponent();
 
-            Detail = Menu = new NavigationPage(new SectionMenu("Annual", 1));
+            Menu = new SectionMenu("Annual", 1);
 
-            Menu.PropertyChanged += ChangeSectionMenu();
-        }
+            Detail = new NavigationPage(Menu);
 
-        public PropertyChangedEventHandler ChangeSectionMenu()
-        {
-            if (Detail != Menu)
-            {
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    Detail = Menu;
-                });
-            }
-            return PropertyChange;
         }
 
 

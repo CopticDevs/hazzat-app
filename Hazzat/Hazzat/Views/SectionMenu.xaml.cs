@@ -14,19 +14,24 @@ namespace Hazzat.Views
 {
     public partial class SectionMenu : ContentPage
     {
-        private ObservableCollection<ServiceDetails> serviceList;
+        private static ObservableCollection<ServiceDetails> serviceList;
 
         public SectionMenu(string Season, int SeasonId)
         {
             InitializeComponent();
 
+            SectionMenuInit(Season, SeasonId);
+        }
+
+        public void SectionMenuInit(string Season, int SeasonId)
+        {
             Title = Season;
 
             serviceList = new ObservableCollection<ServiceDetails>();
 
-            App.NameViewModel.createViewModelBySeason(SeasonId);
-
             SubscribeMessage();
+
+            App.NameViewModel.createViewModelBySeason(SeasonId);
         }
 
         protected override void OnDisappearing()
@@ -72,7 +77,7 @@ namespace Hazzat.Views
 
             if (fetchedHymns.Length != 0)
             {
-                var serviceInfo = this.serviceList.First(s => s.StructureId == fetchedHymns[0].Structure_ID);
+                var serviceInfo = serviceList.First(s => s.StructureId == fetchedHymns[0].Structure_ID);
 
                 // Adding a lock on serviceList since multiple services could be modifying the collection
                 lock (serviceList)
