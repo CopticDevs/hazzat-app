@@ -20,11 +20,6 @@ namespace Hazzat.Views
         {
             InitializeComponent();
 
-            SectionMenuInit(Season, SeasonId);
-        }
-
-        public void SectionMenuInit(string Season, int SeasonId)
-        {
             Title = Season;
 
             serviceList = new ObservableCollection<ServiceDetails>();
@@ -32,6 +27,13 @@ namespace Hazzat.Views
             SubscribeMessage();
 
             App.NameViewModel.createViewModelBySeason(SeasonId);
+        }
+
+        public async void SectionMenuInit(string Season, int SeasonId)
+        {
+            SectionMenu newMenu = new SectionMenu(Season, SeasonId);
+
+            await Navigation.PushAsync(newMenu, true);
         }
 
         protected override void OnDisappearing()

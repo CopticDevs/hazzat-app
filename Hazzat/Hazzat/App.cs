@@ -74,7 +74,7 @@ namespace Hazzat
 
             //Perform Season Calculations Here
 
-            MainPage = new MasterDetailMenu(); //Set to current Season
+            MainPage = new MasterDetailMenu("Annual", 1); //Set to current Season
         }
 
         protected override void OnStart()
@@ -107,7 +107,7 @@ namespace Hazzat
 
         protected override void OnSleep()
         {
-            Properties["AppDataCache"] = Serialize(AppDataCache);
+           // Properties["AppDataCache"] = Serialize(AppDataCache);
         }
 
         protected override void OnResume()

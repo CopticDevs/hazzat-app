@@ -14,11 +14,11 @@ namespace Hazzat.Views
     {
         public static SectionMenu Menu { get; set; }
 
-        public MasterDetailMenu()
+        public MasterDetailMenu(string Season, int SeasonId)
         {
             InitializeComponent();
 
-            Menu = new SectionMenu("Annual", 1);
+            Menu = new SectionMenu(Season, SeasonId);
 
             Detail = new NavigationPage(Menu);
 
