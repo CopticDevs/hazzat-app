@@ -7,7 +7,7 @@
     <StackLayout>
       <ListView x:Name="MenuStack" ItemTapped="SeasonSelected">
         <ListView.RowHeight>
-          <OnPlatform x:TypeArguments="x:Int32" iOS="80" Android="80" WinPhone="90" />
+          <OnPlatform x:TypeArguments="x:Int32" iOS="50" Android="50" WinPhone="60" />
         </ListView.RowHeight>
         <ListView.ItemTemplate>
           <DataTemplate>
