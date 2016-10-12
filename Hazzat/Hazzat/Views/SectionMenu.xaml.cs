@@ -14,7 +14,7 @@ namespace Hazzat.Views
 {
     public partial class SectionMenu : ContentPage
     {
-        private ObservableCollection<ServiceDetails> serviceList;
+        private static ObservableCollection<ServiceDetails> serviceList;
 
         public SectionMenu(string Season, int SeasonId)
         {
@@ -23,18 +23,29 @@ namespace Hazzat.Views
             Title = Season;
 
             serviceList = new ObservableCollection<ServiceDetails>();
+
+            SubscribeMessage();
+
+            App.NameViewModel.createViewModelBySeason(SeasonId);
+        }
+
+        public async void SectionMenuInit(string Season, int SeasonId)
+        {
+            SectionMenu newMenu = new SectionMenu(Season, SeasonId);
+
+            await Navigation.PushAsync(newMenu, true);
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
 
-            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "Done");
+            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "DoneSeason");
         }
 
         public void SubscribeMessage()
         {
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "Done", (sender) =>
+            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneSeason", (sender) =>
             {
                 if (App.NameViewModel?.HymnsBySeason != null)
                 {
@@ -68,7 +79,7 @@ namespace Hazzat.Views
 
             if (fetchedHymns.Length != 0)
             {
-                var serviceInfo = this.serviceList.First(s => s.StructureId == fetchedHymns[0].Structure_ID);
+                var serviceInfo = serviceList.First(s => s.StructureId == fetchedHymns[0].Structure_ID);
 
                 // Adding a lock on serviceList since multiple services could be modifying the collection
                 lock (serviceList)

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Hazzat"
+             x:Class="Hazzat.Views.MasterDetailMenu"
+             Title="hazzat.com"
+             MasterBehavior="Default">
+  <MasterDetailPage.ToolbarItems>
+    <ToolbarItem Text="Hazzat" Order="Primary" Clicked="OnToolbarItemClicked">
+      <ToolbarItem.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource" iOS="bookmark.png" Android="icon.png" WinPhone="Assets/appbar.paper.png" />
+      </ToolbarItem.Icon>
+    </ToolbarItem>
+    <ToolbarItem Text="Settings" Order="Secondary" Clicked="OnToolbarItemClicked">
+      <ToolbarItem.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource" WinPhone="Images/Icon1F435.png" />
+      </ToolbarItem.Icon>
+    </ToolbarItem>
+  </MasterDetailPage.ToolbarItems>
+  <MasterDetailPage.Master>
+    <local:MainMenu />
+  </MasterDetailPage.Master>
+
+</MasterDetailPage>

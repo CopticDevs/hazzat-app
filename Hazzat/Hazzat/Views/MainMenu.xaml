@@ -3,29 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Hazzat.MainMenu"
             Title="hazzat.com">
-  <ContentPage.ToolbarItems>
-    <ToolbarItem Text="Hazzat" Order="Primary" Clicked="OnToolbarItemClicked">
-      <ToolbarItem.Icon>
-        <OnPlatform x:TypeArguments="FileImageSource" iOS="bookmark.png" Android="icon.png" WinPhone="Assets/appbar.paper.png" />
-      </ToolbarItem.Icon>
-    </ToolbarItem>
-
-  
-    <ToolbarItem Text="Settings" Order="Secondary" Clicked="OnToolbarItemClicked">
-      <ToolbarItem.Icon>
-        <OnPlatform x:TypeArguments="FileImageSource" WinPhone="Images/Icon1F435.png" />
-      </ToolbarItem.Icon>
-    </ToolbarItem>
-  </ContentPage.ToolbarItems>
-
   <ContentPage Title="Seasons">
     <StackLayout>
       <ListView x:Name="MenuStack" ItemTapped="SeasonSelected">
+        <ListView.RowHeight>
+          <OnPlatform x:TypeArguments="x:Int32" iOS="50" Android="50" WinPhone="60" />
+        </ListView.RowHeight>
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
               <StackLayout Padding="0,5,0,5">
-                <Frame HasShadow="True" OutlineColor="Silver" Padding="2.5,2.5,2.5,2.5">
+                <Frame HasShadow="True" OutlineColor="Silver" Padding="10,10,10,10">
                   <StackLayout Orientation="Horizontal">
                     <Label FontSize="Medium" Text="{Binding Name}" TextColor="{Binding accent}"></Label>
                     <Label FontSize="Medium" Text="{Binding ServiceHymnsCount, StringFormat='({0})'}" TextColor="{Binding accent}" HorizontalOptions="StartAndExpand"></Label>

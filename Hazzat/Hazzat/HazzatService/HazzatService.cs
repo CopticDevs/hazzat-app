@@ -140,7 +140,7 @@ namespace HazzatService
         public void GetCompletedStructBySeason(object sender, GetSeasonServicesCompletedEventArgs e)
         {
             HymnsBySeason = e.Result;
-            MessagingCenter.Send(this, "Done");
+            MessagingCenter.Send(this, "DoneSeason");
         }
 
         public void FetchServiceHymns(int StructId, Action<object, GetSeasonServiceHymnsCompletedEventArgs> GetCompletedHymnsBySeason)

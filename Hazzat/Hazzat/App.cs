@@ -1,4 +1,5 @@
-﻿using HazzatService;
+﻿using Hazzat.Views;
+using HazzatService;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -70,7 +71,10 @@ namespace Hazzat
             });
             Resources.Add("accent", Color.Accent);
             Resources.Add("default", Color.Default);
-            MainPage = new NavigationPage(new MainMenu()); //Temp fix for insulation. NavigationPage -> TabbedPage 
+
+            //Perform Season Calculations Here
+
+            MainPage = new MasterDetailMenu("Annual", 1); //Set to current Season
         }
 
         protected override void OnStart()
@@ -94,16 +98,16 @@ namespace Hazzat
 
         private Action BuildDataCache()
         {
-            isDataCacheBuilding = true;
+            return delegate {
+                isDataCacheBuilding = true;
 
-            Dictionary<string, Dictionary<string, List<string>>> tempcache = new Dictionary<string, Dictionary<string, List<string>>>();
-
-            return null;
+                Dictionary<string, Dictionary<string, List<string>>> tempcache = new Dictionary<string, Dictionary<string, List<string>>>();
+            };
         }
 
         protected override void OnSleep()
         {
-            Properties["AppDataCache"] = Serialize(AppDataCache);
+           // Properties["AppDataCache"] = Serialize(AppDataCache);
         }
 
         protected override void OnResume()
