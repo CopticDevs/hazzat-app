@@ -18,10 +18,16 @@ namespace Hazzat.Views
         {
             InitializeComponent();
 
+            MessagingCenter.Subscribe<MainMenu>(this, "SeasonSelected",  TooglePresented);
+
             Menu = new SectionMenu(Season, SeasonId);
 
             Detail = new NavigationPage(Menu);
+        }
 
+        private void TooglePresented(MainMenu obj)
+        {
+            IsPresented = false;
         }
 
 
