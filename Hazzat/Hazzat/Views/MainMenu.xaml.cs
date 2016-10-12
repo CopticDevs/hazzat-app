@@ -47,13 +47,8 @@ namespace Hazzat
         protected void SeasonSelected(object sender, ItemTappedEventArgs e)
         {
             SeasonInfo item = (SeasonInfo)e.Item;
-
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                NavigationPage menu = new NavigationPage(new SectionMenu(item.Name, item.ItemId));
-
-                MasterDetailMenu.Menu = menu;
-            });
+            NavigationPage menu = new NavigationPage(new SectionMenu(item.Name, item.ItemId));
+            MasterDetailMenu.Menu = menu;
         }
     }
 }
