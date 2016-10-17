@@ -133,6 +133,9 @@
     <AndroidAsset Include="Assets\Fonts\hazzatva.ttf" />
     <AndroidAsset Include="Assets\Fonts\hazzatva.woff" />
     <AndroidAsset Include="Assets\Fonts\hazzatva.woff2" />
+    <AndroidAsset Include="Assets\Fonts\998687745-TrajanPro-Regular.eot" />
+    <AndroidAsset Include="Assets\Fonts\998687745-TrajanPro-Regular.ttf" />
+    <AndroidAsset Include="Assets\Fonts\998687745-TrajanPro-Regular.woff" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <AndroidResource Include="Resources\Layout\tabs.axml">
