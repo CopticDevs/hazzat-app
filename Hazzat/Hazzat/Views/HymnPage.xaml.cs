@@ -25,6 +25,8 @@ namespace Hazzat.Views
                                    </style>
                                     <link href=""Fonts/fonts.css"" rel=""stylesheet"" type=""text/css"" />";
 
+        private string HtmlHymnTitleFormatString = @"<font class=""HymnTitle"">{0}</font><br /><br />";
+
         public int HymnID;
 
         public HymnPage(string breadcrumbName, string HymnName, int HymnId)
@@ -61,6 +63,10 @@ namespace Hazzat.Views
 
                     foreach (var hymnContent in App.NameViewModel.HymnContentInfo)
                     {
+                        // Hymn title
+                        html.Append(string.Format(HtmlHymnTitleFormatString, hymnContent.Title));
+
+                        // English content
                         if (!string.IsNullOrWhiteSpace(hymnContent.Content_English))
                         {
                             html.Append(@"<div><font class=""EnglishFont"">");
@@ -68,6 +74,7 @@ namespace Hazzat.Views
                             html.Append(@"</font></div>");
                         }
 
+                        // Coptic content
                         if (!string.IsNullOrWhiteSpace(hymnContent.Content_Coptic))
                         {
                             html.Append(@"<div><font class=""CopticFont"">");
@@ -75,6 +82,7 @@ namespace Hazzat.Views
                             html.Append(@"</font></div>");
                         }
 
+                        // Arabic Content
                         if (!string.IsNullOrWhiteSpace(hymnContent.Content_Arabic))
                         {
                             html.Append(@"<div><font class=""ArabicFont"">");
@@ -112,6 +120,9 @@ namespace Hazzat.Views
 
                     foreach (var hymnContent in App.NameViewModel.HazzatHymnContentInfo)
                     {
+                        // Hymn title
+                        html.Append(string.Format(HtmlHymnTitleFormatString, hymnContent.Title));
+
                         //if (!string.IsNullOrWhiteSpace(hymnContent.Content_English))
                         //{
                         //    html.Append(hymnContent.Content_English);
@@ -161,6 +172,9 @@ namespace Hazzat.Views
 
                     foreach (var hymnContent in App.NameViewModel.VerticalHazzatHymnContent)
                     {
+                        // Hymn title
+                        html.Append(string.Format(HtmlHymnTitleFormatString, hymnContent.Title));
+
                         //if (!string.IsNullOrWhiteSpace(hymnContent.Content_English))
                         //{
                         //    html.Append(hymnContent.Content_English);

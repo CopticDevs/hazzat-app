@@ -3,6 +3,18 @@
 Embedded fonts
 ================================
 */
+@font-face {
+	
+	font-family: "Trajan Pro";
+	src: url('998687745-TrajanPro-Regular.eot');
+	src: url('998687745-TrajanPro-Regular.eot?#iefix') format('embedded-opentype'),
+	url('998687745-TrajanPro-Regular.svg#Trajan Pro') format('svg'),
+	url('998687745-TrajanPro-Regular.woff') format('woff'),
+	url('998687745-TrajanPro-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;	
+}
+
 @font-face  {
     font-family: 'CS Avva Shenouda';
     src: url('cs_avva_shenouda.ttf') format('truetype');
@@ -39,6 +51,14 @@ Embedded fonts
 Hymn text Styles
 ================================
 */
+.HymnTitle {
+    padding: 0px 0px 22px;
+    font-family: "Trajan Pro";
+    font-size: 22px;
+    font-weight: 700;
+    padding-bottom: 10px;
+}
+
 .CopticFont {
     text-decoration: none;
     font-family: 'CS Avva Shenouda';
