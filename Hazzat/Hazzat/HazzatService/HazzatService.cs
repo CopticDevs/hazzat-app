@@ -231,6 +231,29 @@ namespace HazzatService
             TypeList = e.Result;
             MessagingCenter.Send(this, "DoneWithTypeList");
         }
+
+        public void GetSeasonsByType(int typeId)
+        {
+            MessagingCenter.Send(this, "LoadingSeasonsByTypes");
+            try
+            {
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetSeasonsByTuneIDCompleted += new EventHandler<GetSeasonsByTuneIDCompletedEventArgs>(client_GetSeasonsByTuneID);
+                client.GetSeasonsByTuneIDAsync(typeId);
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        private void client_GetSeasonsByTuneID(object sender, GetSeasonsByTuneIDCompletedEventArgs e)
+        {
+            Seasons = e.Result;
+            MessagingCenter.Send(this, "DoneType");
+        }
+
         #endregion
 
         #region byTune
