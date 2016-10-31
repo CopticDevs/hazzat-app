@@ -18,9 +18,11 @@ namespace Hazzat
         {
             InitializeComponent();
 
-            SubscribeMessage();
+            SubscribeMessages();
 
             App.NameViewModel.createSeasonsViewModel(true);
+            App.NameViewModel.GetHymnsByType();
+            App.NameViewModel.GetHymnsByTune();
         }
 
         protected override void OnDisappearing()
@@ -30,7 +32,7 @@ namespace Hazzat
             MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "Done");
         }
 
-        private void SubscribeMessage()
+        private void SubscribeMessages()
         {
             MessagingCenter.Subscribe<ByNameMainViewModel>(this, "Done", (sender) =>
             {
@@ -42,6 +44,28 @@ namespace Hazzat
                     });
                 }
             });
+
+            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithTypeList", (sender) =>
+            {
+                if (App.NameViewModel?.TypeList != null)
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        MenuStack2.ItemsSource = App.NameViewModel.TypeList;
+                    });
+                }
+            });
+
+            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithTuneList", (sender) =>
+            {
+                if (App.NameViewModel?.TuneList != null)
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        MenuStack3.ItemsSource = App.NameViewModel.TuneList;
+                    });
+                }
+            });
         }
 
         protected void SeasonSelected(object sender, ItemTappedEventArgs e)
@@ -49,6 +73,14 @@ namespace Hazzat
             SeasonInfo item = (SeasonInfo)e.Item;
             MessagingCenter.Send(this, "SeasonSelected");
             MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId);
+        }
+        protected void TypeSelected(object sender, ItemTappedEventArgs e)
+        {
+    
+        }
+        protected void TuneSelected(object sender, ItemTappedEventArgs e)
+        {
+           
         }
     }
 }

@@ -100,6 +100,11 @@ namespace HazzatService
         public ServiceHymnsContentInfo[] HazzatHymnContentInfo { get; private set; }
         public ServiceHymnsContentInfo[] VerticalHazzatHymnContent { get; private set; }
 
+        public TypeInfo[] TypeList { get; private set; }
+
+        public TuneInfo[] TuneList { get; private set; }
+
+
         public void createSeasonsViewModel(bool isDateSpecific)
         {
             MessagingCenter.Send(this, "Loading");
@@ -203,5 +208,54 @@ namespace HazzatService
             VerticalHazzatHymnContent = e.Result;
             MessagingCenter.Send(this, "DoneWithVerticalHazzat");
         }
+
+        #region byType
+        public void GetHymnsByType()
+        {
+            MessagingCenter.Send(this, "LoadingTypesList");
+            try
+            {
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetTypeListCompleted += new EventHandler<GetTypeListCompletedEventArgs>(GetCompletedTypeList);
+                client.GetTypeListAsync();
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        private void GetCompletedTypeList(object sender, GetTypeListCompletedEventArgs e)
+        {
+            TypeList = e.Result;
+            MessagingCenter.Send(this, "DoneWithTypeList");
+        }
+        #endregion
+
+        #region byTune
+        public void GetHymnsByTune()
+        {
+            MessagingCenter.Send(this, "LoadingTunesList");
+            try
+            {
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetTuneListCompleted += new EventHandler<GetTuneListCompletedEventArgs>(GetCompletedTuneList);
+                client.GetTuneListAsync();
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        private void GetCompletedTuneList(object sender, GetTuneListCompletedEventArgs e)
+        {
+            TuneList = e.Result;
+            MessagingCenter.Send(this, "DoneWithTuneList");
+        }
+
+        #endregion
     }
 }

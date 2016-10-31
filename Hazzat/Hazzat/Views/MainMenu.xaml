@@ -28,7 +28,7 @@
   </ContentPage>
   <ContentPage Title="Types">
     <StackLayout>
-      <ListView x:Name="MenuStack2" ItemTapped="SeasonSelected">
+      <ListView x:Name="MenuStack2" ItemTapped="TypeSelected">
         <ListView.RowHeight>
           <OnPlatform x:TypeArguments="x:Int32" iOS="50" Android="50" WinPhone="60" />
         </ListView.RowHeight>
@@ -51,7 +51,7 @@
   </ContentPage>
   <ContentPage Title="Tunes">
     <StackLayout>
-      <ListView x:Name="MenuStack3" ItemTapped="SeasonSelected">
+      <ListView x:Name="MenuStack3" ItemTapped="TuneSelected">
         <ListView.RowHeight>
           <OnPlatform x:TypeArguments="x:Int32" iOS="50" Android="50" WinPhone="60" />
         </ListView.RowHeight>
