@@ -16,23 +16,23 @@ namespace Hazzat.Views
     {
         private static ObservableCollection<ServiceDetails> serviceList;
 
-        public SectionMenu(string Season, int SeasonId)
+        public SectionMenu(string ItemName, int ItemId, string By)
         {
             InitializeComponent();
 
-            Title = Season;
+            Title = ItemName;
 
             serviceList = new ObservableCollection<ServiceDetails>();
 
             SubscribeMessage();
 
-            App.NameViewModel.createViewModelBySeason(SeasonId);
+            App.NameViewModel.createViewModelBySeason(ItemId);
         }
 
-        public async void SectionMenuInit(string Season, int SeasonId)
+        public async void SectionMenuInit(string ItemName, int ItemId, string By)
         {
-            SectionMenu newMenu = new SectionMenu(Season, SeasonId);
-
+            SectionMenu newMenu = new SectionMenu(ItemName, ItemId, By);
+            await Navigation.PopAsync();
             await Navigation.PushAsync(newMenu, true);
         }
 
@@ -91,6 +91,7 @@ namespace Hazzat.Views
                 }
             }
         }
+
 
         protected async void ServiceHymnTapped(object sender, ItemTappedEventArgs e)
         {
