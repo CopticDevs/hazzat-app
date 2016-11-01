@@ -92,6 +92,10 @@
     <Content Include="Assets\Fonts\fonts.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Fonts\HazzatVA.ttf" />
+    <Content Include="Assets\Fonts\HazzatA.ttf" />
+    <None Include="Assets\Fonts\hazzata.eot" />
+    <None Include="Assets\Fonts\hazzatva.eot" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>

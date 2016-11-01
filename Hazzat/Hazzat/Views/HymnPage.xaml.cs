@@ -123,13 +123,6 @@ namespace Hazzat.Views
                         // Hymn title
                         html.Append(string.Format(HtmlHymnTitleFormatString, hymnContent.Title));
 
-                        //if (!string.IsNullOrWhiteSpace(hymnContent.Content_English))
-                        //{
-                        //    html.Append(hymnContent.Content_English);
-                        //    html.Append("<br /><br />");
-                        //    html.Append("<br /><br />");
-                        //}
-
                         if (!string.IsNullOrWhiteSpace(hymnContent.Content_Coptic))
                         {
                             html.Append(hymnContent.Content_Coptic);
@@ -137,12 +130,19 @@ namespace Hazzat.Views
                             html.Append("<br /><br />");
                         }
 
-                        //if (!string.IsNullOrWhiteSpace(hymnContent.Content_Arabic))
-                        //{
-                        //    html.Append(hymnContent.Content_Arabic);
-                        //    html.Append("<br /><br />");
-                        //    html.Append("<br /><br />");
-                        //}
+                        if (!string.IsNullOrWhiteSpace(hymnContent.Content_English))
+                        {
+                            html.Append(hymnContent.Content_English);
+                            html.Append("<br /><br />");
+                            html.Append("<br /><br />");
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(hymnContent.Content_Arabic))
+                        {
+                            html.Append(hymnContent.Content_Arabic);
+                            html.Append("<br /><br />");
+                            html.Append("<br /><br />");
+                        }
 
                         // hymn content separator
                         html.Append("<br /><br />");
@@ -175,12 +175,7 @@ namespace Hazzat.Views
                         // Hymn title
                         html.Append(string.Format(HtmlHymnTitleFormatString, hymnContent.Title));
 
-                        //if (!string.IsNullOrWhiteSpace(hymnContent.Content_English))
-                        //{
-                        //    html.Append(hymnContent.Content_English);
-                        //    html.Append("<br /><br />");
-                        //    html.Append("<br /><br />");
-                        //}
+         
 
                         if (!string.IsNullOrWhiteSpace(hymnContent.Content_Coptic))
                         {
@@ -189,12 +184,19 @@ namespace Hazzat.Views
                             html.Append("<br /><br />");
                         }
 
-                        //if (!string.IsNullOrWhiteSpace(hymnContent.Content_Arabic))
-                        //{
-                        //    html.Append(hymnContent.Content_Arabic);
-                        //    html.Append("<br /><br />");
-                        //    html.Append("<br /><br />");
-                        //}
+                        if (!string.IsNullOrWhiteSpace(hymnContent.Content_English))
+                        {
+                            html.Append(hymnContent.Content_English);
+                            html.Append("<br /><br />");
+                            html.Append("<br /><br />");
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(hymnContent.Content_Arabic))
+                        {
+                            html.Append(hymnContent.Content_Arabic);
+                            html.Append("<br /><br />");
+                            html.Append("<br /><br />");
+                        }
 
                         // hymn content separator
                         html.Append("<br /><br />");
