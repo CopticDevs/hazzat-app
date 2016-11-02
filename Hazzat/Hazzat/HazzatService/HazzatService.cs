@@ -101,9 +101,10 @@ namespace HazzatService
         public ServiceHymnsContentInfo[] VerticalHazzatHymnContent { get; private set; }
 
         public TypeInfo[] TypeList { get; private set; }
+        public SeasonInfo[] TypeSeasons { get; private set; }
 
         public TuneInfo[] TuneList { get; private set; }
-
+        public SeasonInfo[] TuneSeasons { get; private set; }
 
         public void createSeasonsViewModel(bool isDateSpecific)
         {
@@ -238,8 +239,8 @@ namespace HazzatService
             try
             {
                 HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-                client.GetSeasonsByTuneIDCompleted += new EventHandler<GetSeasonsByTuneIDCompletedEventArgs>(client_GetSeasonsByTuneID);
-                client.GetSeasonsByTuneIDAsync(typeId);
+                client.GetSeasonsByTypeIDCompleted += new EventHandler<GetSeasonsByTypeIDCompletedEventArgs>(client_GetSeasonsByTypeID);
+                client.GetSeasonsByTypeIDAsync(typeId);
             }
 
             catch (Exception ex)
@@ -248,10 +249,25 @@ namespace HazzatService
             }
         }
 
-        private void client_GetSeasonsByTuneID(object sender, GetSeasonsByTuneIDCompletedEventArgs e)
+        private void client_GetSeasonsByTypeID(object sender, GetSeasonsByTypeIDCompletedEventArgs e)
         {
-            Seasons = e.Result;
-            MessagingCenter.Send(this, "DoneType");
+            TypeSeasons = e.Result;
+            MessagingCenter.Send(this, "DoneWithSeasonsListByType");
+        }
+
+        public void GetServiceHymnListBySeasonIdAndTypeId(int itemId1, int itemId2, Action<object, GetServiceHymnListBySeasonIdAndTypeIdCompletedEventArgs> getCompletedHymnsBySeasonAndType)
+        {
+            try
+            {
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetServiceHymnListBySeasonIdAndTypeIdCompleted += new EventHandler<GetServiceHymnListBySeasonIdAndTypeIdCompletedEventArgs>(getCompletedHymnsBySeasonAndType);
+                client.GetServiceHymnListBySeasonIdAndTypeIdAsync(itemId1, itemId2);
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
 
         #endregion
@@ -297,30 +313,11 @@ namespace HazzatService
 
         private void client_ByTuneGetSeasons(object sender, GetSeasonsByTuneIDCompletedEventArgs e)
         {
-            Seasons = e.Result;
+            TuneSeasons = e.Result;
             MessagingCenter.Send(this, "DoneWithSeasonsListByTune");
         }
 
-        public void ByTypeGetSeasons(int TypeId)
-        {
-            MessagingCenter.Send(this, "LoadingSeasonsListByType");
-            try
-            {
-                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-                client.GetSeasonsByTypeIDCompleted += new EventHandler<GetSeasonsByTypeIDCompletedEventArgs>(client_ByTypeGetSeasons);
-                client.GetSeasonsByTypeIDAsync(TypeId);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
-
-        private void client_ByTypeGetSeasons(object sender, GetSeasonsByTypeIDCompletedEventArgs e)
-        {
-            Seasons = e.Result;
-            MessagingCenter.Send(this, "DoneWithSeasonsListByTune");
-        }
+        
 
         #endregion
     }

@@ -15,6 +15,7 @@ namespace Hazzat.Views
     public partial class SectionMenu : ContentPage
     {
         private static ObservableCollection<ServiceDetails> serviceList;
+        private static int itemId;
 
         public SectionMenu(string ItemName, int ItemId, string By)
         {
@@ -23,6 +24,7 @@ namespace Hazzat.Views
             Title = ItemName;
 
             serviceList = new ObservableCollection<ServiceDetails>();
+            itemId = 0;
 
             SubscribeMessages();
 
@@ -33,12 +35,14 @@ namespace Hazzat.Views
 
             if (By == "Type")
             {
-                App.NameViewModel.ByTypeGetSeasons(ItemId);
+                App.NameViewModel.GetSeasonsByType(ItemId);
+                itemId = ItemId;
             }
 
             if (By == "Tune")
             {
                 App.NameViewModel.ByTuneGetSeasons(ItemId);
+                itemId = ItemId;
             }
         }
 
@@ -75,7 +79,7 @@ namespace Hazzat.Views
             {
                 if (App.NameViewModel?.HymnsBySeason != null)
                 {
-                    LoadServiceHymnsByType(App.NameViewModel.HymnsBySeason);
+                    LoadServiceHymnsByType(App.NameViewModel.TypeSeasons);
 
                     Device.BeginInvokeOnMainThread(() =>
                     {
@@ -88,7 +92,7 @@ namespace Hazzat.Views
             {
                 if (App.NameViewModel?.HymnsBySeason != null)
                 {
-                    LoadServiceHymnsByTune(App.NameViewModel.HymnsBySeason);
+                    LoadServiceHymnsByTune(App.NameViewModel.TuneSeasons);
 
                     Device.BeginInvokeOnMainThread(() =>
                     {
@@ -112,27 +116,27 @@ namespace Hazzat.Views
             }
         }
 
-        private void LoadServiceHymnsByType(StructureInfo[] hymnsBySeason)
+        private void LoadServiceHymnsByType(SeasonInfo[] hymnsBySeason)
         {
-            foreach (var structInfo in hymnsBySeason.OrderBy(s => s.Service_Order))
+            foreach (var structInfo in hymnsBySeason.OrderBy(s => s.Season_Order))
             {
                 serviceList.Add(new ServiceDetails()
                 {
-                    ServiceName = structInfo.Service_Name,
+                    ServiceName = structInfo.Name,
                     StructureId = structInfo.ItemId
                 });
 
-                //GetServiceHymnListBySeasonIdAndTypeId
+                App.NameViewModel.GetServiceHymnListBySeasonIdAndTypeId(structInfo.ItemId, itemId, GetCompletedHymnsBySeasonAndType);
             }
         }
 
-        private void LoadServiceHymnsByTune(StructureInfo[] hymnsBySeason)
+        private void LoadServiceHymnsByTune(SeasonInfo[] hymnsBySeason)
         {
-              foreach (var structInfo in hymnsBySeason.OrderBy(s => s.Service_Order))
+            foreach (var structInfo in hymnsBySeason.OrderBy(s => s.Season_Order))
             {
                 serviceList.Add(new ServiceDetails()
                 {
-                    ServiceName = structInfo.Service_Name,
+                    ServiceName = structInfo.Name,
                     StructureId = structInfo.ItemId
                 });
 
@@ -154,6 +158,33 @@ namespace Hazzat.Views
                     foreach (var hymnInfo in fetchedHymns)
                     {
                         serviceInfo.Add(hymnInfo);
+                    }
+                }
+            }
+        }
+
+        //TODO: add method to remove redundant code
+        private void GetCompletedHymnsBySeasonAndType(object sender, GetServiceHymnListBySeasonIdAndTypeIdCompletedEventArgs e)
+        {
+            var fetchedHymns = e.Result;
+
+            if (fetchedHymns.Length != 0)
+            {
+               
+
+                // Adding a lock on serviceList since multiple services could be modifying the collection
+                lock (serviceList)
+                {
+                    foreach (var seasonInfo in serviceList)
+                    {
+                        foreach (var hymnInfo in fetchedHymns)
+                        {
+                            if (seasonInfo.ServiceName == hymnInfo.Service_Name)
+                            {
+                                var serviceInfo = serviceList.First(s => s.ServiceName == hymnInfo.Service_Name);
+                                serviceInfo.Add(hymnInfo);
+                            }
+                        }
                     }
                 }
             }
