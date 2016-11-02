@@ -9,7 +9,7 @@ using Xamarin.Forms;
 namespace HazzatService
 {
     public class HymnStructNameViewModel : INotifyPropertyChanged
-    {        
+    {
         private string _name;
         public string Name
         {
@@ -277,6 +277,49 @@ namespace HazzatService
         {
             TuneList = e.Result;
             MessagingCenter.Send(this, "DoneWithTuneList");
+        }
+
+        public void ByTuneGetSeasons(int tuneId)
+        {
+            MessagingCenter.Send(this, "LoadingSeasonsListByTune");
+            try
+            {
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetSeasonsByTuneIDCompleted += new EventHandler<GetSeasonsByTuneIDCompletedEventArgs>(client_ByTuneGetSeasons);
+                client.GetSeasonsByTuneIDAsync(tuneId);
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        private void client_ByTuneGetSeasons(object sender, GetSeasonsByTuneIDCompletedEventArgs e)
+        {
+            Seasons = e.Result;
+            MessagingCenter.Send(this, "DoneWithSeasonsListByTune");
+        }
+
+        public void ByTypeGetSeasons(int TypeId)
+        {
+            MessagingCenter.Send(this, "LoadingSeasonsListByType");
+            try
+            {
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetSeasonsByTypeIDCompleted += new EventHandler<GetSeasonsByTypeIDCompletedEventArgs>(client_ByTypeGetSeasons);
+                client.GetSeasonsByTypeIDAsync(TypeId);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        private void client_ByTypeGetSeasons(object sender, GetSeasonsByTypeIDCompletedEventArgs e)
+        {
+            Seasons = e.Result;
+            MessagingCenter.Send(this, "DoneWithSeasonsListByTune");
         }
 
         #endregion

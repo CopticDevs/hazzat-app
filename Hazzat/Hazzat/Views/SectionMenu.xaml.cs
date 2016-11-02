@@ -24,9 +24,22 @@ namespace Hazzat.Views
 
             serviceList = new ObservableCollection<ServiceDetails>();
 
-            SubscribeMessage();
+            SubscribeMessages();
 
-            App.NameViewModel.createViewModelBySeason(ItemId);
+            if (By == "Season")
+            {
+                App.NameViewModel.createViewModelBySeason(ItemId);
+            }
+
+            if (By == "Type")
+            {
+                App.NameViewModel.ByTypeGetSeasons(ItemId);
+            }
+
+            if (By == "Tune")
+            {
+                App.NameViewModel.ByTuneGetSeasons(ItemId);
+            }
         }
 
         public async void SectionMenuInit(string ItemName, int ItemId, string By)
@@ -43,13 +56,39 @@ namespace Hazzat.Views
             MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "DoneSeason");
         }
 
-        public void SubscribeMessage()
+        public void SubscribeMessages()
         {
             MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneSeason", (sender) =>
             {
                 if (App.NameViewModel?.HymnsBySeason != null)
                 {
                     LoadServiceHymns(App.NameViewModel.HymnsBySeason);
+
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        StructList.ItemsSource = serviceList;
+                    });
+                }
+            });
+
+            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithSeasonsListByType", (sender) =>
+            {
+                if (App.NameViewModel?.HymnsBySeason != null)
+                {
+                    LoadServiceHymnsByType(App.NameViewModel.HymnsBySeason);
+
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        StructList.ItemsSource = serviceList;
+                    });
+                }
+            });
+
+            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithSeasonsListByTune", (sender) =>
+            {
+                if (App.NameViewModel?.HymnsBySeason != null)
+                {
+                    LoadServiceHymnsByTune(App.NameViewModel.HymnsBySeason);
 
                     Device.BeginInvokeOnMainThread(() =>
                     {
@@ -70,6 +109,34 @@ namespace Hazzat.Views
                 });
 
                 App.NameViewModel.FetchServiceHymns(structInfo.ItemId, GetCompletedHymnsBySeason);
+            }
+        }
+
+        private void LoadServiceHymnsByType(StructureInfo[] hymnsBySeason)
+        {
+            foreach (var structInfo in hymnsBySeason.OrderBy(s => s.Service_Order))
+            {
+                serviceList.Add(new ServiceDetails()
+                {
+                    ServiceName = structInfo.Service_Name,
+                    StructureId = structInfo.ItemId
+                });
+
+                //GetServiceHymnListBySeasonIdAndTypeId
+            }
+        }
+
+        private void LoadServiceHymnsByTune(StructureInfo[] hymnsBySeason)
+        {
+              foreach (var structInfo in hymnsBySeason.OrderBy(s => s.Service_Order))
+            {
+                serviceList.Add(new ServiceDetails()
+                {
+                    ServiceName = structInfo.Service_Name,
+                    StructureId = structInfo.ItemId
+                });
+
+                //GetServiceHymnListBySeasonIdAndTuneId
             }
         }
 
