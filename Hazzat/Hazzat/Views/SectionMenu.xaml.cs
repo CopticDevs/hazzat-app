@@ -170,8 +170,6 @@ namespace Hazzat.Views
 
             if (fetchedHymns.Length != 0)
             {
-               
-
                 // Adding a lock on serviceList since multiple services could be modifying the collection
                 lock (serviceList)
                 {
@@ -179,7 +177,7 @@ namespace Hazzat.Views
                     {
                         foreach (var hymnInfo in fetchedHymns)
                         {
-                            if (seasonInfo.ServiceName == hymnInfo.Service_Name)
+                            if (seasonInfo.ServiceName == hymnInfo.Season_Name)
                             {
                                 var serviceInfo = serviceList.First(s => s.ServiceName == hymnInfo.Service_Name);
                                 serviceInfo.Add(hymnInfo);
