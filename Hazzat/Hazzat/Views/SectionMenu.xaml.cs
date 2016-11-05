@@ -77,7 +77,7 @@ namespace Hazzat.Views
 
             MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithSeasonsListByType", (sender) =>
             {
-                if (App.NameViewModel?.HymnsBySeason != null)
+                if (App.NameViewModel?.TypeSeasons != null)
                 {
                     LoadServiceHymnsByType(App.NameViewModel.TypeSeasons);
 
@@ -90,7 +90,7 @@ namespace Hazzat.Views
 
             MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithSeasonsListByTune", (sender) =>
             {
-                if (App.NameViewModel?.HymnsBySeason != null)
+                if (App.NameViewModel?.TuneSeasons != null)
                 {
                     LoadServiceHymnsByTune(App.NameViewModel.TuneSeasons);
 
@@ -116,31 +116,51 @@ namespace Hazzat.Views
             }
         }
 
-        private void LoadServiceHymnsByType(SeasonInfo[] hymnsBySeason)
+        private void LoadServiceHymnsByType(SeasonInfo[] filteredSeasons)
         {
-            foreach (var structInfo in hymnsBySeason.OrderBy(s => s.Season_Order))
-            {
-                serviceList.Add(new ServiceDetails()
-                {
-                    ServiceName = structInfo.Name,
-                    StructureId = structInfo.ItemId
-                });
+            //BUGBUG: For some reason this method is being called multiple times.  As a temporary
+            //hack clear the serviceList first to avoid redundancy
+            serviceList.Clear();
 
-                App.NameViewModel.GetServiceHymnListBySeasonIdAndTypeId(structInfo.ItemId, itemId, GetCompletedHymnsBySeasonAndType);
+            foreach (var seasonInfo in filteredSeasons.OrderBy(s => s.Season_Order))
+            {
+                // TODO: change the member names to be more generic
+                var serviceInfo = new ServiceDetails()
+                {
+                    ServiceName = seasonInfo.Name,
+                    StructureId = seasonInfo.ItemId
+                };
+
+                serviceList.Add(serviceInfo);
+
+                App.NameViewModel.GetServiceHymnListBySeasonIdAndTypeId(
+                    seasonInfo.ItemId,
+                    itemId,
+                    (sender, e) => GetCompletedHymnsBySeasonAndTypeOrTune(e.Result, serviceInfo));
             }
         }
 
         private void LoadServiceHymnsByTune(SeasonInfo[] hymnsBySeason)
         {
-            foreach (var structInfo in hymnsBySeason.OrderBy(s => s.Season_Order))
-            {
-                serviceList.Add(new ServiceDetails()
-                {
-                    ServiceName = structInfo.Name,
-                    StructureId = structInfo.ItemId
-                });
+            //BUGBUG: For some reason this method is being called multiple times.  As a temporary
+            //hack clear the serviceList first to avoid redundancy
+            serviceList.Clear();
 
-                //GetServiceHymnListBySeasonIdAndTuneId
+            foreach (var seasonInfo in hymnsBySeason.OrderBy(s => s.Season_Order))
+            {
+                // TODO: change the member names to be more generic
+                var serviceInfo = new ServiceDetails()
+                {
+                    ServiceName = seasonInfo.Name,
+                    StructureId = seasonInfo.ItemId
+                };
+
+                serviceList.Add(serviceInfo);
+
+                App.NameViewModel.GetServiceHymnListBySeasonIdAndTuneId(
+                    seasonInfo.ItemId,
+                    itemId,
+                    (sender, e) => GetCompletedHymnsBySeasonAndTypeOrTune(e.Result, serviceInfo));
             }
         }
 
@@ -163,31 +183,19 @@ namespace Hazzat.Views
             }
         }
 
-        //TODO: add method to remove redundant code
-        private void GetCompletedHymnsBySeasonAndType(object sender, GetServiceHymnListBySeasonIdAndTypeIdCompletedEventArgs e)
+        private void GetCompletedHymnsBySeasonAndTypeOrTune(ServiceHymnInfo[] fetchedHymns, ServiceDetails serviceInfo)
         {
-            var fetchedHymns = e.Result;
-
             if (fetchedHymns.Length != 0)
             {
-                // Adding a lock on serviceList since multiple services could be modifying the collection
                 lock (serviceList)
                 {
-                    foreach (var seasonInfo in serviceList)
+                    foreach (var hymnInfo in fetchedHymns)
                     {
-                        foreach (var hymnInfo in fetchedHymns)
-                        {
-                            if (seasonInfo.ServiceName == hymnInfo.Season_Name)
-                            {
-                                var serviceInfo = serviceList.First(s => s.ServiceName == hymnInfo.Service_Name);
-                                serviceInfo.Add(hymnInfo);
-                            }
-                        }
+                        serviceInfo.Add(hymnInfo);
                     }
                 }
             }
         }
-
 
         protected async void ServiceHymnTapped(object sender, ItemTappedEventArgs e)
         {

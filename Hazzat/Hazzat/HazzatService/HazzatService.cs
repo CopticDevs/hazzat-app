@@ -255,13 +255,28 @@ namespace HazzatService
             MessagingCenter.Send(this, "DoneWithSeasonsListByType");
         }
 
-        public void GetServiceHymnListBySeasonIdAndTypeId(int itemId1, int itemId2, Action<object, GetServiceHymnListBySeasonIdAndTypeIdCompletedEventArgs> getCompletedHymnsBySeasonAndType)
+        public void GetServiceHymnListBySeasonIdAndTypeId(int seasonId, int typeId, Action<object, GetServiceHymnListBySeasonIdAndTypeIdCompletedEventArgs> getCompletedHymnsBySeasonAndType)
         {
             try
             {
                 HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
                 client.GetServiceHymnListBySeasonIdAndTypeIdCompleted += new EventHandler<GetServiceHymnListBySeasonIdAndTypeIdCompletedEventArgs>(getCompletedHymnsBySeasonAndType);
-                client.GetServiceHymnListBySeasonIdAndTypeIdAsync(itemId1, itemId2);
+                client.GetServiceHymnListBySeasonIdAndTypeIdAsync(seasonId, typeId);
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public void GetServiceHymnListBySeasonIdAndTuneId(int seasonId, int tuneId, Action<object, GetServiceHymnListBySeasonIdAndTuneIdCompletedEventArgs> getCompletedHymnsBySeasonAndTune)
+        {
+            try
+            {
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetServiceHymnListBySeasonIdAndTuneIdCompleted += new EventHandler<GetServiceHymnListBySeasonIdAndTuneIdCompletedEventArgs>(getCompletedHymnsBySeasonAndTune);
+                client.GetServiceHymnListBySeasonIdAndTuneIdAsync(seasonId, tuneId);
             }
 
             catch (Exception ex)
