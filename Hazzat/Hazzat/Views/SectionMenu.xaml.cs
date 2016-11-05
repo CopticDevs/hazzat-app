@@ -15,9 +15,11 @@ namespace Hazzat.Views
     public partial class SectionMenu : ContentPage
     {
         private static ObservableCollection<ServiceDetails> serviceList;
+        private static NavigationType navigationType;
         private static int itemId;
+        private static string itemName;
 
-        public SectionMenu(string ItemName, int ItemId, string By)
+        public SectionMenu(string ItemName, int ItemId, NavigationType navType)
         {
             InitializeComponent();
 
@@ -25,30 +27,32 @@ namespace Hazzat.Views
 
             serviceList = new ObservableCollection<ServiceDetails>();
             itemId = 0;
+            itemName = ItemName;
+            navigationType = navType;
 
             SubscribeMessages();
 
-            if (By == "Season")
+            switch (navType)
             {
-                App.NameViewModel.createViewModelBySeason(ItemId);
-            }
-
-            if (By == "Type")
-            {
-                App.NameViewModel.GetSeasonsByType(ItemId);
-                itemId = ItemId;
-            }
-
-            if (By == "Tune")
-            {
-                App.NameViewModel.ByTuneGetSeasons(ItemId);
-                itemId = ItemId;
+                case NavigationType.Season:
+                    App.NameViewModel.createViewModelBySeason(ItemId);
+                    break;
+                case NavigationType.Type:
+                    App.NameViewModel.GetSeasonsByType(ItemId);
+                    itemId = ItemId;
+                    break;
+                case NavigationType.Tune:
+                    App.NameViewModel.ByTuneGetSeasons(ItemId);
+                    itemId = ItemId;
+                    break;
+                default:
+                    break;
             }
         }
 
-        public async void SectionMenuInit(string ItemName, int ItemId, string By)
+        public async void SectionMenuInit(string ItemName, int ItemId, NavigationType navType)
         {
-            SectionMenu newMenu = new SectionMenu(ItemName, ItemId, By);
+            SectionMenu newMenu = new SectionMenu(ItemName, ItemId, navType);
             await Navigation.PopAsync();
             await Navigation.PushAsync(newMenu, true);
         }
@@ -201,7 +205,8 @@ namespace Hazzat.Views
         {
             ServiceHymnInfo item = (ServiceHymnInfo)e.Item;
 
-            HymnPage HymnPage = new HymnPage(item.Structure_Name, item.Title, item.ItemId);
+            string breadcrumbName = navigationType == NavigationType.Season ? item.Structure_Name : itemName;
+            HymnPage HymnPage = new HymnPage(breadcrumbName, item.Title, item.ItemId);
 
             await Navigation.PushAsync(HymnPage, true);
 

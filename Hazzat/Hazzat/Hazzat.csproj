@@ -41,6 +41,7 @@
     <Compile Include="HazzatService\HazzatService.cs" />
     <Compile Include="HazzatService\HazzatServiceExtensions.cs" />
     <Compile Include="HazzatService\HazzatWebService.cs" />
+    <Compile Include="NavigationType.cs" />
     <Compile Include="Views\HymnPage.xaml.cs">
       <DependentUpon>HymnPage.xaml</DependentUpon>
     </Compile>

@@ -71,18 +71,18 @@ namespace Hazzat
         protected void SeasonSelected(object sender, ItemTappedEventArgs e)
         {
             SeasonInfo item = (SeasonInfo)e.Item;
-            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, "Season");
+            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Season);
         }
         protected void TypeSelected(object sender, ItemTappedEventArgs e)
         {
             //Unfortunate type name collision
             hazzat.com.TypeInfo item = (hazzat.com.TypeInfo)e.Item;
-            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, "Type");
+            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Type);
         }
         protected void TuneSelected(object sender, ItemTappedEventArgs e)
         {
             TuneInfo item = (TuneInfo)e.Item;
-            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, "Tune");
+            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Tune);
         }
     }
 }

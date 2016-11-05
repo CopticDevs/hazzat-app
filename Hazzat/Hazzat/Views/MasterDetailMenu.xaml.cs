@@ -20,7 +20,7 @@ namespace Hazzat.Views
 
             MessagingCenter.Subscribe<MainMenu>(this, "SeasonSelected",  TooglePresented);
 
-            Menu = new SectionMenu(Season, SeasonId, "Season");
+            Menu = new SectionMenu(Season, SeasonId, NavigationType.Season);
 
             Detail = new NavigationPage(Menu);
         }
