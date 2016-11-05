@@ -15,24 +15,45 @@ namespace Hazzat.Views
     public partial class SectionMenu : ContentPage
     {
         private static ObservableCollection<ServiceDetails> serviceList;
+        private static NavigationType navigationType;
+        private static int itemId;
+        private static string itemName;
 
-        public SectionMenu(string Season, int SeasonId)
+        public SectionMenu(string ItemName, int ItemId, NavigationType navType)
         {
             InitializeComponent();
 
-            Title = Season;
+            Title = ItemName;
 
             serviceList = new ObservableCollection<ServiceDetails>();
+            itemId = 0;
+            itemName = ItemName;
+            navigationType = navType;
 
-            SubscribeMessage();
+            SubscribeMessages();
 
-            App.NameViewModel.createViewModelBySeason(SeasonId);
+            switch (navType)
+            {
+                case NavigationType.Season:
+                    App.NameViewModel.createViewModelBySeason(ItemId);
+                    break;
+                case NavigationType.Type:
+                    App.NameViewModel.GetSeasonsByType(ItemId);
+                    itemId = ItemId;
+                    break;
+                case NavigationType.Tune:
+                    App.NameViewModel.ByTuneGetSeasons(ItemId);
+                    itemId = ItemId;
+                    break;
+                default:
+                    break;
+            }
         }
 
-        public async void SectionMenuInit(string Season, int SeasonId)
+        public async void SectionMenuInit(string ItemName, int ItemId, NavigationType navType)
         {
-            SectionMenu newMenu = new SectionMenu(Season, SeasonId);
-
+            SectionMenu newMenu = new SectionMenu(ItemName, ItemId, navType);
+            await Navigation.PopAsync();
             await Navigation.PushAsync(newMenu, true);
         }
 
@@ -43,13 +64,39 @@ namespace Hazzat.Views
             MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "DoneSeason");
         }
 
-        public void SubscribeMessage()
+        public void SubscribeMessages()
         {
             MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneSeason", (sender) =>
             {
                 if (App.NameViewModel?.HymnsBySeason != null)
                 {
                     LoadServiceHymns(App.NameViewModel.HymnsBySeason);
+
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        StructList.ItemsSource = serviceList;
+                    });
+                }
+            });
+
+            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithSeasonsListByType", (sender) =>
+            {
+                if (App.NameViewModel?.TypeSeasons != null)
+                {
+                    LoadServiceHymnsByType(App.NameViewModel.TypeSeasons);
+
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        StructList.ItemsSource = serviceList;
+                    });
+                }
+            });
+
+            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithSeasonsListByTune", (sender) =>
+            {
+                if (App.NameViewModel?.TuneSeasons != null)
+                {
+                    LoadServiceHymnsByTune(App.NameViewModel.TuneSeasons);
 
                     Device.BeginInvokeOnMainThread(() =>
                     {
@@ -73,6 +120,54 @@ namespace Hazzat.Views
             }
         }
 
+        private void LoadServiceHymnsByType(SeasonInfo[] filteredSeasons)
+        {
+            //BUGBUG: For some reason this method is being called multiple times.  As a temporary
+            //hack clear the serviceList first to avoid redundancy
+            serviceList.Clear();
+
+            foreach (var seasonInfo in filteredSeasons.OrderBy(s => s.Season_Order))
+            {
+                // TODO: change the member names to be more generic
+                var serviceInfo = new ServiceDetails()
+                {
+                    ServiceName = seasonInfo.Name,
+                    StructureId = seasonInfo.ItemId
+                };
+
+                serviceList.Add(serviceInfo);
+
+                App.NameViewModel.GetServiceHymnListBySeasonIdAndTypeId(
+                    seasonInfo.ItemId,
+                    itemId,
+                    (sender, e) => GetCompletedHymnsBySeasonAndTypeOrTune(e.Result, serviceInfo));
+            }
+        }
+
+        private void LoadServiceHymnsByTune(SeasonInfo[] hymnsBySeason)
+        {
+            //BUGBUG: For some reason this method is being called multiple times.  As a temporary
+            //hack clear the serviceList first to avoid redundancy
+            serviceList.Clear();
+
+            foreach (var seasonInfo in hymnsBySeason.OrderBy(s => s.Season_Order))
+            {
+                // TODO: change the member names to be more generic
+                var serviceInfo = new ServiceDetails()
+                {
+                    ServiceName = seasonInfo.Name,
+                    StructureId = seasonInfo.ItemId
+                };
+
+                serviceList.Add(serviceInfo);
+
+                App.NameViewModel.GetServiceHymnListBySeasonIdAndTuneId(
+                    seasonInfo.ItemId,
+                    itemId,
+                    (sender, e) => GetCompletedHymnsBySeasonAndTypeOrTune(e.Result, serviceInfo));
+            }
+        }
+
         private void GetCompletedHymnsBySeason(object sender, GetSeasonServiceHymnsCompletedEventArgs e)
         {
             var fetchedHymns = e.Result;
@@ -92,11 +187,26 @@ namespace Hazzat.Views
             }
         }
 
+        private void GetCompletedHymnsBySeasonAndTypeOrTune(ServiceHymnInfo[] fetchedHymns, ServiceDetails serviceInfo)
+        {
+            if (fetchedHymns.Length != 0)
+            {
+                lock (serviceList)
+                {
+                    foreach (var hymnInfo in fetchedHymns)
+                    {
+                        serviceInfo.Add(hymnInfo);
+                    }
+                }
+            }
+        }
+
         protected async void ServiceHymnTapped(object sender, ItemTappedEventArgs e)
         {
             ServiceHymnInfo item = (ServiceHymnInfo)e.Item;
 
-            HymnPage HymnPage = new HymnPage(item.Structure_Name, item.Title, item.ItemId);
+            string breadcrumbName = navigationType == NavigationType.Season ? item.Structure_Name : itemName;
+            HymnPage HymnPage = new HymnPage(breadcrumbName, item.Title, item.ItemId);
 
             await Navigation.PushAsync(HymnPage, true);
 
