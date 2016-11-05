@@ -51,7 +51,7 @@ namespace Hazzat.Views
         {
             MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithHymnText", (sender) =>
             {
-                if (App.NameViewModel?.HymnContentInfo != null)
+                if (App.NameViewModel?.HymnContentInfo?.FirstOrDefault() != null)
                 {
                     HtmlWebViewSource source = new HtmlWebViewSource();
                     var html = new StringBuilder();
@@ -99,14 +99,15 @@ namespace Hazzat.Views
                     source.Html = html.Append("</body></html>").ToString();
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        TextWebView.Source = source;
+                        this.Children.Add(new ContentPage { Title = "Text", Content = new WebView { Source = source } });
+                        Children.OrderBy(s => s.Title);
                     });
                 }
             });
 
             MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithHazzat", (sender) =>
             {
-                if (App.NameViewModel?.HazzatHymnContentInfo != null)
+                if (App.NameViewModel?.HazzatHymnContentInfo?.FirstOrDefault() != null)
                 {
                     HtmlWebViewSource source = new HtmlWebViewSource();
 
@@ -152,15 +153,18 @@ namespace Hazzat.Views
                     source.Html = html.Append("</body></html>").ToString();
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        HazzatWebView.Source = source;
+                        this.Children.Add(new ContentPage { Title = "Hazzat", Content = new WebView { Source = source } });
+                        Children.OrderBy(s => s.Title);
                     });
                 }
             });
 
             MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithVerticalHazzat", (sender) =>
             {
-                if (App.NameViewModel?.VerticalHazzatHymnContent != null)
+                if (App.NameViewModel?.VerticalHazzatHymnContent?.FirstOrDefault() != null)
                 {
+                   
+
                     HtmlWebViewSource source = new HtmlWebViewSource();
 
                     var html = new StringBuilder();
@@ -172,10 +176,11 @@ namespace Hazzat.Views
 
                     foreach (var hymnContent in App.NameViewModel.VerticalHazzatHymnContent)
                     {
+
                         // Hymn title
                         html.Append(string.Format(HtmlHymnTitleFormatString, hymnContent.Title));
 
-         
+
 
                         if (!string.IsNullOrWhiteSpace(hymnContent.Content_Coptic))
                         {
@@ -207,7 +212,8 @@ namespace Hazzat.Views
                     source.Html = html.ToString();
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        VerticalHazzatWebView.Source = source;
+                        this.Children.Add(new ContentPage { Title = "Vertical Hazzat", Content = new WebView { Source = source } });
+                        Children.OrderBy(s => s.Title);
                     });
                 }
             });
