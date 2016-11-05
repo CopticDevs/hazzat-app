@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Hazzat.Views.HymnPage">
+  <ContentPage Title="Text">
+    <WebView x:Name="TextWebView">
+    </WebView>
+  </ContentPage>
+  <ContentPage Title="Hazzat">
+    <WebView x:Name="HazzatWebView">
+    </WebView>
+  </ContentPage>
+  <ContentPage Title="Vertical Hazzat">
+    <WebView x:Name="VerticalHazzatWebView">
+    </WebView>
+  </ContentPage>
+</TabbedPage>

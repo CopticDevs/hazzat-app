@@ -35,16 +35,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ColorRender.cs" />
+    <Compile Include="Abstract\WebAssets.cs" />
     <Compile Include="App.cs" />
     <Compile Include="HazzatService\HazzatService.cs" />
+    <Compile Include="HazzatService\HazzatServiceExtensions.cs" />
     <Compile Include="HazzatService\HazzatWebService.cs" />
-    <Compile Include="Views\HymnsView.xaml.cs">
-      <DependentUpon>HymnsView.xaml</DependentUpon>
+    <Compile Include="NavigationType.cs" />
+    <Compile Include="Views\HymnPage.xaml.cs">
+      <DependentUpon>HymnPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\MasterDetailMenu.xaml.cs">
+      <DependentUpon>MasterDetailMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SectionMenu.xaml.cs">
       <DependentUpon>SectionMenu.xaml</DependentUpon>
     </Compile>
@@ -84,7 +91,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\HymnsView.xaml">
+    <EmbeddedResource Include="Views\HymnPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\MasterDetailMenu.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -7,8 +7,8 @@
     <ProjectGuid>{21C0EC91-BEC9-4EEE-9239-85828A751C3C}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hazzat.Windows</RootNamespace>
-    <AssemblyName>Hazzat.Windows</AssemblyName>
+    <RootNamespace>Hazzat.Windows8</RootNamespace>
+    <AssemblyName>Hazzat.Windows8</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\appbar.paper.png" />
+    <Content Include="Assets\Fonts\fonts.css" />
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />

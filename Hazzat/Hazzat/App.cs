@@ -1,9 +1,12 @@
-﻿using HazzatService;
+﻿using Hazzat.Views;
+using HazzatService;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Xamarin.Forms;
 
 
@@ -12,8 +15,10 @@ namespace Hazzat
 {
     public class App : Application
     {
-        public enum HymnLanguage { Arabic, Coptic, English };
-        public static HymnLanguage CurrentLanguage { get; set; }
+        private static Dictionary<string, Dictionary<string, List<string>>> AppDataCache { get; set; }    // Designed for BySeasons ViewModel
+        public static bool isDataCacheBuilding { get; set; } = false;
+
+
         private static ByNameMainViewModel nameViewModel = null;
         internal static ByNameMainViewModel NameViewModel
         {
@@ -27,6 +32,26 @@ namespace Hazzat
             }
         }
 
+        public static string Serialize(Dictionary<string, Dictionary<string, List<string>>> viewModel)
+        {
+            XmlSerializer serialize = new XmlSerializer(typeof(Dictionary<string, Dictionary<string, List<string>>>));
+
+            using (var stringWriter = new StringWriter())
+            {
+                serialize.Serialize(stringWriter, viewModel);
+                return stringWriter.GetStringBuilder().ToString();
+            }
+        }
+        public static Dictionary<string, Dictionary<string, List<string>>> Deserialize(string viewModel)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Dictionary<string, Dictionary<string, List<string>>>));
+
+            using (var stringReader = new StringReader(viewModel))
+            {
+                Dictionary<string, Dictionary<string, List<string>>> model = (Dictionary<string, Dictionary<string, List<string>>>)serializer.Deserialize(stringReader);
+                return model;
+            }
+        }
 
 
         public App()
@@ -39,37 +64,50 @@ namespace Hazzat
                 Setters = {
                     new Setter
                     {
-                        Property = ContentPage.PaddingProperty,
-                        Value = Device.OnPlatform(new Thickness(10, 10, 0, 0), new Thickness(10), new Thickness(15, 15, 0, 0))
+                        Property = Page.PaddingProperty,
+                        Value = Device.OnPlatform(new Thickness(10), new Thickness(10), new Thickness(10))
                     }
                 }
             });
             Resources.Add("accent", Color.Accent);
             Resources.Add("default", Color.Default);
-            MainPage = new NavigationPage(new MainMenu()); //Temp fix for insulation. NavigationPage -> TabbedPage 
+
+            //Perform Season Calculations Here
+
+            MainPage = new MasterDetailMenu("Annual", 1); //Set to current Season
         }
 
         protected override void OnStart()
         {
-            InitializeDefaultAppSettings();
-
-            App.CurrentLanguage = (App.HymnLanguage)Enum.Parse(typeof(App.HymnLanguage), Application.Current.Properties["AppLanguage"] as string);
+            if (Properties.ContainsKey("AppDataCache"))
+            {
+                try
+                {
+                    Deserialize(Properties["AppDataCache"] as string);
+                }
+                catch
+                {
+                    Task.Run(BuildDataCache());
+                }
+            }
+            else
+            {
+                Task.Run(BuildDataCache());
+            }
         }
 
-        /// <summary>
-        /// Sets default app settings
-        /// </summary>
-        private void InitializeDefaultAppSettings()
+        private Action BuildDataCache()
         {
-            if (!Application.Current.Properties.ContainsKey("AppLanguage"))
-            {
-                Application.Current.Properties["AppLanguage"] = App.HymnLanguage.English.ToString();
-            }
+            return delegate {
+                isDataCacheBuilding = true;
+
+                Dictionary<string, Dictionary<string, List<string>>> tempcache = new Dictionary<string, Dictionary<string, List<string>>>();
+            };
         }
 
         protected override void OnSleep()
         {
-            Application.Current.Properties["AppLanguage"] = CurrentLanguage.ToString();
+           // Properties["AppDataCache"] = Serialize(AppDataCache);
         }
 
         protected override void OnResume()

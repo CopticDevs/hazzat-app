@@ -18,12 +18,21 @@ namespace Hazzat
         {
             InitializeComponent();
 
-            SubscribeMessage();
+            SubscribeMessages();
 
             App.NameViewModel.createSeasonsViewModel(true);
+            App.NameViewModel.GetHymnsByType();
+            App.NameViewModel.GetHymnsByTune();
         }
 
-        private void SubscribeMessage()
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "Done");
+        }
+
+        private void SubscribeMessages()
         {
             MessagingCenter.Subscribe<ByNameMainViewModel>(this, "Done", (sender) =>
             {
@@ -35,14 +44,46 @@ namespace Hazzat
                     });
                 }
             });
+
+            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithTypeList", (sender) =>
+            {
+                if (App.NameViewModel?.TypeList != null)
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        MenuStack2.ItemsSource = App.NameViewModel.TypeList;
+                    });
+                }
+            });
+
+            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithTuneList", (sender) =>
+            {
+                if (App.NameViewModel?.TuneList != null)
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        MenuStack3.ItemsSource = App.NameViewModel.TuneList;
+                    });
+                }
+            });
         }
 
-        void OnToolbarItemClicked(object sender, EventArgs args) { ToolbarItem toolbarItem = (ToolbarItem)sender; DisplayAlert("Yo!","ToolbarItem '" + toolbarItem.Text + "' clicked","okay"); }
-
-        public async void SeasonSelected(object sender, ItemTappedEventArgs e) {
-            await Navigation.PushAsync(new SectionMenu());
+        protected void SeasonSelected(object sender, ItemTappedEventArgs e)
+        {
+            SeasonInfo item = (SeasonInfo)e.Item;
+            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Season);
         }
-
+        protected void TypeSelected(object sender, ItemTappedEventArgs e)
+        {
+            //Unfortunate type name collision
+            hazzat.com.TypeInfo item = (hazzat.com.TypeInfo)e.Item;
+            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Type);
+        }
+        protected void TuneSelected(object sender, ItemTappedEventArgs e)
+        {
+            TuneInfo item = (TuneInfo)e.Item;
+            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Tune);
+        }
     }
 }
 
