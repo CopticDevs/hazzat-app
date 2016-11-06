@@ -6,11 +6,7 @@ Embedded fonts
 @font-face {
 	
 	font-family: "Trajan Pro";
-	src: url('998687745-TrajanPro-Regular.eot');
-	src: url('998687745-TrajanPro-Regular.eot?#iefix') format('embedded-opentype'),
-	url('998687745-TrajanPro-Regular.svg#Trajan Pro') format('svg'),
-	url('998687745-TrajanPro-Regular.woff') format('woff'),
-	url('998687745-TrajanPro-Regular.ttf') format('truetype');
+	src: url('998687745-TrajanPro-Regular.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;	
 }
@@ -88,6 +84,7 @@ Hymn text Styles
     font-size: 22px;
     text-align: right;
     direction: rtl;
+    color:blue;
 }
 .EnglishFont {
     text-decoration: none;

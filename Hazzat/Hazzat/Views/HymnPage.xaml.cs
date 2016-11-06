@@ -163,8 +163,6 @@ namespace Hazzat.Views
             {
                 if (App.NameViewModel?.VerticalHazzatHymnContent?.FirstOrDefault() != null)
                 {
-                   
-
                     HtmlWebViewSource source = new HtmlWebViewSource();
 
                     var html = new StringBuilder();
@@ -176,11 +174,8 @@ namespace Hazzat.Views
 
                     foreach (var hymnContent in App.NameViewModel.VerticalHazzatHymnContent)
                     {
-
                         // Hymn title
                         html.Append(string.Format(HtmlHymnTitleFormatString, hymnContent.Title));
-
-
 
                         if (!string.IsNullOrWhiteSpace(hymnContent.Content_Coptic))
                         {
