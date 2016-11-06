@@ -15,5 +15,4 @@
   <MasterDetailPage.Master>
     <local:MainMenu />
   </MasterDetailPage.Master>
-
 </MasterDetailPage>

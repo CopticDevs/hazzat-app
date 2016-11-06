@@ -18,18 +18,17 @@ namespace Hazzat.Views
         {
             InitializeComponent();
 
-            MessagingCenter.Subscribe<MainMenu>(this, "SeasonSelected",  TooglePresented);
+            MessagingCenter.Subscribe<MainMenu>(this, "MenuItemSelected", HideMasterPage);
 
             Menu = new SectionMenu(Season, SeasonId, NavigationType.Season);
 
             Detail = new NavigationPage(Menu);
         }
 
-        private void TooglePresented(MainMenu obj)
+        public void HideMasterPage(MainMenu obj)
         {
             IsPresented = false;
         }
-
 
         protected void OnToolbarItemClicked(object sender, EventArgs args)
         {
