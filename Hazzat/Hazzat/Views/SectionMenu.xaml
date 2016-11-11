@@ -2,11 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Hazzat.Views.SectionMenu">
-  <ListView x:Name="StructList" IsGroupingEnabled="True" GroupDisplayBinding="{Binding ServiceName}" ItemTapped="ServiceHymnTapped">
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <TextCell Text="{Binding Title}" />
-      </DataTemplate>
-    </ListView.ItemTemplate>
-  </ListView>
+  <AbsoluteLayout>
+    <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+      <ListView x:Name="StructList" IsGroupingEnabled="True" GroupDisplayBinding="{Binding ServiceName}" ItemTapped="ServiceHymnTapped">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <TextCell Text="{Binding Title}" />
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </StackLayout>
+    <ContentView x:Name="overlay" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" IsVisible="False" Padding="10, 0">
+      <ActivityIndicator x:Name="activityIndicator" IsRunning="True" IsVisible="True" VerticalOptions="Center" />
+    </ContentView>
+  </AbsoluteLayout>
 </ContentPage>
