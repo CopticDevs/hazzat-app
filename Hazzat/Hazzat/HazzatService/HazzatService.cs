@@ -114,7 +114,7 @@ namespace HazzatService
             {
                 HttpClient testConnection = new HttpClient();
 
-                if (String.IsNullOrWhiteSpace(testConnection.GetAsync(HazzatServiceEndpoint).Result.Content.ToString()))
+                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
                 {
                     HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
                     client.GetSeasonsCompleted += new EventHandler<GetSeasonsCompletedEventArgs>(client_GetCompleted);
@@ -140,7 +140,7 @@ namespace HazzatService
             {
                 HttpClient testConnection = new HttpClient();
 
-                if (String.IsNullOrWhiteSpace(testConnection.GetAsync(HazzatServiceEndpoint).Result.Content.ToString()))
+                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
                 {
                     HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
                     client.GetSeasonServicesCompleted += new EventHandler<GetSeasonServicesCompletedEventArgs>(GetCompletedStructBySeason);
@@ -167,7 +167,7 @@ namespace HazzatService
             {
                 HttpClient testConnection = new HttpClient();
 
-                if (String.IsNullOrWhiteSpace(testConnection.GetAsync(HazzatServiceEndpoint).Result.Content.ToString()))
+                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
                 {
                     HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
                     client.GetSeasonServiceHymnsCompleted += new EventHandler<GetSeasonServiceHymnsCompletedEventArgs>(GetCompletedHymnsBySeason);
@@ -234,7 +234,7 @@ namespace HazzatService
             {
                 HttpClient testConnection = new HttpClient();
 
-                if (String.IsNullOrWhiteSpace(testConnection.GetAsync(HazzatServiceEndpoint).Result.Content.ToString()))
+                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
                 {
                     HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
                     client.GetTypeListCompleted += new EventHandler<GetTypeListCompletedEventArgs>(GetCompletedTypeList);
@@ -297,7 +297,7 @@ namespace HazzatService
             {
                 HttpClient testConnection = new HttpClient();
 
-                if (String.IsNullOrWhiteSpace(testConnection.GetAsync(HazzatServiceEndpoint).Result.Content.ToString()))
+                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
                 {
                     HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
                     client.GetServiceHymnListBySeasonIdAndTuneIdCompleted += new EventHandler<GetServiceHymnListBySeasonIdAndTuneIdCompletedEventArgs>(getCompletedHymnsBySeasonAndTune);
@@ -321,7 +321,7 @@ namespace HazzatService
             {
                 HttpClient testConnection = new HttpClient();
 
-                if (String.IsNullOrWhiteSpace(testConnection.GetAsync(HazzatServiceEndpoint).Result.Content.ToString()))
+                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
                 {
                     HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
                     client.GetTuneListCompleted += new EventHandler<GetTuneListCompletedEventArgs>(GetCompletedTuneList);
@@ -348,7 +348,7 @@ namespace HazzatService
             {
                 HttpClient testConnection = new HttpClient();
 
-                if (String.IsNullOrWhiteSpace(testConnection.GetAsync(HazzatServiceEndpoint).Result.Content.ToString()))
+                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
                 {
                     HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
                     client.GetSeasonsByTuneIDCompleted += new EventHandler<GetSeasonsByTuneIDCompletedEventArgs>(client_ByTuneGetSeasons);
