@@ -30,7 +30,6 @@ namespace Hazzat.Views
             IsPresented = false;
         }
 
-
         protected void OnToolbarItemClicked(object sender, EventArgs args)
         {
             ToolbarItem toolbarItem = (ToolbarItem)sender; DisplayAlert("Yo!", "ToolbarItem '" + toolbarItem.Text + "' clicked", "okay");
