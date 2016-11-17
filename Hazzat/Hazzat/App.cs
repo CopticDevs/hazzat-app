@@ -1,5 +1,6 @@
 ﻿using Hazzat.Views;
 using HazzatService;
+using NodaTime;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,9 +16,24 @@ namespace Hazzat
 {
     public class App : Application
     {
-        private static Dictionary<string, Dictionary<string, List<string>>> AppDataCache { get; set; }    // Designed for BySeasons ViewModel
-        public static bool isDataCacheBuilding { get; set; } = false;
+        String one = "Tout";
+        String two = "Baba";
+        String three = "Hatour";
+        String four = "Kiahk";
+        String five = "Touba";
+        String six = "Amshir";
+        String seven = "Baramhat";
+        String eight = "Barmouda";
+        String nine = "Bashans";
+        String ten = "Baona";
+        String eleven = "Abib";
+        String twelve = "Mesra";
+        String thirteen = "El Nasii";
 
+        public object Month { get; private set; }
+        public string Day { get; private set; }
+
+        private static Dictionary<string, Dictionary<string, List<string>>> AppDataCache { get; set; }    // Designed for BySeasons ViewModel
 
         private static ByNameMainViewModel nameViewModel = null;
         internal static ByNameMainViewModel NameViewModel
@@ -53,7 +69,6 @@ namespace Hazzat
             }
         }
 
-
         public App()
         {
             Resources = new ResourceDictionary();
@@ -74,8 +89,103 @@ namespace Hazzat
 
             //Perform Season Calculations Here
 
+            Tuple<string, string> currTime = CurrentTime();
+
             MainPage = new MasterDetailMenu("Annual", 1); //Set to current Season
+
         }
+
+        private Tuple<string, string> CurrentTime()
+        {
+
+            int Year = DateTime.Now.Year;
+            int Month = DateTime.Now.Month;
+            int Day = DateTime.Now.Day;
+            int Hour = DateTime.Now.Hour;
+            int Min = DateTime.Now.Minute;
+            LocalDateTime DateToConvertFrom = new LocalDateTime(Year, Month, Day, Hour, Min);
+
+            CalendarSystem CoptCal = CalendarSystem.GetCopticCalendar(1);
+
+            LocalDateTime ConvertedTime = DateToConvertFrom.WithCalendar(CoptCal);
+
+
+            getMonth(ConvertedTime.Month.ToString());
+            getDay(ConvertedTime.Day.ToString());
+
+            if (this.Month.Equals("1"))
+            {
+                this.Month = one;
+            }
+
+            if (this.Month.Equals("2"))
+            {
+                this.Month = two;
+            }
+
+            if (this.Month.Equals("3"))
+            {
+                this.Month = three;
+            }
+
+            if (this.Month.Equals("4"))
+            {
+                this.Month = four;
+            }
+
+            if (this.Month.Equals("5"))
+            {
+                this.Month = five;
+            }
+            if (this.Month.Equals("6"))
+            {
+                this.Month = six;
+            }
+            if (this.Month.Equals("7"))
+            {
+                this.Month = seven;
+            }
+
+            if (this.Month.Equals("8"))
+            {
+                this.Month = eight;
+            }
+
+            if (this.Month.Equals("9"))
+            {
+                this.Month = nine;
+            }
+
+            if (this.Month.Equals("10"))
+            {
+                this.Month = ten;
+            }
+            if (this.Month.Equals("11"))
+            {
+                this.Month = eleven;
+            }
+            if (this.Month.Equals("12"))
+            {
+                this.Month = twelve;
+            }
+            if (this.Month.Equals("13"))
+            {
+                this.Month = thirteen;
+            }
+
+            return new Tuple<string, string>(ConvertedTime.Month.ToString(), ConvertedTime.Day.ToString());
+        }
+
+        private void getMonth(string Month)
+        {
+            this.Month = Month;
+        }
+
+        private void getDay(string Day)
+        {
+            this.Day = Day;
+        }
+
 
         protected override void OnStart()
         {
@@ -98,16 +208,15 @@ namespace Hazzat
 
         private Action BuildDataCache()
         {
-            return delegate {
-                isDataCacheBuilding = true;
-
+            return delegate
+            {
                 Dictionary<string, Dictionary<string, List<string>>> tempcache = new Dictionary<string, Dictionary<string, List<string>>>();
             };
         }
 
         protected override void OnSleep()
         {
-           // Properties["AppDataCache"] = Serialize(AppDataCache);
+            // Properties["AppDataCache"] = Serialize(AppDataCache);
         }
 
         protected override void OnResume()
