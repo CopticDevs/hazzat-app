@@ -117,25 +117,17 @@
     <AndroidAsset Include="Assets\Fonts\hazzat1_10a.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AndroidAsset>
-    <AndroidAsset Include="Assets\Fonts\cs_avva_shenouda.eot" />
     <AndroidAsset Include="Assets\Fonts\cs_avva_shenouda.ttf" />
-    <AndroidAsset Include="Assets\Fonts\cs_avva_shenouda.woff" />
-    <AndroidAsset Include="Assets\Fonts\cs_avva_shenouda.woff2" />
-    <AndroidAsset Include="Assets\Fonts\hazzata.eot" />
-    <AndroidAsset Include="Assets\Fonts\hazzata.ttf" />
-    <AndroidAsset Include="Assets\Fonts\hazzata.woff" />
-    <AndroidAsset Include="Assets\Fonts\hazzata.woff2" />
-    <AndroidAsset Include="Assets\Fonts\hazzatv.eot" />
-    <AndroidAsset Include="Assets\Fonts\hazzatv.ttf" />
-    <AndroidAsset Include="Assets\Fonts\hazzatv.woff" />
-    <AndroidAsset Include="Assets\Fonts\hazzatv.woff2" />
-    <AndroidAsset Include="Assets\Fonts\hazzatva.eot" />
-    <AndroidAsset Include="Assets\Fonts\hazzatva.ttf" />
-    <AndroidAsset Include="Assets\Fonts\hazzatva.woff" />
-    <AndroidAsset Include="Assets\Fonts\hazzatva.woff2" />
-    <AndroidAsset Include="Assets\Fonts\998687745-TrajanPro-Regular.eot" />
+    <AndroidAsset Include="Assets\Fonts\hazzata.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Include="Assets\Fonts\hazzatv.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Include="Assets\Fonts\hazzatva.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AndroidAsset>
     <AndroidAsset Include="Assets\Fonts\998687745-TrajanPro-Regular.ttf" />
-    <AndroidAsset Include="Assets\Fonts\998687745-TrajanPro-Regular.woff" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <AndroidResource Include="Resources\Layout\tabs.axml">

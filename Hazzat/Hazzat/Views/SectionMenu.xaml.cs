@@ -22,7 +22,10 @@ namespace Hazzat.Views
         public SectionMenu(string ItemName, int ItemId, NavigationType navType)
         {
             InitializeComponent();
-
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                overlay.IsVisible = true;
+            });
             Title = ItemName;
 
             serviceList = new ObservableCollection<ServiceDetails>();
@@ -97,7 +100,7 @@ namespace Hazzat.Views
                 if (App.NameViewModel?.TuneSeasons != null)
                 {
                     LoadServiceHymnsByTune(App.NameViewModel.TuneSeasons);
-
+    
                     Device.BeginInvokeOnMainThread(() =>
                     {
                         StructList.ItemsSource = serviceList;
@@ -183,6 +186,10 @@ namespace Hazzat.Views
                     {
                         serviceInfo.Add(hymnInfo);
                     }
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        overlay.IsVisible = false;
+                    });
                 }
             }
         }
@@ -197,6 +204,10 @@ namespace Hazzat.Views
                     {
                         serviceInfo.Add(hymnInfo);
                     }
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        overlay.IsVisible = false;
+                    });
                 }
             }
         }
