@@ -87,7 +87,6 @@ Hymn text Styles
     font-size: 22px;
     text-align: right;
     direction: rtl;
-    color:cornflowerblue;
 }
 
 .HazzatVAFont {
@@ -96,7 +95,6 @@ Hymn text Styles
     font-size: 22px;
     text-align: right;
     direction: rtl;
-    color:cornflowerblue;
 }
 
 .EnglishFont {
@@ -109,7 +107,6 @@ Hymn text Styles
     text-decoration: none;
     font-family: 'Arabic Transparent';
     font-size: 22px;
-    color: azure;
     text-align: right;
     direction: rtl;
 }
