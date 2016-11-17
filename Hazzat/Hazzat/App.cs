@@ -93,8 +93,6 @@ namespace Hazzat
 
             MainPage = new MasterDetailMenu("Annual", 1); //Set to current Season
 
-
-
         }
 
         private Tuple<string, string> CurrentTime()
@@ -212,8 +210,6 @@ namespace Hazzat
         {
             return delegate
             {
-                isDataCacheBuilding = true;
-
                 Dictionary<string, Dictionary<string, List<string>>> tempcache = new Dictionary<string, Dictionary<string, List<string>>>();
             };
         }
