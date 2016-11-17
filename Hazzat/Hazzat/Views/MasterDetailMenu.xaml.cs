@@ -27,7 +27,10 @@ namespace Hazzat.Views
 
         public void HideMasterPage(MainMenu obj)
         {
-            IsPresented = false;
+            if (Device.OS != TargetPlatform.Windows)
+            {
+                IsPresented = false;
+            }
         }
 
         protected void OnToolbarItemClicked(object sender, EventArgs args)
