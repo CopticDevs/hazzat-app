@@ -43,9 +43,7 @@ namespace Hazzat.Droid
     {
         public String GetAccent()
         {
-
             return $"33,150,243";
-
         }
 
         public string GetDefault()
