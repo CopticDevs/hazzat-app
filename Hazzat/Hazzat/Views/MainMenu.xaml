@@ -5,18 +5,17 @@
             Title="hazzat.com">
   <ContentPage Title="Seasons">
     <StackLayout>
-      <ListView x:Name="MenuStack" ItemTapped="SeasonSelected">
+      <ListView x:Name="MenuStack" ItemTapped="SeasonSelected" SeparatorVisibility="None" >
         <ListView.RowHeight>
           <OnPlatform x:TypeArguments="x:Int32" iOS="50" Android="50" WinPhone="60" />
         </ListView.RowHeight>
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-              <StackLayout Padding="0,5,0,5">
+              <StackLayout Padding="0,5,20,5">
                 <Frame HasShadow="True" OutlineColor="Silver" Padding="10,10,10,10">
                   <StackLayout Orientation="Horizontal">
-                    <Label FontSize="Medium" Text="{Binding Name}" TextColor="{Binding accent}"></Label>
-                    <Label FontSize="Medium" Text="{Binding ServiceHymnsCount, StringFormat='({0})'}" TextColor="{Binding accent}" HorizontalOptions="StartAndExpand"></Label>
+                    <Label FontSize="Medium" Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="TailTruncation"></Label>
                   </StackLayout>
                 </Frame>
               </StackLayout>
@@ -35,11 +34,10 @@
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-              <StackLayout Padding="0,5,0,5">
+              <StackLayout Padding="0,5,20,5">
                 <Frame HasShadow="True" OutlineColor="Silver" Padding="10,10,10,10">
                   <StackLayout Orientation="Horizontal">
-                    <Label FontSize="Medium" Text="{Binding Name}" TextColor="{Binding accent}"></Label>
-                    <Label FontSize="Medium" Text="{Binding ServiceHymnsCount, StringFormat='({0})'}" TextColor="{Binding accent}" HorizontalOptions="StartAndExpand"></Label>
+                    <Label FontSize="Medium" Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="TailTruncation"></Label>
                   </StackLayout>
                 </Frame>
               </StackLayout>
@@ -58,11 +56,10 @@
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-              <StackLayout Padding="0,5,0,5">
+              <StackLayout Padding="0,5,20,5">
                 <Frame HasShadow="True" OutlineColor="Silver" Padding="10,10,10,10">
                   <StackLayout Orientation="Horizontal">
-                    <Label FontSize="Medium" Text="{Binding Name}" TextColor="{Binding accent}"></Label>
-                    <Label FontSize="Medium" Text="{Binding ServiceHymnsCount, StringFormat='({0})'}" TextColor="{Binding accent}" HorizontalOptions="StartAndExpand"></Label>
+                    <Label FontSize="Medium" Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="TailTruncation"></Label>
                   </StackLayout>
                 </Frame>
               </StackLayout>

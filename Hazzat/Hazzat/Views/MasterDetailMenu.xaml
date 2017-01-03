@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:Hazzat"
              x:Class="Hazzat.Views.MasterDetailMenu"
              Title="hazzat.com"
-             MasterBehavior="Default">
+             MasterBehavior="Default" >
   <MasterDetailPage.ToolbarItems>
     <ToolbarItem Text="Settings" Order="Secondary" Clicked="OnToolbarItemClicked">
       <ToolbarItem.Icon>
@@ -12,7 +12,7 @@
       </ToolbarItem.Icon>
     </ToolbarItem>
   </MasterDetailPage.ToolbarItems>
-  <MasterDetailPage.Master>
+  <MasterDetailPage.Master IsGestureEnabled="False">
     <local:MainMenu />
   </MasterDetailPage.Master>
 </MasterDetailPage>

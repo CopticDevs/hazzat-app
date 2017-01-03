@@ -129,6 +129,15 @@ namespace HazzatService
 
         public void client_GetCompleted(object sender, GetSeasonsCompletedEventArgs e)
         {
+            foreach(var item in e.Result)
+            {
+                if(item?.ServiceHymnsCount != null)
+                {
+                    item.Name = $"{item.Name} ({item.ServiceHymnsCount})";
+                }
+            }
+
+
             Seasons = e.Result;
             MessagingCenter.Send(this, "Done");
         }
@@ -250,6 +259,14 @@ namespace HazzatService
 
         private void GetCompletedTypeList(object sender, GetTypeListCompletedEventArgs e)
         {
+            foreach (var item in e.Result)
+            {
+                if (item?.ServiceHymnsCount != null)
+                {
+                    item.Name = $"{item.Name} ({item.ServiceHymnsCount})";
+                }
+            }
+
             TypeList = e.Result;
             MessagingCenter.Send(this, "DoneWithTypeList");
         }
@@ -337,6 +354,14 @@ namespace HazzatService
 
         private void GetCompletedTuneList(object sender, GetTuneListCompletedEventArgs e)
         {
+            foreach (var item in e.Result)
+            {
+                if (item?.ServiceHymnsCount != null)
+                {
+                    item.Name = $"{item.Name} ({item.ServiceHymnsCount})";
+                }
+            }
+
             TuneList = e.Result;
             MessagingCenter.Send(this, "DoneWithTuneList");
         }
