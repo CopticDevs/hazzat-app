@@ -7,7 +7,7 @@
     <StackLayout>
       <ListView x:Name="MenuStack" ItemTapped="SeasonSelected" SeparatorVisibility="None" >
         <ListView.RowHeight>
-          <OnPlatform x:TypeArguments="x:Int32" iOS="50" Android="50" WinPhone="60" />
+          <OnPlatform x:TypeArguments="x:Int32" iOS="40" Android="40" WinPhone="50" />
         </ListView.RowHeight>
         <ListView.ItemTemplate>
           <DataTemplate>
@@ -15,7 +15,7 @@
               <StackLayout Padding="0,5,20,5">
                 <Frame HasShadow="True" OutlineColor="Silver" Padding="10,10,10,10">
                   <StackLayout Orientation="Horizontal">
-                    <Label FontSize="Medium" Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="TailTruncation"></Label>
+                    <Label  Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="WordWrap"></Label>
                   </StackLayout>
                 </Frame>
               </StackLayout>
@@ -29,7 +29,7 @@
     <StackLayout>
       <ListView x:Name="MenuStack2" ItemTapped="TypeSelected">
         <ListView.RowHeight>
-          <OnPlatform x:TypeArguments="x:Int32" iOS="50" Android="50" WinPhone="60" />
+          <OnPlatform x:TypeArguments="x:Int32" iOS="40" Android="40" WinPhone="50" />
         </ListView.RowHeight>
         <ListView.ItemTemplate>
           <DataTemplate>
@@ -37,7 +37,7 @@
               <StackLayout Padding="0,5,20,5">
                 <Frame HasShadow="True" OutlineColor="Silver" Padding="10,10,10,10">
                   <StackLayout Orientation="Horizontal">
-                    <Label FontSize="Medium" Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="TailTruncation"></Label>
+                    <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="WordWrap"></Label>
                   </StackLayout>
                 </Frame>
               </StackLayout>
@@ -51,7 +51,7 @@
     <StackLayout>
       <ListView x:Name="MenuStack3" ItemTapped="TuneSelected">
         <ListView.RowHeight>
-          <OnPlatform x:TypeArguments="x:Int32" iOS="50" Android="50" WinPhone="60" />
+          <OnPlatform x:TypeArguments="x:Int32" iOS="40" Android="40" WinPhone="50" />
         </ListView.RowHeight>
         <ListView.ItemTemplate>
           <DataTemplate>
@@ -59,7 +59,7 @@
               <StackLayout Padding="0,5,20,5">
                 <Frame HasShadow="True" OutlineColor="Silver" Padding="10,10,10,10">
                   <StackLayout Orientation="Horizontal">
-                    <Label FontSize="Medium" Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="TailTruncation"></Label>
+                    <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="WordWrap" ></Label>
                   </StackLayout>
                 </Frame>
               </StackLayout>
