@@ -15,7 +15,9 @@
               <StackLayout Padding="0,5,20,5">
                 <Frame HasShadow="True" OutlineColor="Silver" Padding="10,10,10,10">
                   <StackLayout Orientation="Horizontal">
-                    <Label  Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="WordWrap"></Label>
+                    <Grid>
+                      <Label  Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation"></Label>
+                    </Grid>
                   </StackLayout>
                 </Frame>
               </StackLayout>
@@ -35,9 +37,12 @@
           <DataTemplate>
             <ViewCell>
               <StackLayout Padding="0,5,20,5">
+
                 <Frame HasShadow="True" OutlineColor="Silver" Padding="10,10,10,10">
                   <StackLayout Orientation="Horizontal">
-                    <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="WordWrap"></Label>
+                    <Grid>
+                      <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation"></Label>
+                    </Grid>
                   </StackLayout>
                 </Frame>
               </StackLayout>
@@ -59,7 +64,9 @@
               <StackLayout Padding="0,5,20,5">
                 <Frame HasShadow="True" OutlineColor="Silver" Padding="10,10,10,10">
                   <StackLayout Orientation="Horizontal">
-                    <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="WordWrap" ></Label>
+                    <Grid>
+                      <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation"  ></Label>
+                    </Grid>
                   </StackLayout>
                 </Frame>
               </StackLayout>
