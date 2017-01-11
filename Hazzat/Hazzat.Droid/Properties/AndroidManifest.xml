@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-  <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="23" />
-  <application android:label="$safeprojectname$" android:theme="@style/MyTheme"></application>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" package="Hazzat.Hazzat" android:versionName="First" android:versionCode="1">
+	<uses-sdk android:minSdkVersion="15" />
+	<application android:label="Hazzat" android:theme="@style/MyTheme" android:icon="@drawable/icon"></application>
 </manifest>
