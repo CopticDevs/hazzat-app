@@ -7,5 +7,5 @@ using Xamarin.Forms;
 
 namespace Hazzat.Abstract
 {
-    public interface IColorRender { String GetDefault(); String GetAccent(); String GetBackground(); }
+    public interface IColorRender { string GetDefault(); string GetAccent(); string GetBackground(); }
 }

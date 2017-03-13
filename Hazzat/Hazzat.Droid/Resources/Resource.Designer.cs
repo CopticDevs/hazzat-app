@@ -1091,32 +1091,32 @@ namespace Hazzat.Droid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0b004c
-			public const int abc_background_cache_hint_selector_material_dark = 2131427404;
+			// aapt resource value: 0x7f0b0048
+			public const int abc_background_cache_hint_selector_material_dark = 2131427400;
 			
-			// aapt resource value: 0x7f0b004d
-			public const int abc_background_cache_hint_selector_material_light = 2131427405;
+			// aapt resource value: 0x7f0b0049
+			public const int abc_background_cache_hint_selector_material_light = 2131427401;
 			
-			// aapt resource value: 0x7f0b004e
-			public const int abc_color_highlight_material = 2131427406;
+			// aapt resource value: 0x7f0b004a
+			public const int abc_color_highlight_material = 2131427402;
 			
 			// aapt resource value: 0x7f0b0004
 			public const int abc_input_method_navigation_guard = 2131427332;
 			
+			// aapt resource value: 0x7f0b004b
+			public const int abc_primary_text_disable_only_material_dark = 2131427403;
+			
+			// aapt resource value: 0x7f0b004c
+			public const int abc_primary_text_disable_only_material_light = 2131427404;
+			
+			// aapt resource value: 0x7f0b004d
+			public const int abc_primary_text_material_dark = 2131427405;
+			
+			// aapt resource value: 0x7f0b004e
+			public const int abc_primary_text_material_light = 2131427406;
+			
 			// aapt resource value: 0x7f0b004f
-			public const int abc_primary_text_disable_only_material_dark = 2131427407;
-			
-			// aapt resource value: 0x7f0b0050
-			public const int abc_primary_text_disable_only_material_light = 2131427408;
-			
-			// aapt resource value: 0x7f0b0051
-			public const int abc_primary_text_material_dark = 2131427409;
-			
-			// aapt resource value: 0x7f0b0052
-			public const int abc_primary_text_material_light = 2131427410;
-			
-			// aapt resource value: 0x7f0b0053
-			public const int abc_search_url_text = 2131427411;
+			public const int abc_search_url_text = 2131427407;
 			
 			// aapt resource value: 0x7f0b0005
 			public const int abc_search_url_text_normal = 2131427333;
@@ -1127,14 +1127,11 @@ namespace Hazzat.Droid
 			// aapt resource value: 0x7f0b0007
 			public const int abc_search_url_text_selected = 2131427335;
 			
-			// aapt resource value: 0x7f0b0054
-			public const int abc_secondary_text_material_dark = 2131427412;
+			// aapt resource value: 0x7f0b0050
+			public const int abc_secondary_text_material_dark = 2131427408;
 			
-			// aapt resource value: 0x7f0b0055
-			public const int abc_secondary_text_material_light = 2131427413;
-			
-			// aapt resource value: 0x7f0b004a
-			public const int accent = 2131427402;
+			// aapt resource value: 0x7f0b0051
+			public const int abc_secondary_text_material_light = 2131427409;
 			
 			// aapt resource value: 0x7f0b0008
 			public const int accent_material_dark = 2131427336;
@@ -1286,12 +1283,6 @@ namespace Hazzat.Droid
 			// aapt resource value: 0x7f0b002b
 			public const int material_grey_900 = 2131427371;
 			
-			// aapt resource value: 0x7f0b0048
-			public const int primary = 2131427400;
-			
-			// aapt resource value: 0x7f0b0049
-			public const int primaryDark = 2131427401;
-			
 			// aapt resource value: 0x7f0b002c
 			public const int primary_dark_material_dark = 2131427372;
 			
@@ -1340,20 +1331,17 @@ namespace Hazzat.Droid
 			// aapt resource value: 0x7f0b003b
 			public const int switch_thumb_disabled_material_light = 2131427387;
 			
-			// aapt resource value: 0x7f0b0056
-			public const int switch_thumb_material_dark = 2131427414;
+			// aapt resource value: 0x7f0b0052
+			public const int switch_thumb_material_dark = 2131427410;
 			
-			// aapt resource value: 0x7f0b0057
-			public const int switch_thumb_material_light = 2131427415;
+			// aapt resource value: 0x7f0b0053
+			public const int switch_thumb_material_light = 2131427411;
 			
 			// aapt resource value: 0x7f0b003c
 			public const int switch_thumb_normal_material_dark = 2131427388;
 			
 			// aapt resource value: 0x7f0b003d
 			public const int switch_thumb_normal_material_light = 2131427389;
-			
-			// aapt resource value: 0x7f0b004b
-			public const int window_background = 2131427403;
 			
 			static Color()
 			{
@@ -2165,55 +2153,58 @@ namespace Hazzat.Droid
 			public const int ic_tv_light = 2130837648;
 			
 			// aapt resource value: 0x7f020091
-			public const int icon = 2130837649;
+			public const int mr_dialog_material_background_dark = 2130837649;
 			
 			// aapt resource value: 0x7f020092
-			public const int mr_dialog_material_background_dark = 2130837650;
+			public const int mr_dialog_material_background_light = 2130837650;
 			
 			// aapt resource value: 0x7f020093
-			public const int mr_dialog_material_background_light = 2130837651;
+			public const int mr_ic_audiotrack_light = 2130837651;
 			
 			// aapt resource value: 0x7f020094
-			public const int mr_ic_audiotrack_light = 2130837652;
+			public const int mr_ic_cast_dark = 2130837652;
 			
 			// aapt resource value: 0x7f020095
-			public const int mr_ic_cast_dark = 2130837653;
+			public const int mr_ic_cast_light = 2130837653;
 			
 			// aapt resource value: 0x7f020096
-			public const int mr_ic_cast_light = 2130837654;
+			public const int mr_ic_close_dark = 2130837654;
 			
 			// aapt resource value: 0x7f020097
-			public const int mr_ic_close_dark = 2130837655;
+			public const int mr_ic_close_light = 2130837655;
 			
 			// aapt resource value: 0x7f020098
-			public const int mr_ic_close_light = 2130837656;
+			public const int mr_ic_media_route_connecting_mono_dark = 2130837656;
 			
 			// aapt resource value: 0x7f020099
-			public const int mr_ic_media_route_connecting_mono_dark = 2130837657;
+			public const int mr_ic_media_route_connecting_mono_light = 2130837657;
 			
 			// aapt resource value: 0x7f02009a
-			public const int mr_ic_media_route_connecting_mono_light = 2130837658;
+			public const int mr_ic_media_route_mono_dark = 2130837658;
 			
 			// aapt resource value: 0x7f02009b
-			public const int mr_ic_media_route_mono_dark = 2130837659;
+			public const int mr_ic_media_route_mono_light = 2130837659;
 			
 			// aapt resource value: 0x7f02009c
-			public const int mr_ic_media_route_mono_light = 2130837660;
+			public const int mr_ic_pause_dark = 2130837660;
 			
 			// aapt resource value: 0x7f02009d
-			public const int mr_ic_pause_dark = 2130837661;
+			public const int mr_ic_pause_light = 2130837661;
 			
 			// aapt resource value: 0x7f02009e
-			public const int mr_ic_pause_light = 2130837662;
+			public const int mr_ic_play_dark = 2130837662;
 			
 			// aapt resource value: 0x7f02009f
-			public const int mr_ic_play_dark = 2130837663;
+			public const int mr_ic_play_light = 2130837663;
+			
+			// aapt resource value: 0x7f0200a2
+			public const int notification_template_icon_bg = 2130837666;
 			
 			// aapt resource value: 0x7f0200a0
-			public const int mr_ic_play_light = 2130837664;
+			public const int profile_generic = 2130837664;
 			
 			// aapt resource value: 0x7f0200a1
-			public const int notification_template_icon_bg = 2130837665;
+			public const int slideout = 2130837665;
 			
 			static Drawable()
 			{
@@ -2931,10 +2922,10 @@ namespace Hazzat.Droid
 			public const int support_simple_spinner_dropdown_item = 2130903094;
 			
 			// aapt resource value: 0x7f030037
-			public const int tabs = 2130903095;
+			public const int Tabbar = 2130903095;
 			
 			// aapt resource value: 0x7f030038
-			public const int toolbar = 2130903096;
+			public const int Toolbar = 2130903096;
 			
 			static Layout()
 			{
@@ -3005,6 +2996,9 @@ namespace Hazzat.Droid
 			
 			// aapt resource value: 0x7f080021
 			public const int abc_toolbar_collapse_description = 2131230753;
+			
+			// aapt resource value: 0x7f080026
+			public const int app_name = 2131230758;
 			
 			// aapt resource value: 0x7f080023
 			public const int appbar_scrolling_view_behavior = 2131230755;
@@ -3090,6 +3084,9 @@ namespace Hazzat.Droid
 			
 			// aapt resource value: 0x7f0a015a
 			public const int Animation_Design_BottomSheetDialog = 2131362138;
+			
+			// aapt resource value: 0x7f0a0174
+			public const int AppCompatDialogStyle = 2131362164;
 			
 			// aapt resource value: 0x7f0a00a5
 			public const int Base_AlertDialog_AppCompat = 2131361957;

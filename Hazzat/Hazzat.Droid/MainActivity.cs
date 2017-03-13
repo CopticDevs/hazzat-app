@@ -1,47 +1,39 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Xamarin.Forms;
-using Hazzat.Droid.WorkingWithWebview.Android;
 using Hazzat.Abstract;
 using Hazzat.Droid;
-using Xamarin.Forms.Platform.Android;
 
-[assembly: Dependency(typeof(BaseUrl_Android))]
-[assembly: Dependency(typeof(ColorScheme))]
+[assembly: Xamarin.Forms.Dependency(typeof(BaseUrl_Android))]
+[assembly: Xamarin.Forms.Dependency(typeof(ColorScheme))]
 namespace Hazzat.Droid
 {
-    [Activity(Label = "Hazzat", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : FormsAppCompatActivity
+    [Activity(Label = "@string/app_name", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
-            TabLayoutResource = Resource.Layout.tabs;
-            ToolbarResource = Resource.Layout.toolbar;
+            TabLayoutResource = Resource.Layout.Tabbar;
+            ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
 
-            Forms.Init(this, bundle);
+            global::Xamarin.Forms.Forms.Init(this, bundle);
+
             LoadApplication(new App());
         }
-
     }
-    namespace WorkingWithWebview.Android
+    public class BaseUrl_Android : IWebAssets
     {
-        public class BaseUrl_Android : IWebAssets
+        public string Get()
         {
-            public string Get()
-            {
-                return "file:///android_asset/";
-            }
+            return "file:///android_asset/";
         }
     }
 
     public class ColorScheme : IColorRender
     {
-        public String GetAccent()
+        public string GetAccent()
         {
             return $"33,150,243";
         }
@@ -51,7 +43,7 @@ namespace Hazzat.Droid
             return $"0,0,0";
         }
 
-        public String GetBackground()
+        public string GetBackground()
         {
             return $"245,245,245";
         }
