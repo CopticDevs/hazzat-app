@@ -7,10 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace Hazzat.Views
 {
-    public partial class MasterDetailMenu : MasterDetailPage, INotifyPropertyChanged
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class MasterDetailMenu : MasterDetailPage
     {
         public static SectionMenu Menu { get; set; }
 

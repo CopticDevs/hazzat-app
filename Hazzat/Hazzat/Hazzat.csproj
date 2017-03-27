@@ -35,9 +35,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Abstract\ColorRender.cs" />
-    <Compile Include="Abstract\WebAssets.cs" />
-    <Compile Include="App.cs" />
+    <Compile Include="Abstract\IColorRender.cs" />
+    <Compile Include="Abstract\IWebAssets.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HazzatService\HazzatService.cs" />
     <Compile Include="HazzatService\HazzatServiceExtensions.cs" />
     <Compile Include="HazzatService\HazzatWebService.cs" />
@@ -103,6 +105,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\MasterDetailMenu.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

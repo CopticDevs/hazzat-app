@@ -1,5 +1,4 @@
 ﻿using hazzat.com;
-using Hazzat.Views;
 using HazzatService;
 using System;
 using System.Collections.Generic;
@@ -9,9 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
-namespace Hazzat
+namespace Hazzat.Views
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainMenu : TabbedPage
     {
         public MainMenu()

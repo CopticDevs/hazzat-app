@@ -95,28 +95,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork@2x" />
-    <BundleResource Include="Resources\Fonts\cs_avva_shenouda.eot" />
     <BundleResource Include="Resources\Fonts\cs_avva_shenouda.ttf" />
-    <BundleResource Include="Resources\Fonts\cs_avva_shenouda.woff" />
-    <BundleResource Include="Resources\Fonts\cs_avva_shenouda.woff2" />
     <BundleResource Include="Resources\Fonts\hazzat1_10a.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
-    <BundleResource Include="Resources\Fonts\hazzata.eot" />
     <BundleResource Include="Resources\Fonts\hazzata.ttf" />
-    <BundleResource Include="Resources\Fonts\hazzata.woff" />
-    <BundleResource Include="Resources\Fonts\hazzata.woff2" />
-    <BundleResource Include="Resources\Fonts\hazzatv.eot" />
     <BundleResource Include="Resources\Fonts\hazzatv.ttf" />
-    <BundleResource Include="Resources\Fonts\hazzatv.woff" />
-    <BundleResource Include="Resources\Fonts\hazzatv.woff2" />
-    <BundleResource Include="Resources\Fonts\hazzatva.eot" />
     <BundleResource Include="Resources\Fonts\hazzatva.ttf" />
-    <BundleResource Include="Resources\Fonts\hazzatva.woff" />
-    <BundleResource Include="Resources\Fonts\hazzatva.woff2" />
-    <BundleResource Include="Resources\Fonts\998687745-TrajanPro-Regular.eot" />
     <BundleResource Include="Resources\Fonts\998687745-TrajanPro-Regular.ttf" />
-    <BundleResource Include="Resources\Fonts\998687745-TrajanPro-Regular.woff" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

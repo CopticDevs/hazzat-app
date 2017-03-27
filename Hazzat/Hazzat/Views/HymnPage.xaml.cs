@@ -9,9 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace Hazzat.Views
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HymnPage : TabbedPage
     {
         private string HtmlHeaderFormatString = @"
