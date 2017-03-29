@@ -29,6 +29,11 @@ namespace Hazzat.Views
 
         private string HtmlHymnTitleFormatString = @"<font class=""HymnTitle"">{0}</font><br /><br />";
 
+        /// <summary>
+        /// Dictionary holding the different tabs, where the id is the order of the tab
+        /// </summary>
+        private Dictionary<int, Page> orderedPages;
+
         public int HymnID;
 
         public HymnPage(string breadcrumbName, string HymnName, int HymnId)
@@ -38,6 +43,8 @@ namespace Hazzat.Views
             Title = $"{breadcrumbName} - {HymnName}";
 
             this.HymnID = HymnId;
+
+            orderedPages = new Dictionary<int, Page>();
         }
 
         protected override void OnDisappearing()
@@ -101,8 +108,8 @@ namespace Hazzat.Views
                     source.Html = html.Append("</body></html>").ToString();
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        this.Children.Add(new ContentPage { Title = "Text", Content = new WebView { Source = source } });
-                        Children.OrderBy(s => s.Title);
+                        orderedPages[0] = new ContentPage { Title = "Text", Content = new WebView { Source = source } };
+                        UpdateTabs();
                     });
                 }
             });
@@ -155,8 +162,8 @@ namespace Hazzat.Views
                     source.Html = html.Append("</body></html>").ToString();
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        this.Children.Add(new ContentPage { Title = "Hazzat", Content = new WebView { Source = source } });
-                        Children.OrderBy(s => s.Title);
+                        orderedPages[1] = new ContentPage { Title = "Hazzat", Content = new WebView { Source = source } };
+                        UpdateTabs();
                     });
                 }
             });
@@ -209,11 +216,20 @@ namespace Hazzat.Views
                     source.Html = html.ToString();
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        this.Children.Add(new ContentPage { Title = "Vertical Hazzat", Content = new WebView { Source = source } });
-                        Children.OrderBy(s => s.Title);
+                        orderedPages[2] = new ContentPage { Title = "Vertical Hazzat", Content = new WebView { Source = source } };
+                        UpdateTabs();
                     });
                 }
             });
+        }
+
+        private void UpdateTabs()
+        {
+            Children.Clear();
+            foreach(var pagePair in orderedPages.OrderBy(kvp => kvp.Key))
+            {
+                Children.Add(pagePair.Value);
+            }
         }
     }
 }
