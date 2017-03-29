@@ -94,7 +94,7 @@ namespace Hazzat.Views
                         // Arabic Content
                         if (!string.IsNullOrWhiteSpace(hymnContent.Content_Arabic))
                         {
-                            html.Append(@"<div><font class=""ArabicFont"">");
+                            html.Append(@"<div style=""text-align: right; direction: rtl; padding-right: 15px""><font class=""ArabicFont"">");
                             html.Append(hymnContent.Content_Arabic);
                             html.Append(@"</font></div>");
                         }
@@ -149,9 +149,9 @@ namespace Hazzat.Views
 
                         if (!string.IsNullOrWhiteSpace(hymnContent.Content_Arabic))
                         {
+                            html.Append(@"<div style=""text-align: right; direction: rtl; padding-right: 15px"">");
                             html.Append(hymnContent.Content_Arabic);
-                            html.Append("<br /><br />");
-                            html.Append("<br /><br />");
+                            html.Append(@"</div>");
                         }
 
                         // hymn content separator
@@ -202,9 +202,9 @@ namespace Hazzat.Views
 
                         if (!string.IsNullOrWhiteSpace(hymnContent.Content_Arabic))
                         {
+                            html.Append(@"<div style=""text-align: right; direction: rtl; padding-right: 15px"">");
                             html.Append(hymnContent.Content_Arabic);
-                            html.Append("<br /><br />");
-                            html.Append("<br /><br />");
+                            html.Append(@"</div>");
                         }
 
                         // hymn content separator
