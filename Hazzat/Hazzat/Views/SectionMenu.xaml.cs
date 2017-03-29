@@ -1,6 +1,5 @@
 ﻿using hazzat.com;
 using Hazzat.HazzatService;
-using HazzatService;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

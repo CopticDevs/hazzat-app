@@ -1,5 +1,5 @@
-﻿using Hazzat.Views;
-using HazzatService;
+﻿using Hazzat.HazzatService;
+using Hazzat.Views;
 using NodaTime;
 using System;
 using System.Collections.Generic;

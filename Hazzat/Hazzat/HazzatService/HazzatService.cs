@@ -7,7 +7,7 @@ using System.ServiceModel;
 using Xamarin.Forms;
 using System.Net.Http;
 
-namespace HazzatService
+namespace Hazzat.HazzatService
 {
     public class HymnStructNameViewModel : INotifyPropertyChanged
     {

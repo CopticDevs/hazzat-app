@@ -1,5 +1,5 @@
 ﻿using Hazzat.Abstract;
-using HazzatService;
+using Hazzat.HazzatService;
 using System;
 using System.Collections.Generic;
 using System.IO;
