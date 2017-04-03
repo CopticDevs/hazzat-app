@@ -75,6 +75,7 @@ namespace Hazzat.Views
             MessagingCenter.Send(this,"MenuItemSelected");
             MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Season);
         }
+
         protected void TypeSelected(object sender, ItemTappedEventArgs e)
         {
             //Unfortunate type name collision
