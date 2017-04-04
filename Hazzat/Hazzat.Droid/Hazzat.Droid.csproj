@@ -112,6 +112,7 @@
     <AndroidAsset Include="Assets\Fonts\hazzata.ttf" />
     <AndroidAsset Include="Assets\Fonts\hazzatv.ttf" />
     <AndroidAsset Include="Assets\Fonts\hazzatva.ttf" />
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
