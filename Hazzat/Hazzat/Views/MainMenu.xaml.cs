@@ -41,7 +41,7 @@ namespace Hazzat.Views
                 {
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        MenuStack.ItemsSource = App.NameViewModel.Seasons;
+                        SeasonsMenu.ItemsSource = App.NameViewModel.Seasons;
                     });
                 }
             });
@@ -52,7 +52,7 @@ namespace Hazzat.Views
                 {
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        MenuStack2.ItemsSource = App.NameViewModel.TypeList;
+                        TypesMenu.ItemsSource = App.NameViewModel.TypeList;
                     });
                 }
             });
@@ -63,7 +63,7 @@ namespace Hazzat.Views
                 {
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        MenuStack3.ItemsSource = App.NameViewModel.TuneList;
+                        TunesMenu.ItemsSource = App.NameViewModel.TuneList;
                     });
                 }
             });

@@ -5,7 +5,7 @@
             Title="hazzat.com">
     <ContentPage Title="Seasons">
         <StackLayout>
-            <ListView x:Name="MenuStack" ItemTapped="SeasonSelected" SeparatorVisibility="None" >
+            <ListView x:Name="SeasonsMenu" ItemTapped="SeasonSelected">
                 <ListView.RowHeight>
                     <OnPlatform x:TypeArguments="x:Int32" iOS="40" Android="40" WinPhone="50" />
                 </ListView.RowHeight>
@@ -23,7 +23,7 @@
     </ContentPage>
     <ContentPage Title="Types">
         <StackLayout>
-            <ListView x:Name="MenuStack2" ItemTapped="TypeSelected">
+            <ListView x:Name="TypesMenu" ItemTapped="TypeSelected">
                 <ListView.RowHeight>
                     <OnPlatform x:TypeArguments="x:Int32" iOS="40" Android="40" WinPhone="50" />
                 </ListView.RowHeight>
@@ -41,7 +41,7 @@
     </ContentPage>
     <ContentPage Title="Tunes">
         <StackLayout>
-            <ListView x:Name="MenuStack3" ItemTapped="TuneSelected">
+            <ListView x:Name="TunesMenu" ItemTapped="TuneSelected">
                 <ListView.RowHeight>
                     <OnPlatform x:TypeArguments="x:Int32" iOS="40" Android="40" WinPhone="50" />
                 </ListView.RowHeight>
