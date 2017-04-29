@@ -4,22 +4,20 @@
              x:Class="Hazzat.Views.MainMenu"
             Title="hazzat.com">
     <ContentPage Title="Seasons">
-        <StackLayout>
-            <ListView x:Name="SeasonsMenu" ItemTapped="SeasonSelected">
-                <ListView.RowHeight>
-                    <OnPlatform x:TypeArguments="x:Int32" iOS="40" Android="40" WinPhone="50" />
-                </ListView.RowHeight>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Frame HasShadow="True" OutlineColor="Silver" Padding="10,10,10,10">
-                                <Label  Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
-                            </Frame>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+        <ListView x:Name="SeasonsMenu" ItemTapped="SeasonSelected">
+            <ListView.RowHeight>
+                <OnPlatform x:TypeArguments="x:Int32" iOS="40" Android="40" WinPhone="50" />
+            </ListView.RowHeight>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame HasShadow="True" OutlineColor="Silver" Padding="10,10,10,10">
+                            <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentPage>
     <ContentPage Title="Types">
         <StackLayout>
