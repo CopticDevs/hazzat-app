@@ -1,10 +1,12 @@
 ﻿using Hazzat.HazzatService;
 using Hazzat.Views;
 using NodaTime;
+using ObjCRuntime;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -89,11 +91,59 @@ namespace Hazzat
             Resources.Add("accent", Color.Accent);
             Resources.Add("default", Color.Default);
 
-            //Perform Season Calculations Here
+            Proceed(this, null);
+        }
 
-            Tuple<string, string> currTime = CurrentTime();
+        private void Proceed(object sender, EventArgs e)
+        {
+            string CheckUrl = "http://beshoyhanna.com";
 
-            MainPage = new MasterDetailMenu("Annual", 1); //Set to current Season
+            try
+            {
+                HttpWebRequest iNetRequest = (HttpWebRequest)WebRequest.Create(CheckUrl);
+
+                WebResponse iNetResponse = iNetRequest.GetResponseAsync().Result;
+
+                iNetResponse.Dispose();
+
+                //Perform Season Calculations Here
+
+                Tuple<string, string> currTime = CurrentTime();
+
+                MainPage = new MasterDetailMenu("Annual", 1); //Set to current Season
+
+                return;
+            }
+            catch (Exception)
+            {
+                StackLayout layout = new StackLayout()
+                {
+                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                    VerticalOptions = LayoutOptions.CenterAndExpand,
+                };
+
+                Button btn = new Button()
+                {
+                    Text = "Retry",
+                    TextColor = Color.Blue,
+                };
+
+                layout.Children.Add(new Label()
+                {
+                    Text = "No Internet Connection"
+                });
+
+                layout.Children.Add(btn);
+
+
+                btn.Clicked += Proceed;
+
+                MainPage = new ContentPage()
+                {
+                    Content = layout
+                };
+                return;
+            }
         }
 
         private Tuple<string, string> CurrentTime()
