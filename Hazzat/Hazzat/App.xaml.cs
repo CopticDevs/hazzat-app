@@ -95,7 +95,7 @@ namespace Hazzat
 
         private void Proceed(object sender, EventArgs e)
         {
-            string CheckUrl = "http://beshoyhanna.com";
+            string CheckUrl = "http://hazzat.com";
 
             try
             {
