@@ -117,9 +117,13 @@ namespace Hazzat.HazzatService
                 if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
                 {
                     HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                    client.InnerChannel.OperationTimeout = System.TimeSpan.FromSeconds(10);
+                    client.InnerChannel.Faulted += new EventHandler(SendConnectionFailure);
                     client.GetSeasonsCompleted += new EventHandler<GetSeasonsCompletedEventArgs>(client_GetCompleted);
                     client.GetSeasonsAsync(isDateSpecific);
                 }
+                testConnection.Dispose();
+
             }
             catch (Exception ex)
             {
@@ -129,9 +133,9 @@ namespace Hazzat.HazzatService
 
         public void client_GetCompleted(object sender, GetSeasonsCompletedEventArgs e)
         {
-            foreach(var item in e.Result)
+            foreach (var item in e.Result)
             {
-                if(item?.ServiceHymnsCount != null)
+                if (item?.ServiceHymnsCount != null)
                 {
                     item.Name = $"{item.Name} ({item.ServiceHymnsCount})";
                 }
@@ -152,9 +156,13 @@ namespace Hazzat.HazzatService
                 if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
                 {
                     HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                    client.InnerChannel.OperationTimeout = System.TimeSpan.FromSeconds(10);
+                    client.InnerChannel.Faulted += new EventHandler(SendConnectionFailure);
                     client.GetSeasonServicesCompleted += new EventHandler<GetSeasonServicesCompletedEventArgs>(GetCompletedStructBySeason);
                     client.GetSeasonServicesAsync(Season);
                 }
+                testConnection.Dispose();
+
             }
 
             catch (Exception ex)
@@ -171,7 +179,7 @@ namespace Hazzat.HazzatService
 
         public void FetchServiceHymns(int StructId, Action<object, GetSeasonServiceHymnsCompletedEventArgs> GetCompletedHymnsBySeason)
         {
-            MessagingCenter.Send(this, "LoadingServiceHymns");
+            MessagingCenter.Send(this, "Loading");
             try
             {
                 HttpClient testConnection = new HttpClient();
@@ -179,9 +187,13 @@ namespace Hazzat.HazzatService
                 if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
                 {
                     HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                    client.InnerChannel.OperationTimeout = System.TimeSpan.FromSeconds(10);
+                    client.InnerChannel.Faulted += new EventHandler(SendConnectionFailure);
                     client.GetSeasonServiceHymnsCompleted += new EventHandler<GetSeasonServiceHymnsCompletedEventArgs>(GetCompletedHymnsBySeason);
                     client.GetSeasonServiceHymnsAsync(StructId);
                 }
+                testConnection.Dispose();
+
             }
 
             catch (Exception ex)
@@ -201,15 +213,25 @@ namespace Hazzat.HazzatService
             MessagingCenter.Send(this, "Loading");
             try
             {
-                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                HttpClient testConnection = new HttpClient();
 
-                client.GetSeasonServiceHymnTextCompleted += new EventHandler<GetSeasonServiceHymnTextCompletedEventArgs>(client_GetCompletedHymnInfo);
-                client.GetSeasonServiceHymnHazzatCompleted += new EventHandler<GetSeasonServiceHymnHazzatCompletedEventArgs>(client_GetCompletedHymnHazzat);
-                client.GetSeasonServiceHymnVerticalHazzatCompleted += new EventHandler<GetSeasonServiceHymnVerticalHazzatCompletedEventArgs>(client_GetCompletedHymnVerticalHazzat);
+                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
+                {
+                    HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
 
-                client.GetSeasonServiceHymnTextAsync(itemId);
-                client.GetSeasonServiceHymnHazzatAsync(itemId);
-                client.GetSeasonServiceHymnVerticalHazzatAsync(itemId);
+                    client.InnerChannel.OperationTimeout = System.TimeSpan.FromSeconds(10);
+                    client.InnerChannel.Faulted += new EventHandler(SendConnectionFailure);
+
+                    client.GetSeasonServiceHymnTextCompleted += new EventHandler<GetSeasonServiceHymnTextCompletedEventArgs>(client_GetCompletedHymnInfo);
+                    client.GetSeasonServiceHymnHazzatCompleted += new EventHandler<GetSeasonServiceHymnHazzatCompletedEventArgs>(client_GetCompletedHymnHazzat);
+                    client.GetSeasonServiceHymnVerticalHazzatCompleted += new EventHandler<GetSeasonServiceHymnVerticalHazzatCompletedEventArgs>(client_GetCompletedHymnVerticalHazzat);
+
+                    client.GetSeasonServiceHymnTextAsync(itemId);
+                    client.GetSeasonServiceHymnHazzatAsync(itemId);
+                    client.GetSeasonServiceHymnVerticalHazzatAsync(itemId);
+                }
+                testConnection.Dispose();
+
             }
             catch (Exception ex)
             {
@@ -238,7 +260,7 @@ namespace Hazzat.HazzatService
         #region byType
         public void GetHymnsByType()
         {
-            MessagingCenter.Send(this, "LoadingTypesList");
+            MessagingCenter.Send(this, "Loading");
             try
             {
                 HttpClient testConnection = new HttpClient();
@@ -246,9 +268,13 @@ namespace Hazzat.HazzatService
                 if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
                 {
                     HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                    client.InnerChannel.OperationTimeout = System.TimeSpan.FromSeconds(10);
+                    client.InnerChannel.Faulted += new EventHandler(SendConnectionFailure);
                     client.GetTypeListCompleted += new EventHandler<GetTypeListCompletedEventArgs>(GetCompletedTypeList);
                     client.GetTypeListAsync();
                 }
+                testConnection.Dispose();
+
             }
 
             catch (Exception ex)
@@ -273,12 +299,21 @@ namespace Hazzat.HazzatService
 
         public void GetSeasonsByType(int typeId)
         {
-            MessagingCenter.Send(this, "LoadingSeasonsByTypes");
+            MessagingCenter.Send(this, "Loading");
             try
             {
-                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-                client.GetSeasonsByTypeIDCompleted += new EventHandler<GetSeasonsByTypeIDCompletedEventArgs>(client_GetSeasonsByTypeID);
-                client.GetSeasonsByTypeIDAsync(typeId);
+                HttpClient testConnection = new HttpClient();
+
+                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
+                {
+                    HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                    client.InnerChannel.OperationTimeout = System.TimeSpan.FromSeconds(10);
+                    client.InnerChannel.Faulted += new EventHandler(SendConnectionFailure);
+                    client.GetSeasonsByTypeIDCompleted += new EventHandler<GetSeasonsByTypeIDCompletedEventArgs>(client_GetSeasonsByTypeID);
+                    client.GetSeasonsByTypeIDAsync(typeId);
+                }
+                testConnection.Dispose();
+
             }
 
             catch (Exception ex)
@@ -295,11 +330,21 @@ namespace Hazzat.HazzatService
 
         public void GetServiceHymnListBySeasonIdAndTypeId(int seasonId, int typeId, Action<object, GetServiceHymnListBySeasonIdAndTypeIdCompletedEventArgs> getCompletedHymnsBySeasonAndType)
         {
+            MessagingCenter.Send(this, "Loading");
             try
             {
-                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-                client.GetServiceHymnListBySeasonIdAndTypeIdCompleted += new EventHandler<GetServiceHymnListBySeasonIdAndTypeIdCompletedEventArgs>(getCompletedHymnsBySeasonAndType);
-                client.GetServiceHymnListBySeasonIdAndTypeIdAsync(seasonId, typeId);
+                HttpClient testConnection = new HttpClient();
+
+                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
+                {
+                    HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                    client.InnerChannel.OperationTimeout = System.TimeSpan.FromSeconds(10);
+                    client.InnerChannel.Faulted += new EventHandler(SendConnectionFailure);
+                    client.GetServiceHymnListBySeasonIdAndTypeIdCompleted += new EventHandler<GetServiceHymnListBySeasonIdAndTypeIdCompletedEventArgs>(getCompletedHymnsBySeasonAndType);
+                    client.GetServiceHymnListBySeasonIdAndTypeIdAsync(seasonId, typeId);
+                }
+                testConnection.Dispose();
+
             }
 
             catch (Exception ex)
@@ -310,6 +355,7 @@ namespace Hazzat.HazzatService
 
         public void GetServiceHymnListBySeasonIdAndTuneId(int seasonId, int tuneId, Action<object, GetServiceHymnListBySeasonIdAndTuneIdCompletedEventArgs> getCompletedHymnsBySeasonAndTune)
         {
+            MessagingCenter.Send(this, "Loading");
             try
             {
                 HttpClient testConnection = new HttpClient();
@@ -317,9 +363,13 @@ namespace Hazzat.HazzatService
                 if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
                 {
                     HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                    client.InnerChannel.OperationTimeout = System.TimeSpan.FromSeconds(10);
+                    client.InnerChannel.Faulted += new EventHandler(SendConnectionFailure);
                     client.GetServiceHymnListBySeasonIdAndTuneIdCompleted += new EventHandler<GetServiceHymnListBySeasonIdAndTuneIdCompletedEventArgs>(getCompletedHymnsBySeasonAndTune);
                     client.GetServiceHymnListBySeasonIdAndTuneIdAsync(seasonId, tuneId);
                 }
+                testConnection.Dispose();
+
             }
 
             catch (Exception ex)
@@ -333,7 +383,7 @@ namespace Hazzat.HazzatService
         #region byTune
         public void GetHymnsByTune()
         {
-            MessagingCenter.Send(this, "LoadingTunesList");
+            MessagingCenter.Send(this, "Loading");
             try
             {
                 HttpClient testConnection = new HttpClient();
@@ -341,9 +391,13 @@ namespace Hazzat.HazzatService
                 if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
                 {
                     HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                    client.InnerChannel.OperationTimeout = System.TimeSpan.FromSeconds(10);
+                    client.InnerChannel.Faulted += new EventHandler(SendConnectionFailure);
                     client.GetTuneListCompleted += new EventHandler<GetTuneListCompletedEventArgs>(GetCompletedTuneList);
                     client.GetTuneListAsync();
                 }
+                testConnection.Dispose();
+
             }
 
             catch (Exception ex)
@@ -368,7 +422,7 @@ namespace Hazzat.HazzatService
 
         public void ByTuneGetSeasons(int tuneId)
         {
-            MessagingCenter.Send(this, "LoadingSeasonsListByTune");
+            MessagingCenter.Send(this, "Loading");
             try
             {
                 HttpClient testConnection = new HttpClient();
@@ -376,9 +430,12 @@ namespace Hazzat.HazzatService
                 if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
                 {
                     HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                    client.InnerChannel.OperationTimeout = System.TimeSpan.FromSeconds(10);
+                    client.InnerChannel.Faulted += new EventHandler(SendConnectionFailure);
                     client.GetSeasonsByTuneIDCompleted += new EventHandler<GetSeasonsByTuneIDCompletedEventArgs>(client_ByTuneGetSeasons);
                     client.GetSeasonsByTuneIDAsync(tuneId);
                 }
+                testConnection.Dispose();
             }
 
             catch (Exception ex)
@@ -396,5 +453,11 @@ namespace Hazzat.HazzatService
 
 
         #endregion
+
+        private void SendConnectionFailure(object sender, EventArgs e)
+        {
+            MessagingCenter.Send(this, "SEGFAULT");
+        }
+
     }
 }
