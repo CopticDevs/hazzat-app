@@ -8,6 +8,7 @@ using Hazzat.Abstract;
 using static Hazzat.iOS.Application;
 
 [assembly: Dependency(typeof(BaseUrl_iOS))]
+[assembly: Dependency(typeof(ColorScheme))]
 namespace Hazzat.iOS
 {
     public class Application
