@@ -24,7 +24,7 @@ namespace Hazzat.Views
 
             MessagingCenter.Subscribe<MainMenu>(this, "MenuItemSelected", HideMasterPage);
 
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "SEGFAULT", ShowReload);
+            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "Loading", ShowReload);
 
             Menu = new SectionMenu(Season, SeasonId, NavigationType.Season);
 
@@ -33,40 +33,43 @@ namespace Hazzat.Views
 
         private void ShowReload(ByNameMainViewModel obj)
         {
-            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "SEGFAULT");
+            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "Loading");
 
             Timer time = new Timer(Reload, null, 10000, Timeout.Infinite);
 
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "SEGFAULT", ShowReload);
+            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "Loading", ShowReload);
         }
 
         private void Reload(object state)
         {
-            Device.BeginInvokeOnMainThread(() =>
+            if (!App.IsLoaded)
             {
-                StackLayout layout = new StackLayout()
+                Device.BeginInvokeOnMainThread(() =>
                 {
-                    HorizontalOptions = LayoutOptions.CenterAndExpand,
-                    VerticalOptions = LayoutOptions.CenterAndExpand,
-                };
+                    StackLayout layout = new StackLayout()
+                    {
+                        HorizontalOptions = LayoutOptions.CenterAndExpand,
+                        VerticalOptions = LayoutOptions.CenterAndExpand,
+                    };
 
-                Button btn = new Button()
-                {
-                    Text = "Retry",
-                    TextColor = Color.Blue,
-                };
+                    Button btn = new Button()
+                    {
+                        Text = "Retry",
+                        TextColor = Color.Blue,
+                    };
 
-                layout.Children.Add(new Label()
-                {
-                    Text = "No Internet Connection"
+                    layout.Children.Add(new Label()
+                    {
+                        Text = "No Internet Connection"
+                    });
+
+                    layout.Children.Add(btn);
+                    Detail = new ContentPage()
+                    {
+                        Content = layout
+                    };
                 });
-
-                layout.Children.Add(btn);
-                Detail = new ContentPage()
-                {
-                    Content = layout
-                };
-            });
+            }
         }
 
         public void HideMasterPage(MainMenu obj)

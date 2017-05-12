@@ -109,6 +109,7 @@ namespace Hazzat.HazzatService
 
         public void createSeasonsViewModel(bool isDateSpecific)
         {
+            App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
             try
             {
@@ -117,8 +118,6 @@ namespace Hazzat.HazzatService
                 if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
                 {
                     HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-                    client.InnerChannel.OperationTimeout = System.TimeSpan.FromSeconds(10);
-                    client.InnerChannel.Faulted += new EventHandler(SendConnectionFailure);
                     client.GetSeasonsCompleted += new EventHandler<GetSeasonsCompletedEventArgs>(client_GetCompleted);
                     client.GetSeasonsAsync(isDateSpecific);
                 }
@@ -143,11 +142,14 @@ namespace Hazzat.HazzatService
 
 
             Seasons = e.Result;
+
             MessagingCenter.Send(this, "Done");
+            App.IsLoaded = true;
         }
 
         public void createViewModelBySeason(int Season)
         {
+            App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
             try
             {
@@ -173,10 +175,12 @@ namespace Hazzat.HazzatService
         {
             HymnsBySeason = e.Result;
             MessagingCenter.Send(this, "DoneSeason");
+            App.IsLoaded = true;
         }
 
         public void FetchServiceHymns(int StructId, Action<object, GetSeasonServiceHymnsCompletedEventArgs> GetCompletedHymnsBySeason)
         {
+            App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
             try
             {
@@ -202,10 +206,12 @@ namespace Hazzat.HazzatService
         {
             HazzatHymns = e.Result;
             MessagingCenter.Send(this, "Done");
+            App.IsLoaded = true;
         }
 
         public void CreateHymnTextViewModel(int itemId)
         {
+            App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
             try
             {
@@ -230,23 +236,27 @@ namespace Hazzat.HazzatService
         {
             HymnContentInfo = e.Result;
             MessagingCenter.Send(this, "DoneWithHymnText");
+            App.IsLoaded = true;
         }
 
         public void client_GetCompletedHymnHazzat(object sender, GetSeasonServiceHymnHazzatCompletedEventArgs e)
         {
             HazzatHymnContentInfo = e.Result;
             MessagingCenter.Send(this, "DoneWithHazzat");
+            App.IsLoaded = true;
         }
 
         private void client_GetCompletedHymnVerticalHazzat(object sender, GetSeasonServiceHymnVerticalHazzatCompletedEventArgs e)
         {
             VerticalHazzatHymnContent = e.Result;
             MessagingCenter.Send(this, "DoneWithVerticalHazzat");
+            App.IsLoaded = true;
         }
 
         #region byType
         public void GetHymnsByType()
         {
+            App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
             try
             {
@@ -280,10 +290,12 @@ namespace Hazzat.HazzatService
 
             TypeList = e.Result;
             MessagingCenter.Send(this, "DoneWithTypeList");
+            App.IsLoaded = true;
         }
 
         public void GetSeasonsByType(int typeId)
         {
+            App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
             try
             {
@@ -309,10 +321,12 @@ namespace Hazzat.HazzatService
         {
             TypeSeasons = e.Result;
             MessagingCenter.Send(this, "DoneWithSeasonsListByType");
+            App.IsLoaded = true;
         }
 
         public void GetServiceHymnListBySeasonIdAndTypeId(int seasonId, int typeId, Action<object, GetServiceHymnListBySeasonIdAndTypeIdCompletedEventArgs> getCompletedHymnsBySeasonAndType)
         {
+            App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
             try
             {
@@ -336,6 +350,7 @@ namespace Hazzat.HazzatService
 
         public void GetServiceHymnListBySeasonIdAndTuneId(int seasonId, int tuneId, Action<object, GetServiceHymnListBySeasonIdAndTuneIdCompletedEventArgs> getCompletedHymnsBySeasonAndTune)
         {
+            App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
             try
             {
@@ -362,6 +377,7 @@ namespace Hazzat.HazzatService
         #region byTune
         public void GetHymnsByTune()
         {
+            App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
             try
             {
@@ -395,10 +411,12 @@ namespace Hazzat.HazzatService
 
             TuneList = e.Result;
             MessagingCenter.Send(this, "DoneWithTuneList");
+            App.IsLoaded = true;
         }
 
         public void ByTuneGetSeasons(int tuneId)
         {
+            App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
             try
             {
@@ -423,16 +441,12 @@ namespace Hazzat.HazzatService
         {
             TuneSeasons = e.Result;
             MessagingCenter.Send(this, "DoneWithSeasonsListByTune");
+            App.IsLoaded = true;
         }
 
 
 
         #endregion
-
-        private void SendConnectionFailure(object sender, EventArgs e)
-        {
-            MessagingCenter.Send(this, "SEGFAULT");
-        }
 
     }
 }

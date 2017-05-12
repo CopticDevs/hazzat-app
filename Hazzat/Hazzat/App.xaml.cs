@@ -17,6 +17,8 @@ namespace Hazzat
 {
     public partial class App : Application
     {
+        public static bool IsLoaded { get; set; } = false;
+
         String one = "Tout";
         String two = "Baba";
         String three = "Hatour";
