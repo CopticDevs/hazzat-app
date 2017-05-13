@@ -39,7 +39,10 @@ namespace Hazzat.Views
         public HymnPage(string breadcrumbName, string HymnName, int HymnId)
         {
             InitializeComponent();
-
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                overlay.IsVisible = true;
+            });
             Title = $"{breadcrumbName} - {HymnName}";
 
             this.HymnID = HymnId;
@@ -110,6 +113,7 @@ namespace Hazzat.Views
                     {
                         orderedPages[0] = new ContentPage { Title = "Text", Content = new WebView { Source = source } };
                         UpdateTabs();
+                        overlay.IsVisible = false;
                     });
                 }
             });
@@ -164,6 +168,7 @@ namespace Hazzat.Views
                     {
                         orderedPages[1] = new ContentPage { Title = "Hazzat", Content = new WebView { Source = source } };
                         UpdateTabs();
+                        overlay.IsVisible = false;
                     });
                 }
             });
@@ -218,6 +223,7 @@ namespace Hazzat.Views
                     {
                         orderedPages[2] = new ContentPage { Title = "Vertical Hazzat", Content = new WebView { Source = source } };
                         UpdateTabs();
+                        overlay.IsVisible = false;
                     });
                 }
             });

@@ -63,6 +63,8 @@ namespace Hazzat.Views
                         Text = "No Internet Connection"
                     });
 
+                    btn.Clicked += Reset;
+
                     layout.Children.Add(btn);
                     Detail = new ContentPage()
                     {
@@ -70,6 +72,11 @@ namespace Hazzat.Views
                     };
                 });
             }
+        }
+
+        private void Reset(object sender, EventArgs e)
+        {
+            Detail = new NavigationPage(Menu);
         }
 
         public void HideMasterPage(MainMenu obj)

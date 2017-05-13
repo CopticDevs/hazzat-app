@@ -215,6 +215,10 @@ namespace Hazzat.HazzatService
             MessagingCenter.Send(this, "Loading");
             try
             {
+                HttpClient testConnection = new HttpClient();
+
+                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
+                {
                     HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
 
                     client.GetSeasonServiceHymnTextCompleted += new EventHandler<GetSeasonServiceHymnTextCompletedEventArgs>(client_GetCompletedHymnInfo);
@@ -224,6 +228,7 @@ namespace Hazzat.HazzatService
                     client.GetSeasonServiceHymnTextAsync(itemId);
                     client.GetSeasonServiceHymnHazzatAsync(itemId);
                     client.GetSeasonServiceHymnVerticalHazzatAsync(itemId);
+                }
                 }
 
             catch (Exception ex)
