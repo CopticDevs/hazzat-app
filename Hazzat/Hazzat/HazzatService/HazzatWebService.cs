@@ -3837,24 +3837,38 @@ public partial class HazzatWebServiceSoapClient : System.ServiceModel.ClientBase
     
     public void OpenAsync()
     {
-        this.OpenAsync(null);
+        try
+        {
+            this.OpenAsync(null);
+        }
+        catch
+        {
+            CloseAsync();
+        }
     }
     
     public void OpenAsync(object userState)
     {
-        if ((this.onBeginOpenDelegate == null))
+        try
         {
-            this.onBeginOpenDelegate = new BeginOperationDelegate(this.OnBeginOpen);
+            if ((this.onBeginOpenDelegate == null))
+            {
+                this.onBeginOpenDelegate = new BeginOperationDelegate(this.OnBeginOpen);
+            }
+            if ((this.onEndOpenDelegate == null))
+            {
+                this.onEndOpenDelegate = new EndOperationDelegate(this.OnEndOpen);
+            }
+            if ((this.onOpenCompletedDelegate == null))
+            {
+                this.onOpenCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnOpenCompleted);
+            }
+            base.InvokeAsync(this.onBeginOpenDelegate, null, this.onEndOpenDelegate, this.onOpenCompletedDelegate, userState);
         }
-        if ((this.onEndOpenDelegate == null))
+        catch
         {
-            this.onEndOpenDelegate = new EndOperationDelegate(this.OnEndOpen);
+            CloseAsync();
         }
-        if ((this.onOpenCompletedDelegate == null))
-        {
-            this.onOpenCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnOpenCompleted);
-        }
-        base.InvokeAsync(this.onBeginOpenDelegate, null, this.onEndOpenDelegate, this.onOpenCompletedDelegate, userState);
     }
     
     private System.IAsyncResult OnBeginClose(object[] inValues, System.AsyncCallback callback, object asyncState)
