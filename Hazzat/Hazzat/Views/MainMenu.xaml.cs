@@ -26,6 +26,9 @@ namespace Hazzat.Views
                     Seasons.Icon = "worldwide.png";
                     Tunes.Icon = "music-player-1";
                     Types.Icon = "windows-1";
+					Seasons.Padding = new Thickness(0, 24.5, 0, 0);
+                    Types.Padding = new Thickness(0, 24.5, 0, 0);
+                    Tunes.Padding = new Thickness(0, 24.5, 0, 0);
                     break;
             }
 
