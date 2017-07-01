@@ -11,9 +11,9 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame HasShadow="False" OutlineColor="Silver" Padding="10,10,10,10">
+                        <Grid Padding="10,10,10,10">
                             <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
-                        </Frame>
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -28,9 +28,9 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame HasShadow="False" OutlineColor="Silver" Padding="10,10,10,10">
+                            <Grid Padding="10,10,10,10">
                                 <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
-                            </Frame>
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -46,9 +46,9 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame HasShadow="False" OutlineColor="Silver" Padding="10,10,10,10">
+                            <Grid Padding="10,10,10,10">
                                 <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
-                            </Frame>
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
