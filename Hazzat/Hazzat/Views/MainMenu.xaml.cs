@@ -22,6 +22,7 @@ namespace Hazzat.Views
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
+                    Icon = "menu-1.png";
                     Seasons.Icon = "worldwide.png";
                     Tunes.Icon = "music-player-1";
                     Types.Icon = "windows-1";

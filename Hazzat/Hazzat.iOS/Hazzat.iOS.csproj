@@ -124,6 +124,9 @@
     <BundleResource Include="Resources\file-1%403x.png" />
     <BundleResource Include="Resources\file%402x.png" />
     <BundleResource Include="Resources\file%403x.png" />
+    <BundleResource Include="Resources\menu-1.png" />
+    <BundleResource Include="Resources\menu-1%402x.png" />
+    <BundleResource Include="Resources\menu-1%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />

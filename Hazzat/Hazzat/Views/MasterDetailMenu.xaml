@@ -4,14 +4,7 @@
              xmlns:local="clr-namespace:Hazzat.Views"
              x:Class="Hazzat.Views.MasterDetailMenu"
              Title="hazzat.com"
-             MasterBehavior="Default" >
-  <MasterDetailPage.ToolbarItems>
-    <ToolbarItem Text="About" Order="Secondary" Clicked="OnToolbarItemClicked">
-      <ToolbarItem.Icon>
-        <OnPlatform x:TypeArguments="FileImageSource" WinPhone="Images/Icon1F435.png" />
-      </ToolbarItem.Icon>
-    </ToolbarItem>
-  </MasterDetailPage.ToolbarItems>
+             MasterBehavior="Default">
   <MasterDetailPage.Master IsGestureEnabled="False">
     <local:MainMenu />
   </MasterDetailPage.Master>

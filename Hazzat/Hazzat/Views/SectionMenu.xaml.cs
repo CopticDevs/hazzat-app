@@ -226,5 +226,15 @@ namespace Hazzat.Views
 
             App.NameViewModel.CreateHymnTextViewModel(item.ItemId);
         }
+
+		protected async Task OnToolbarItemClicked(object sender, EventArgs args)
+		{
+			var result = await DisplayAlert("Credits", "Thank you to madebyoliver at flaticons.com for the awesome app icons! http://www.flaticon.com/authors/madebyoliver", "Okay", "Link");
+
+			if (!result)
+			{
+				Device.OpenUri(new Uri("http://www.flaticon.com/authors/madebyoliver"));
+			}
+		}
     }
 }
