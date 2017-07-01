@@ -104,6 +104,26 @@
     <BundleResource Include="Resources\Fonts\hazzatva.ttf" />
     <BundleResource Include="Resources\Fonts\998687745-TrajanPro-Regular.ttf" />
     <None Include="packages.config" />
+    <BundleResource Include="Resources\worldwide.png">
+      <ResourceTags>false</ResourceTags>
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
+    <BundleResource Include="Resources\windows-1.png" />
+    <BundleResource Include="Resources\music-player-1.png" />
+    <BundleResource Include="Resources\file-1.png" />
+    <BundleResource Include="Resources\file.png" />
+    <BundleResource Include="Resources\document.png" />
+    <BundleResource Include="Resources\worldwide%402x.png" />
+    <BundleResource Include="Resources\worldwide%403x.png" />
+    <BundleResource Include="Resources\music-player-1%403x.png" />
+    <BundleResource Include="Resources\music-player-1%402x.png" />
+    <BundleResource Include="Resources\windows-1%403x.png" />
+    <BundleResource Include="Resources\windows-1%402x.png" />
+    <BundleResource Include="Resources\document%402x.png" />
+    <BundleResource Include="Resources\file-1%402x.png" />
+    <BundleResource Include="Resources\file-1%403x.png" />
+    <BundleResource Include="Resources\file%402x.png" />
+    <BundleResource Include="Resources\file%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />

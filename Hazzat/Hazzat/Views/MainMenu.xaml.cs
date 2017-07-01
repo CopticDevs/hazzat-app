@@ -19,6 +19,15 @@ namespace Hazzat.Views
         {
             InitializeComponent();
 
+            switch (Device.RuntimePlatform)
+            {
+                case Device.iOS:
+                    Seasons.Icon = "worldwide.png";
+                    Tunes.Icon = "music-player-1";
+                    Types.Icon = "windows-1";
+                    break;
+            }
+
             SubscribeMessages();
 
             App.NameViewModel.createSeasonsViewModel(true);
