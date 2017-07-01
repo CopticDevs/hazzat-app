@@ -23,6 +23,15 @@ namespace Hazzat.Views
         public SectionMenu(string ItemName, int ItemId, NavigationType navType)
         {
             InitializeComponent();
+
+            switch(Device.RuntimePlatform)
+            {
+                case Device.Windows:
+                    TBI.Order = ToolbarItemOrder.Secondary;
+                    TBI.Text = "settings";
+                    break;
+            }
+
             Device.BeginInvokeOnMainThread(() =>
             {
                 overlay.IsVisible = true;
