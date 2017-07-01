@@ -77,18 +77,6 @@ namespace Hazzat
             InitializeComponent();
 
             Resources = new ResourceDictionary();
-
-            //Define global app styles here
-            Resources.Add(new Style(typeof(ContentPage))
-            {
-                Setters = {
-                    new Setter
-                    {
-                        Property = Page.PaddingProperty,
-                        Value = Device.OnPlatform(new Thickness(10), new Thickness(10), new Thickness(10))
-                    }
-                }
-            });
             Resources.Add("accent", Color.Accent);
             Resources.Add("default", Color.Default);
 

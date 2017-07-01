@@ -15,13 +15,18 @@
 		<item name="colorPrimaryDark">#1976D2</item>
 		<!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
-		<item name="colorAccent">#FF4081</item>
+		<item name="colorAccent">#000000</item>
+		<item name="android:colorPressedHighlight">@color/ListViewSelected</item>
+        <item name="android:colorFocusedHighlight">@color/ListViewSelected</item>
+        <item name="android:colorActivatedHighlight">@color/ListViewSelected</item>
+        <item name="android:activatedBackgroundIndicator">@color/ListViewSelected</item>
 		<!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
 		<item name="windowActionModeOverlay">true</item>
 		<item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
 	</style>
 	<style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
-		<item name="colorAccent">#FF4081</item>
+		<item name="colorAccent">#000000</item>
 	</style>
+        <color name="ListViewSelected">#FFF3DF</color>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Hazzat.Views.SectionMenu" Padding="10,10,10,10">
+             x:Class="Hazzat.Views.SectionMenu">
       <ContentPage.ToolbarItems>
     <ToolbarItem x:Name="TBI" Order="Primary" Clicked="OnToolbarItemClicked">
       <ToolbarItem.Icon>
@@ -19,7 +19,7 @@
         </ListView.ItemTemplate>
       </ListView>
     </StackLayout>
-    <ContentView x:Name="overlay" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" IsVisible="False" Padding="10, 0">
+    <ContentView x:Name="overlay" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" IsVisible="False">
       <ActivityIndicator x:Name="activityIndicator" IsRunning="True" IsVisible="True" VerticalOptions="Center" />
     </ContentView>
   </AbsoluteLayout>
