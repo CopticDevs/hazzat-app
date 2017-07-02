@@ -250,7 +250,7 @@ Hymn text Styles
                     source.Html = html.Append("</body></html>").ToString();
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        orderedPages[0] = new ContentPage { Icon = Device.OS == TargetPlatform.iOS?"file.png":null, Title = "Text", Content = new WebView { Source = source } };
+                        orderedPages[0] = new ContentPage { Icon = Device.RuntimePlatform == Device.iOS ? "file.png" : null, Title = "Text", Content = new WebView { Source = source } };
                         UpdateTabs();
                         overlay.IsVisible = false;
                     });
@@ -303,7 +303,7 @@ Hymn text Styles
                     source.Html = html.Append("</body></html>").ToString();
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        orderedPages[1] = new ContentPage { Icon = Device.OS == TargetPlatform.iOS?"file-1.png":null, Title = "Hazzat", Content = new WebView { Source = source } };
+                        orderedPages[1] = new ContentPage { Icon = Device.RuntimePlatform == Device.iOS ? "file-1.png" : null, Title = "Hazzat", Content = new WebView { Source = source } };
                         UpdateTabs();
                         overlay.IsVisible = false;
                     });
@@ -357,7 +357,7 @@ Hymn text Styles
                     source.Html = html.ToString();
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        orderedPages[2] = new ContentPage {Icon = Device.OS == TargetPlatform.iOS ? "document.png":null, Title = "Vertical Hazzat", Content = new WebView { Source = source } };
+                        orderedPages[2] = new ContentPage {Icon = Device.RuntimePlatform == Device.iOS ? "document.png" : null, Title = "Vertical Hazzat", Content = new WebView { Source = source } };
                         UpdateTabs();
                         overlay.IsVisible = false;
                     });

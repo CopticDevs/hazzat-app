@@ -81,7 +81,7 @@ namespace Hazzat.Views
 
         public void HideMasterPage(MainMenu obj)
         {
-            if (Device.OS != TargetPlatform.Windows)
+            if (Device.RuntimePlatform != Device.Windows)
             {
                 IsPresented = false;
             }
