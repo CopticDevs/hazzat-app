@@ -238,11 +238,11 @@ namespace Hazzat.Views
 
 		protected async Task OnToolbarItemClicked(object sender, EventArgs args)
 		{
-			var result = await DisplayAlert("Credits", "Thank you to madebyoliver at flaticons.com for the awesome app icons! http://www.flaticon.com/authors/madebyoliver", "Okay", "Link");
+			var result = await DisplayAlert("Notice", "This is a beta version for a proof of concept.", "Okay", "Link");
 
 			if (!result)
 			{
-				Device.OpenUri(new Uri("http://www.flaticon.com/authors/madebyoliver"));
+				Device.OpenUri(new Uri("http://www.hazzat.com/"));
 			}
 		}
     }
