@@ -19,7 +19,7 @@
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>7595BA534403AFC387012FA6B76AF4F51B217807</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>5A2AF362E3444366BF4D09D73513035C78B233AD</PackageCertificateThumbprint>
     <PackageCertificateKeyFile>Hazzat.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
