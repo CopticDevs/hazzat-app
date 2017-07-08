@@ -1,5 +1,5 @@
 ﻿using Hazzat.Abstract;
-using Hazzat.HazzatService;
+using Hazzat.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -189,9 +189,9 @@ Hymn text Styles
         {
             base.OnDisappearing();
 
-            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "DoneWithHymnText");
-            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "DoneWithHazzat");
-            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "DoneWithVerticalHazzat");
+            MessagingCenter.Unsubscribe<MainViewModel>(this, "DoneWithHymnText");
+            MessagingCenter.Unsubscribe<MainViewModel>(this, "DoneWithHazzat");
+            MessagingCenter.Unsubscribe<MainViewModel>(this, "DoneWithVerticalHazzat");
         }
 
         public void SubscribeMessage()
@@ -201,7 +201,7 @@ Hymn text Styles
             HtmlHeaderFormatString.Replace("{0}", background);
             HtmlHeaderFormatString.Replace("{1}", foreground);
 
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithHymnText", (sender) =>
+            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithHymnText", (sender) =>
             {
                 if (App.NameViewModel?.HymnContentInfo?.FirstOrDefault() != null)
                 {
@@ -257,7 +257,7 @@ Hymn text Styles
                 }
             });
 
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithHazzat", (sender) =>
+            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithHazzat", (sender) =>
             {
                 if (App.NameViewModel?.HazzatHymnContentInfo?.FirstOrDefault() != null)
                 {
@@ -310,7 +310,7 @@ Hymn text Styles
                 }
             });
 
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithVerticalHazzat", (sender) =>
+            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithVerticalHazzat", (sender) =>
             {
                 if (App.NameViewModel?.VerticalHazzatHymnContent?.FirstOrDefault() != null)
                 {

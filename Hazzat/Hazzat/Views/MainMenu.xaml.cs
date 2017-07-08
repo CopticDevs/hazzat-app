@@ -1,5 +1,5 @@
 ﻿using hazzat.com;
-using Hazzat.HazzatService;
+using Hazzat.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,12 +43,12 @@ namespace Hazzat.Views
         {
             base.OnDisappearing();
 
-            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "Done");
+            MessagingCenter.Unsubscribe<MainViewModel>(this, "Done");
         }
 
         private void SubscribeMessages()
         {
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "Done", (sender) =>
+            MessagingCenter.Subscribe<MainViewModel>(this, "Done", (sender) =>
             {
                 if (App.NameViewModel?.Seasons != null)
                 {
@@ -59,7 +59,7 @@ namespace Hazzat.Views
                 }
             });
 
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithTypeList", (sender) =>
+            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithTypeList", (sender) =>
             {
                 if (App.NameViewModel?.TypeList != null)
                 {
@@ -70,7 +70,7 @@ namespace Hazzat.Views
                 }
             });
 
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithTuneList", (sender) =>
+            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithTuneList", (sender) =>
             {
                 if (App.NameViewModel?.TuneList != null)
                 {

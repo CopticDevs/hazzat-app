@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hazzat.HazzatService
+namespace Hazzat.Service.Providers.DataProviders.WebServiceProvider
 {
     public class ServiceDetails : ObservableCollection<ServiceHymnInfo>
     {

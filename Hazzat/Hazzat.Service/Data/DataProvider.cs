@@ -1,4 +1,5 @@
-﻿using System;
+﻿using hazzat.com;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,8 +40,7 @@ namespace Hazzat.Service.Data
 
         #region Abstract Methods
 
-        // TODO: fix return type
-        public abstract object GetSeason(int seasonId);
+        public abstract void GetSeasons(bool isDateSpecific, Action<object, GetSeasonsCompletedEventArgs> callback);
 
         #endregion
     }

@@ -1,5 +1,6 @@
 ﻿using hazzat.com;
-using Hazzat.HazzatService;
+using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
+using Hazzat.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -74,12 +75,12 @@ namespace Hazzat.Views
         {
             base.OnDisappearing();
 
-            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "DoneSeason");
+            MessagingCenter.Unsubscribe<MainViewModel>(this, "DoneSeason");
         }
 
         public void SubscribeMessages()
         {
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneSeason", (sender) =>
+            MessagingCenter.Subscribe<MainViewModel>(this, "DoneSeason", (sender) =>
             {
                 if (App.NameViewModel?.HymnsBySeason != null)
                 {
@@ -92,7 +93,7 @@ namespace Hazzat.Views
                 }
             });
 
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithSeasonsListByType", (sender) =>
+            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithSeasonsListByType", (sender) =>
             {
                 if (App.NameViewModel?.TypeSeasons != null)
                 {
@@ -105,7 +106,7 @@ namespace Hazzat.Views
                 }
             });
 
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithSeasonsListByTune", (sender) =>
+            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithSeasonsListByTune", (sender) =>
             {
                 if (App.NameViewModel?.TuneSeasons != null)
                 {
