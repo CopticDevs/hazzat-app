@@ -1,51 +1,58 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Hazzat.MainMenu"
+             x:Class="Hazzat.Views.MainMenu"
             Title="hazzat.com">
-  <ContentPage.ToolbarItems>
-    <ToolbarItem Text="Hazzat" Order="Primary" Clicked="OnToolbarItemClicked">
-      <ToolbarItem.Icon>
-        <OnPlatform x:TypeArguments="FileImageSource" iOS="bookmark.png" Android="icon.png" WinPhone="Assets/appbar.paper.png" />
-      </ToolbarItem.Icon>
-    </ToolbarItem>
-
-  
-    <ToolbarItem Text="Settings" Order="Secondary" Clicked="OnToolbarItemClicked">
-      <ToolbarItem.Icon>
-        <OnPlatform x:TypeArguments="FileImageSource" WinPhone="Images/Icon1F435.png" />
-      </ToolbarItem.Icon>
-    </ToolbarItem>
-  </ContentPage.ToolbarItems>
-
-  <ContentPage Title="Seasons">
-    <StackLayout>
-      <ListView x:Name="MenuStack" ItemTapped="SeasonSelected">
-        <ListView.ItemTemplate>
-          <DataTemplate>
-            <ViewCell>
-              <StackLayout Padding="0,5,0,5">
-                <Frame HasShadow="True" OutlineColor="Silver" Padding="2.5,2.5,2.5,2.5">
-                  <StackLayout Orientation="Horizontal">
-                    <Label FontSize="Medium" Text="{Binding Name}" TextColor="{Binding accent}"></Label>
-                    <Label FontSize="Medium" Text="{Binding ServiceHymnsCount, StringFormat='({0})'}" TextColor="{Binding accent}" HorizontalOptions="StartAndExpand"></Label>
-                  </StackLayout>
-                </Frame>
-              </StackLayout>
-            </ViewCell>
-          </DataTemplate>
-        </ListView.ItemTemplate>
-      </ListView>
-    </StackLayout>
-  </ContentPage>
-  <ContentPage Title="Types">
-    <StackLayout>
-      <!--Code Here-->
-    </StackLayout>
-  </ContentPage>
-  <ContentPage Title="Tunes">
-    <StackLayout>
-      <!--Code Here-->
-    </StackLayout>
-  </ContentPage>
+    <ContentPage Title="Seasons" x:Name="Seasons">
+        <ListView x:Name="SeasonsMenu" ItemTapped="SeasonSelected">
+            <ListView.RowHeight>
+                <OnPlatform x:TypeArguments="x:Int32" iOS="40" Android="40" WinPhone="50" />
+            </ListView.RowHeight>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10,10,10,10">
+                            <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage>
+    <ContentPage Title="Types" x:Name="Types">
+        <StackLayout>
+            <ListView x:Name="TypesMenu" ItemTapped="TypeSelected">
+                <ListView.RowHeight>
+                    <OnPlatform x:TypeArguments="x:Int32" iOS="40" Android="40" WinPhone="50" />
+                </ListView.RowHeight>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10,10,10,10">
+                                <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage>
+    <ContentPage Title="Tunes" x:Name="Tunes">
+        <StackLayout>
+            <ListView x:Name="TunesMenu" ItemTapped="TuneSelected">
+                <ListView.RowHeight>
+                    <OnPlatform x:TypeArguments="x:Int32" iOS="40" Android="40" WinPhone="50" />
+                </ListView.RowHeight>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10,10,10,10">
+                                <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage>
 </TabbedPage>

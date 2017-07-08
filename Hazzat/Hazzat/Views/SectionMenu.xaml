@@ -1,6 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Hazzat.Views.SectionMenu">
-  <Label Text="Section Menu" VerticalOptions="Center" HorizontalOptions="Center" />
+      <ContentPage.ToolbarItems>
+    <ToolbarItem x:Name="TBI" Order="Primary" Clicked="OnToolbarItemClicked">
+      <ToolbarItem.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource" Android ="settings.png" iOS="settings.png" />
+      </ToolbarItem.Icon>
+    </ToolbarItem>
+  </ContentPage.ToolbarItems>
+  <AbsoluteLayout>
+    <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+      <ListView x:Name="StructList" IsGroupingEnabled="True" GroupDisplayBinding="{Binding ServiceName}" ItemTapped="ServiceHymnTapped">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <TextCell Text="{Binding Title}" />
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </StackLayout>
+    <ContentView x:Name="overlay" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+      <ActivityIndicator x:Name="activityIndicator" IsRunning="True" IsVisible="True" VerticalOptions="Center" />
+    </ContentView>
+  </AbsoluteLayout>
 </ContentPage>
