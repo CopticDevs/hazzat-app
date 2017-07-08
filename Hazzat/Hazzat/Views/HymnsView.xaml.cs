@@ -8,9 +8,9 @@ using Xamarin.Forms;
 
 namespace Hazzat.Views
 {
-    public partial class SectionMenu : ContentPage
+    public partial class HymnsView : ContentPage
     {
-        public SectionMenu()
+        public HymnsView()
         {
             InitializeComponent();
         }
