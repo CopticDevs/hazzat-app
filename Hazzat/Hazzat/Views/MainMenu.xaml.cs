@@ -1,5 +1,6 @@
 ﻿using hazzat.com;
-using Hazzat.HazzatService;
+using Hazzat.Views;
+using HazzatService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,45 +9,21 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
-namespace Hazzat.Views
+namespace Hazzat
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainMenu : TabbedPage
     {
         public MainMenu()
         {
             InitializeComponent();
 
-            switch (Device.RuntimePlatform)
-            {
-                case Device.iOS:
-                    Icon = "menu-1.png";
-                    Seasons.Icon = "worldwide.png";
-                    Tunes.Icon = "music-player-1";
-                    Types.Icon = "windows-1";
-					Seasons.Padding = new Thickness(0, 24.5, 0, 0);
-                    Types.Padding = new Thickness(0, 24.5, 0, 0);
-                    Tunes.Padding = new Thickness(0, 24.5, 0, 0);
-                    break;
-            }
-
-            SubscribeMessages();
+            SubscribeMessage();
 
             App.NameViewModel.createSeasonsViewModel(true);
-            App.NameViewModel.GetHymnsByType();
-            App.NameViewModel.GetHymnsByTune();
         }
 
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-
-            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "Done");
-        }
-
-        private void SubscribeMessages()
+        private void SubscribeMessage()
         {
             MessagingCenter.Subscribe<ByNameMainViewModel>(this, "Done", (sender) =>
             {
@@ -54,54 +31,18 @@ namespace Hazzat.Views
                 {
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        SeasonsMenu.ItemsSource = App.NameViewModel.Seasons;
-                    });
-                }
-            });
-
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithTypeList", (sender) =>
-            {
-                if (App.NameViewModel?.TypeList != null)
-                {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        TypesMenu.ItemsSource = App.NameViewModel.TypeList;
-                    });
-                }
-            });
-
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithTuneList", (sender) =>
-            {
-                if (App.NameViewModel?.TuneList != null)
-                {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        TunesMenu.ItemsSource = App.NameViewModel.TuneList;
+                        MenuStack.ItemsSource = App.NameViewModel.Seasons;
                     });
                 }
             });
         }
 
-        protected void SeasonSelected(object sender, ItemTappedEventArgs e)
-        {
-            SeasonInfo item = (SeasonInfo)e.Item;
-            MessagingCenter.Send(this,"MenuItemSelected");
-            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Season);
+        void OnToolbarItemClicked(object sender, EventArgs args) { ToolbarItem toolbarItem = (ToolbarItem)sender; DisplayAlert("Yo!","ToolbarItem '" + toolbarItem.Text + "' clicked","okay"); }
+
+        public async void SeasonSelected(object sender, ItemTappedEventArgs e) {
+            await Navigation.PushAsync(new SectionMenu());
         }
 
-        protected void TypeSelected(object sender, ItemTappedEventArgs e)
-        {
-            //Unfortunate type name collision
-            hazzat.com.TypeInfo item = (hazzat.com.TypeInfo)e.Item;
-            MessagingCenter.Send(this, "MenuItemSelected");
-            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Type);
-        }
-        protected void TuneSelected(object sender, ItemTappedEventArgs e)
-        {
-            TuneInfo item = (TuneInfo)e.Item;
-            MessagingCenter.Send(this, "MenuItemSelected");
-            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Tune);
-        }
     }
 }
 

@@ -1,7 +1,7 @@
 ﻿<Application
-    x:Class="Hazzat.UWP.App"
+    x:Class="Hazzat.Windows.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Hazzat.UWP">
+    xmlns:local="using:Hazzat.Windows">
 
 </Application>
