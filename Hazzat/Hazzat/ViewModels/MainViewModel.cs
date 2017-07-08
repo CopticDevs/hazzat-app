@@ -50,7 +50,7 @@ namespace Hazzat.ViewModels
 
         private HazzatController hazzatController = new HazzatController();
 
-        public void createSeasonsViewModel(bool isDateSpecific)
+        public void GetSeasons(bool isDateSpecific)
         {
             App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
@@ -74,7 +74,7 @@ namespace Hazzat.ViewModels
             App.IsLoaded = true;
         }
 
-        public void createViewModelBySeason(int Season)
+        public void GetSeasonServices(int seasonId)
         {
             App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
@@ -86,7 +86,7 @@ namespace Hazzat.ViewModels
                 {
                     HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
                     client.GetSeasonServicesCompleted += new EventHandler<GetSeasonServicesCompletedEventArgs>(GetCompletedStructBySeason);
-                    client.GetSeasonServicesAsync(Season);
+                    client.GetSeasonServicesAsync(seasonId);
                 }
                 testConnection.Dispose();
 

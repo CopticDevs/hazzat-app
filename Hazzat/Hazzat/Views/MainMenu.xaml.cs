@@ -34,7 +34,7 @@ namespace Hazzat.Views
 
             SubscribeMessages();
 
-            App.NameViewModel.createSeasonsViewModel(true);
+            App.NameViewModel.GetSeasons(true);
             App.NameViewModel.GetHymnsByType();
             App.NameViewModel.GetHymnsByTune();
         }

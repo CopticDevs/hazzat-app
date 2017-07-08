@@ -49,7 +49,7 @@ namespace Hazzat.Views
             switch (navType)
             {
                 case NavigationType.Season:
-                    App.NameViewModel.createViewModelBySeason(ItemId);
+                    App.NameViewModel.GetSeasonServices(ItemId);
                     break;
                 case NavigationType.Type:
                     App.NameViewModel.GetSeasonsByType(ItemId);
