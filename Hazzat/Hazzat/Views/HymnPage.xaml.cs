@@ -203,7 +203,7 @@ Hymn text Styles
 
             MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithHymnText", (sender) =>
             {
-                if (App.NameViewModel?.HymnContentInfo?.FirstOrDefault() != null)
+                if (App.NameViewModel?.TextHymnContentInfo?.FirstOrDefault() != null)
                 {
                     HtmlWebViewSource source = new HtmlWebViewSource();
                     var html = new StringBuilder();
@@ -212,7 +212,7 @@ Hymn text Styles
                     //Append Coptic Font css
                     html.Append(HtmlHeaderFormatString);
 
-                    foreach (var hymnContent in App.NameViewModel.HymnContentInfo)
+                    foreach (var hymnContent in App.NameViewModel.TextHymnContentInfo)
                     {
                         // Hymn title
                         html.Append($"<font class='HymnTitle'>{hymnContent.Title}</font><br /><br />");

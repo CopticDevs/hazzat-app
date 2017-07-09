@@ -234,7 +234,7 @@ namespace Hazzat.Views
 
             HymnPage.SubscribeMessage();
 
-            App.NameViewModel.CreateHymnTextViewModel(item.ItemId);
+            App.NameViewModel.GetHymnContent(item.ItemId);
         }
 
 		protected async Task OnToolbarItemClicked(object sender, EventArgs args)

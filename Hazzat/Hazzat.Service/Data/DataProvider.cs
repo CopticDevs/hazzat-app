@@ -26,8 +26,7 @@ namespace Hazzat.Service.Data
         {
             if (provider == null)
             {
-                // TODO: get actual assembly name
-                const string assembly = "Hazzat.Modules.Hymns.Data.SqlDataprovider,Hazzat.Modules.Hymns";
+                const string assembly = "Hazzat.Service.Providers.DataProviders.WebServiceProvider.WebServiceProvider,Hazzat.Service";
                 Type objectType = Type.GetType(assembly, true);
 
                 provider = (DataProvider)Activator.CreateInstance(objectType);
@@ -43,6 +42,9 @@ namespace Hazzat.Service.Data
         public abstract void GetSeasons(bool isDateSpecific, Action<object, GetSeasonsCompletedEventArgs> callback);
         public abstract void GetSeasonServices(int seasonId, Action<object, GetSeasonServicesCompletedEventArgs> callback);
         public abstract void GetSeasonServiceHymns(int structureId, Action<object, GetSeasonServiceHymnsCompletedEventArgs> callback);
+        public abstract void GetSeasonServiceHymnText(int itemId, Action<object, GetSeasonServiceHymnTextCompletedEventArgs> callback);
+        public abstract void GetSeasonServiceHymnHazzat(int itemId, Action<object, GetSeasonServiceHymnHazzatCompletedEventArgs> callback);
+        public abstract void GetSeasonServiceHymnVerticalHazzat(int itemId, Action<object, GetSeasonServiceHymnVerticalHazzatCompletedEventArgs> callback);
 
         #endregion
     }

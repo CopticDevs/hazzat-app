@@ -37,7 +37,7 @@ namespace Hazzat.ViewModels
         /// </summary>
         public SeasonInfo[] Seasons { get; private set; }
         public StructureInfo[] HymnsBySeason { get; private set; }
-        public ServiceHymnsContentInfo[] HymnContentInfo { get; private set; }
+        public ServiceHymnsContentInfo[] TextHymnContentInfo { get; private set; }
         public ServiceHymnsContentInfo[] HazzatHymnContentInfo { get; private set; }
         public ServiceHymnsContentInfo[] VerticalHazzatHymnContent { get; private set; }
 
@@ -93,49 +93,30 @@ namespace Hazzat.ViewModels
             hazzatController.GetSeasonServiceHymns(structureId, GetCompletedHymnsBySeason);
         }
 
-        public void CreateHymnTextViewModel(int itemId)
+        public void GetHymnContent(int itemId)
         {
             App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
-            try
-            {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-
-                    client.GetSeasonServiceHymnTextCompleted += new EventHandler<GetSeasonServiceHymnTextCompletedEventArgs>(client_GetCompletedHymnInfo);
-                    client.GetSeasonServiceHymnHazzatCompleted += new EventHandler<GetSeasonServiceHymnHazzatCompletedEventArgs>(client_GetCompletedHymnHazzat);
-                    client.GetSeasonServiceHymnVerticalHazzatCompleted += new EventHandler<GetSeasonServiceHymnVerticalHazzatCompletedEventArgs>(client_GetCompletedHymnVerticalHazzat);
-
-                    client.GetSeasonServiceHymnTextAsync(itemId);
-                    client.GetSeasonServiceHymnHazzatAsync(itemId);
-                    client.GetSeasonServiceHymnVerticalHazzatAsync(itemId);
-                }
-            }
-
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+            hazzatController.GetSeasonServiceHymnText(itemId, OnGetSeasonServiceHymnTextCompleted);
+            hazzatController.GetSeasonServiceHymnHazzat(itemId, OnGetSeasonServiceHymnHazzatCompleted);
+            hazzatController.GetSeasonServiceHymnVerticalHazzat(itemId, OnGetSeasonServiceHymnVerticalHazzatCompleted);
         }
 
-        public void client_GetCompletedHymnInfo(object sender, GetSeasonServiceHymnTextCompletedEventArgs e)
+        public void OnGetSeasonServiceHymnTextCompleted(object sender, GetSeasonServiceHymnTextCompletedEventArgs e)
         {
-            HymnContentInfo = e.Result;
+            TextHymnContentInfo = e.Result;
             MessagingCenter.Send(this, "DoneWithHymnText");
             App.IsLoaded = true;
         }
 
-        public void client_GetCompletedHymnHazzat(object sender, GetSeasonServiceHymnHazzatCompletedEventArgs e)
+        public void OnGetSeasonServiceHymnHazzatCompleted(object sender, GetSeasonServiceHymnHazzatCompletedEventArgs e)
         {
             HazzatHymnContentInfo = e.Result;
             MessagingCenter.Send(this, "DoneWithHazzat");
             App.IsLoaded = true;
         }
 
-        private void client_GetCompletedHymnVerticalHazzat(object sender, GetSeasonServiceHymnVerticalHazzatCompletedEventArgs e)
+        private void OnGetSeasonServiceHymnVerticalHazzatCompleted(object sender, GetSeasonServiceHymnVerticalHazzatCompletedEventArgs e)
         {
             VerticalHazzatHymnContent = e.Result;
             MessagingCenter.Send(this, "DoneWithVerticalHazzat");

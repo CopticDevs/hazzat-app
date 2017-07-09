@@ -24,15 +24,50 @@ namespace Hazzat.Service
         /// Gets the services list in the season, then calls the callback method upon completion.
         /// </summary>
         /// <param name="seasonId">The season id to retrieve its services.</param>
-        /// <param name="callback">Call backc method upon completion</param>
+        /// <param name="callback">Call back method upon completion</param>
         public void GetSeasonServices(int seasonId, Action<object, GetSeasonServicesCompletedEventArgs> callback)
         {
             DataProvider.Instance().GetSeasonServices(seasonId, callback);
         }
 
+        /// <summary>
+        /// Gets the list of hymns in a particular Structure (Service in a Season), then calls the callback method upon completion.
+        /// </summary>
+        /// <param name="structureId">The structure id to retrieve its hymns.</param>
+        /// <param name="callback">Call back method upon completion.</param>
         public void GetSeasonServiceHymns(int structureId, Action<object, GetSeasonServiceHymnsCompletedEventArgs> callback)
         {
             DataProvider.Instance().GetSeasonServiceHymns(structureId, callback);
+        }
+
+        /// <summary>
+        /// Gets the text associated with a hymn, then calls the callback method upon completion.
+        /// </summary>
+        /// <param name="itemId">The hymn id.</param>
+        /// <param name="callback">Call back method upon completion.</param>
+        public void GetSeasonServiceHymnText(int itemId, Action<object, GetSeasonServiceHymnTextCompletedEventArgs> callback)
+        {
+            DataProvider.Instance().GetSeasonServiceHymnText(itemId, callback);
+        }
+
+        /// <summary>
+        /// Gets the hazzat associated with a hymn, then calls the callback method upon completion.
+        /// </summary>
+        /// <param name="itemId">The hymn id.</param>
+        /// <param name="callback">Call back method upon completion.</param>
+        public void GetSeasonServiceHymnHazzat(int itemId, Action<object, GetSeasonServiceHymnHazzatCompletedEventArgs> callback)
+        {
+            DataProvider.Instance().GetSeasonServiceHymnHazzat(itemId, callback);
+        }
+
+        /// <summary>
+        /// Gets the vertical hazzat associated with a hymn, then calls the callback method upon completion.
+        /// </summary>
+        /// <param name="itemId">The hymn id.</param>
+        /// <param name="callback">Call back method upon completion.</param>
+        public void GetSeasonServiceHymnVerticalHazzat(int itemId, Action<object, GetSeasonServiceHymnVerticalHazzatCompletedEventArgs> callback)
+        {
+            DataProvider.Instance().GetSeasonServiceHymnVerticalHazzat(itemId, callback);
         }
     }
 }
