@@ -41,6 +41,8 @@ namespace Hazzat.Service.Data
         #region Abstract Methods
 
         public abstract void GetSeasons(bool isDateSpecific, Action<object, GetSeasonsCompletedEventArgs> callback);
+        public abstract void GetSeasonServices(int seasonId, Action<object, GetSeasonServicesCompletedEventArgs> callback);
+        public abstract void GetSeasonServiceHymns(int structureId, Action<object, GetSeasonServiceHymnsCompletedEventArgs> callback);
 
         #endregion
     }

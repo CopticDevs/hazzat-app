@@ -37,7 +37,6 @@ namespace Hazzat.ViewModels
         /// </summary>
         public SeasonInfo[] Seasons { get; private set; }
         public StructureInfo[] HymnsBySeason { get; private set; }
-        public ServiceHymnInfo[] HazzatHymns { get; private set; }
         public ServiceHymnsContentInfo[] HymnContentInfo { get; private set; }
         public ServiceHymnsContentInfo[] HazzatHymnContentInfo { get; private set; }
         public ServiceHymnsContentInfo[] VerticalHazzatHymnContent { get; private set; }
@@ -54,10 +53,10 @@ namespace Hazzat.ViewModels
         {
             App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
-            hazzatController.GetSeasons(isDateSpecific, onGetSeasonsCompleted);
+            hazzatController.GetSeasons(isDateSpecific, OnGetSeasonsCompleted);
         }
 
-        public void onGetSeasonsCompleted(object sender, GetSeasonsCompletedEventArgs e)
+        public void OnGetSeasonsCompleted(object sender, GetSeasonsCompletedEventArgs e)
         {
             foreach (var item in e.Result)
             {
@@ -66,7 +65,6 @@ namespace Hazzat.ViewModels
                     item.Name = $"{item.Name} ({item.ServiceHymnsCount})";
                 }
             }
-
 
             Seasons = e.Result;
 
@@ -78,62 +76,21 @@ namespace Hazzat.ViewModels
         {
             App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
-            try
-            {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-                    client.GetSeasonServicesCompleted += new EventHandler<GetSeasonServicesCompletedEventArgs>(GetCompletedStructBySeason);
-                    client.GetSeasonServicesAsync(seasonId);
-                }
-                testConnection.Dispose();
-
-            }
-
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+            hazzatController.GetSeasonServices(seasonId, OnGetSeasonServicesCompleted);
         }
 
-        public void GetCompletedStructBySeason(object sender, GetSeasonServicesCompletedEventArgs e)
+        public void OnGetSeasonServicesCompleted(object sender, GetSeasonServicesCompletedEventArgs e)
         {
             HymnsBySeason = e.Result;
             MessagingCenter.Send(this, "DoneSeason");
             App.IsLoaded = true;
         }
 
-        public void FetchServiceHymns(int StructId, Action<object, GetSeasonServiceHymnsCompletedEventArgs> GetCompletedHymnsBySeason)
+        public void GetSeasonServiceHymns(int structureId, Action<object, GetSeasonServiceHymnsCompletedEventArgs> GetCompletedHymnsBySeason)
         {
             App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
-            try
-            {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-                    client.GetSeasonServiceHymnsCompleted += new EventHandler<GetSeasonServiceHymnsCompletedEventArgs>(GetCompletedHymnsBySeason);
-                    client.GetSeasonServiceHymnsAsync(StructId);
-                }
-                testConnection.Dispose();
-
-            }
-
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
-
-        public void GetCompletedHymnsBySeason(object sender, GetSeasonServiceHymnsCompletedEventArgs e)
-        {
-            HazzatHymns = e.Result;
-            MessagingCenter.Send(this, "Done");
-            App.IsLoaded = true;
+            hazzatController.GetSeasonServiceHymns(structureId, GetCompletedHymnsBySeason);
         }
 
         public void CreateHymnTextViewModel(int itemId)
@@ -379,7 +336,5 @@ namespace Hazzat.ViewModels
 
 
         #endregion
-
     }
-
 }

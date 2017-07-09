@@ -45,8 +45,52 @@ namespace Hazzat.Service.Providers.DataProviders.WebServiceProvider
                 {
                     client.GetSeasonsAsync(isDateSpecific);
                 }
-                testConnection.Dispose();
 
+                testConnection.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public override void GetSeasonServices(int seasonId, Action<object, GetSeasonServicesCompletedEventArgs> callback)
+        {
+            HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+            client.GetSeasonServicesCompleted += new EventHandler<GetSeasonServicesCompletedEventArgs>(callback);
+
+            try
+            {
+                HttpClient testConnection = new HttpClient();
+
+                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
+                {
+                    client.GetSeasonServicesAsync(seasonId);
+                }
+
+                testConnection.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public override void GetSeasonServiceHymns(int structureId, Action<object, GetSeasonServiceHymnsCompletedEventArgs> callback)
+        {
+            HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+            client.GetSeasonServiceHymnsCompleted += new EventHandler<GetSeasonServiceHymnsCompletedEventArgs>(callback);
+
+            try
+            {
+                HttpClient testConnection = new HttpClient();
+
+                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
+                {
+                    client.GetSeasonServiceHymnsAsync(structureId);
+                }
+
+                testConnection.Dispose();
             }
             catch (Exception ex)
             {
