@@ -1,11 +1,5 @@
-﻿using hazzat.com;
+﻿using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
 using Hazzat.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -91,8 +85,7 @@ namespace Hazzat.Views
 
         protected void TypeSelected(object sender, ItemTappedEventArgs e)
         {
-            //Unfortunate type name collision
-            hazzat.com.TypeInfo item = (hazzat.com.TypeInfo)e.Item;
+            TypeInfo item = (TypeInfo)e.Item;
             MessagingCenter.Send(this, "MenuItemSelected");
             MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Type);
         }

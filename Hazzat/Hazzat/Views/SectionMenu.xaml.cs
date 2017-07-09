@@ -1,5 +1,4 @@
-﻿using hazzat.com;
-using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
+﻿using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
 using Hazzat.ViewModels;
 using System;
 using System.Collections.Generic;

@@ -1,37 +1,12 @@
-﻿using hazzat.com;
-using Hazzat.Service;
+﻿using Hazzat.Service;
+using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.Http;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Hazzat.ViewModels
 {
     public class MainViewModel
     {
-        private const string HazzatServiceEndpoint = "http://hazzat.com/DesktopModules/Hymns/WebService/HazzatWebService.asmx";
-        private const int HazzatServiceMaxReceivedMessageSize = 2147483647;
-        private const int HazzatServiceMaxBufferPoolSize = 2147483647;
-        private const int HazzatServiceMaxBufferSize = 2147483647;
-
-        private BasicHttpBinding HazzatServiceBinding
-        {
-            get
-            {
-                return new BasicHttpBinding()
-                {
-                    MaxReceivedMessageSize = HazzatServiceMaxReceivedMessageSize,
-                    MaxBufferSize = HazzatServiceMaxBufferSize,
-                    MaxBufferPoolSize = HazzatServiceMaxBufferPoolSize
-                };
-            }
-        }
-
         /// <summary>
         /// A collection of hazzat.com objects
         /// </summary>

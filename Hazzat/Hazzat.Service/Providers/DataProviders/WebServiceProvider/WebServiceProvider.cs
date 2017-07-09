@@ -1,13 +1,8 @@
-﻿using hazzat.com;
-using Hazzat.Service.Data;
+﻿using Hazzat.Service.Data;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hazzat.Service.Providers.DataProviders.WebServiceProvider
 {
