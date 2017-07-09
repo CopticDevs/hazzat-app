@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hazzat.Service.Providers.DataProviders.WebServiceProvider
 {
     public class WebServiceHelper
     {
-        public static void ExecuteActionAsync()
+        public static void Execute(Action action)
         {
             try
             {
@@ -18,10 +14,10 @@ namespace Hazzat.Service.Providers.DataProviders.WebServiceProvider
 
                 if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
                 {
-                    //client.GetSeasonsAsync(isDateSpecific);
+                    action();
                 }
-                testConnection.Dispose();
 
+                testConnection.Dispose();
             }
             catch (Exception ex)
             {
