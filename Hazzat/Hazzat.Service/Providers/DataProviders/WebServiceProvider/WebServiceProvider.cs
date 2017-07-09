@@ -246,5 +246,49 @@ namespace Hazzat.Service.Providers.DataProviders.WebServiceProvider
                 Debug.WriteLine(ex.Message);
             }
         }
+
+        public override void GetTuneList(Action<object, GetTuneListCompletedEventArgs> callback)
+        {
+            HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+            client.GetTuneListCompleted += new EventHandler<GetTuneListCompletedEventArgs>(callback);
+
+            try
+            {
+                HttpClient testConnection = new HttpClient();
+
+                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
+                {
+                    client.GetTuneListAsync();
+                }
+
+                testConnection.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public override void GetSeasonsByTuneId(int tuneId, Action<object, GetSeasonsByTuneIDCompletedEventArgs> callback)
+        {
+            HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+            client.GetSeasonsByTuneIDCompleted += new EventHandler<GetSeasonsByTuneIDCompletedEventArgs>(callback);
+
+            try
+            {
+                HttpClient testConnection = new HttpClient();
+
+                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
+                {
+                    client.GetSeasonsByTuneIDAsync(tuneId);
+                }
+
+                testConnection.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
     }
 }

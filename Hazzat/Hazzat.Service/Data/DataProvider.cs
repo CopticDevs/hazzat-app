@@ -49,6 +49,8 @@ namespace Hazzat.Service.Data
         public abstract void GetSeasonsByTypeId(int typeId, Action<object, GetSeasonsByTypeIDCompletedEventArgs> callback);
         public abstract void GetServiceHymnListBySeasonIdAndTypeId(int seasonId, int typeId, Action<object, GetServiceHymnListBySeasonIdAndTypeIdCompletedEventArgs> callback);
         public abstract void GetServiceHymnListBySeasonIdAndTuneId(int seasonId, int tuneId, Action<object, GetServiceHymnListBySeasonIdAndTuneIdCompletedEventArgs> callback);
+        public abstract void GetTuneList(Action<object, GetTuneListCompletedEventArgs> callback);
+        public abstract void GetSeasonsByTuneId(int tuneId, Action<object, GetSeasonsByTuneIDCompletedEventArgs> callback);
 
         #endregion
     }

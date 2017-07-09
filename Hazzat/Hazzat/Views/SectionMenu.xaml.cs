@@ -56,7 +56,7 @@ namespace Hazzat.Views
                     itemId = ItemId;
                     break;
                 case NavigationType.Tune:
-                    App.NameViewModel.ByTuneGetSeasons(ItemId);
+                    App.NameViewModel.GetSeasonsByTuneId(ItemId);
                     itemId = ItemId;
                     break;
                 default:

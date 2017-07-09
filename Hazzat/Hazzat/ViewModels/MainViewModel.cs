@@ -177,31 +177,14 @@ namespace Hazzat.ViewModels
         #endregion
 
         #region byTune
-        public void GetHymnsByTune()
+        public void GetTuneList()
         {
             App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
-            try
-            {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-                    client.GetTuneListCompleted += new EventHandler<GetTuneListCompletedEventArgs>(GetCompletedTuneList);
-                    client.GetTuneListAsync();
-                }
-                testConnection.Dispose();
-
-            }
-
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+            hazzatController.GetTuneList(OnGetTuneListCompleted);
         }
 
-        private void GetCompletedTuneList(object sender, GetTuneListCompletedEventArgs e)
+        private void OnGetTuneListCompleted(object sender, GetTuneListCompletedEventArgs e)
         {
             foreach (var item in e.Result)
             {
@@ -216,37 +199,19 @@ namespace Hazzat.ViewModels
             App.IsLoaded = true;
         }
 
-        public void ByTuneGetSeasons(int tuneId)
+        public void GetSeasonsByTuneId(int tuneId)
         {
             App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
-            try
-            {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-                    client.GetSeasonsByTuneIDCompleted += new EventHandler<GetSeasonsByTuneIDCompletedEventArgs>(client_ByTuneGetSeasons);
-                    client.GetSeasonsByTuneIDAsync(tuneId);
-                }
-                testConnection.Dispose();
-            }
-
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+            hazzatController.GetSeasonsByTuneId(tuneId, OnGetSeasonsByTuneIdCompleted);
         }
 
-        private void client_ByTuneGetSeasons(object sender, GetSeasonsByTuneIDCompletedEventArgs e)
+        private void OnGetSeasonsByTuneIdCompleted(object sender, GetSeasonsByTuneIDCompletedEventArgs e)
         {
             TuneSeasons = e.Result;
             MessagingCenter.Send(this, "DoneWithSeasonsListByTune");
             App.IsLoaded = true;
         }
-
-
 
         #endregion
     }

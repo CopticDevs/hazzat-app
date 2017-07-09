@@ -36,7 +36,7 @@ namespace Hazzat.Views
 
             App.NameViewModel.GetSeasons(true);
             App.NameViewModel.GetTypeList();
-            App.NameViewModel.GetHymnsByTune();
+            App.NameViewModel.GetTuneList();
         }
 
         protected override void OnDisappearing()
