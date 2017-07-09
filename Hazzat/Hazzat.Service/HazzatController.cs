@@ -78,5 +78,37 @@ namespace Hazzat.Service
         {
             DataProvider.Instance().GetTypeList(callback);
         }
+
+        /// <summary>
+        /// Gets the list of seasons containing hymns of the given type id, then calls the callback method upon completion.
+        /// </summary>
+        /// <param name="typeId">The type id.</param>
+        /// <param name="callback">Call back method upon completion.</param>
+        public void GetSeasonsByTypeId(int typeId, Action<object, GetSeasonsByTypeIDCompletedEventArgs> callback)
+        {
+            DataProvider.Instance().GetSeasonsByTypeId(typeId, callback);
+        }
+
+        /// <summary>
+        /// Gets the list of hymns in a given season that match a given type id, then calls the callback method upon completion.
+        /// </summary>
+        /// <param name="seasonId">The season id.</param>
+        /// <param name="typeId">The hymn type id.</param>
+        /// <param name="callback">Call back method upon completion.</param>
+        public void GetServiceHymnListBySeasonIdAndTypeId(int seasonId, int typeId, Action<object, GetServiceHymnListBySeasonIdAndTypeIdCompletedEventArgs> callback)
+        {
+            DataProvider.Instance().GetServiceHymnListBySeasonIdAndTypeId(seasonId, typeId, callback);
+        }
+
+        /// <summary>
+        /// Gets the list of hymns in a given season that match a given tune id, then calls the callback method upon completion.
+        /// </summary>
+        /// <param name="seasonId">The season id.</param>
+        /// <param name="tuneId">The tune id.</param>
+        /// <param name="callback">Call back method upon completion.</param>
+        public void GetServiceHymnListBySeasonIdAndTuneId(int seasonId, int tuneId, Action<object, GetServiceHymnListBySeasonIdAndTuneIdCompletedEventArgs> callback)
+        {
+            DataProvider.Instance().GetServiceHymnListBySeasonIdAndTuneId(seasonId, tuneId, callback);
+        }
     }
 }

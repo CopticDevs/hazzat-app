@@ -52,7 +52,7 @@ namespace Hazzat.Views
                     App.NameViewModel.GetSeasonServices(ItemId);
                     break;
                 case NavigationType.Type:
-                    App.NameViewModel.GetSeasonsByType(ItemId);
+                    App.NameViewModel.GetSeasonsByTypeId(ItemId);
                     itemId = ItemId;
                     break;
                 case NavigationType.Tune:
