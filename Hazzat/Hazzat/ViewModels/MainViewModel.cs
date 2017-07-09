@@ -124,31 +124,14 @@ namespace Hazzat.ViewModels
         }
 
         #region byType
-        public void GetHymnsByType()
+        public void GetTypeList()
         {
             App.IsLoaded = false;
             MessagingCenter.Send(this, "Loading");
-            try
-            {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-                    client.GetTypeListCompleted += new EventHandler<GetTypeListCompletedEventArgs>(GetCompletedTypeList);
-                    client.GetTypeListAsync();
-                }
-                testConnection.Dispose();
-
-            }
-
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+            hazzatController.GetTypeList(OnGetTypeListCompleted);
         }
 
-        private void GetCompletedTypeList(object sender, GetTypeListCompletedEventArgs e)
+        private void OnGetTypeListCompleted(object sender, GetTypeListCompletedEventArgs e)
         {
             foreach (var item in e.Result)
             {

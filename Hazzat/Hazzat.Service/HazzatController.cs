@@ -69,5 +69,14 @@ namespace Hazzat.Service
         {
             DataProvider.Instance().GetSeasonServiceHymnVerticalHazzat(itemId, callback);
         }
+
+        /// <summary>
+        /// Gets the list of hymn types, then calls the callback method upon completion.
+        /// </summary>
+        /// <param name="callback">Call back method upon completion.</param>
+        public void GetTypeList(Action<object, GetTypeListCompletedEventArgs> callback)
+        {
+            DataProvider.Instance().GetTypeList(callback);
+        }
     }
 }

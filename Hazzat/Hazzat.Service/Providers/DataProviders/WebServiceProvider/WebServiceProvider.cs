@@ -157,5 +157,28 @@ namespace Hazzat.Service.Providers.DataProviders.WebServiceProvider
                 Debug.WriteLine(ex.Message);
             }
         }
+
+        public override void GetTypeList(Action<object, GetTypeListCompletedEventArgs> callback)
+        {
+            HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+            client.GetTypeListCompleted += new EventHandler<GetTypeListCompletedEventArgs>(callback);
+
+            try
+            {
+                HttpClient testConnection = new HttpClient();
+
+                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
+                {
+                    client.GetTypeListAsync();
+                }
+
+                testConnection.Dispose();
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
     }
 }

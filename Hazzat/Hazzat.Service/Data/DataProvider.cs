@@ -45,6 +45,7 @@ namespace Hazzat.Service.Data
         public abstract void GetSeasonServiceHymnText(int itemId, Action<object, GetSeasonServiceHymnTextCompletedEventArgs> callback);
         public abstract void GetSeasonServiceHymnHazzat(int itemId, Action<object, GetSeasonServiceHymnHazzatCompletedEventArgs> callback);
         public abstract void GetSeasonServiceHymnVerticalHazzat(int itemId, Action<object, GetSeasonServiceHymnVerticalHazzatCompletedEventArgs> callback);
+        public abstract void GetTypeList(Action<object, GetTypeListCompletedEventArgs> callback);
 
         #endregion
     }
