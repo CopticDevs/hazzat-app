@@ -1,11 +1,5 @@
-﻿using hazzat.com;
-using Hazzat.HazzatService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
+using Hazzat.ViewModels;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -34,21 +28,21 @@ namespace Hazzat.Views
 
             SubscribeMessages();
 
-            App.NameViewModel.createSeasonsViewModel(true);
-            App.NameViewModel.GetHymnsByType();
-            App.NameViewModel.GetHymnsByTune();
+            App.NameViewModel.GetSeasons(true);
+            App.NameViewModel.GetTypeList();
+            App.NameViewModel.GetTuneList();
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
 
-            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "Done");
+            MessagingCenter.Unsubscribe<MainViewModel>(this, "Done");
         }
 
         private void SubscribeMessages()
         {
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "Done", (sender) =>
+            MessagingCenter.Subscribe<MainViewModel>(this, "Done", (sender) =>
             {
                 if (App.NameViewModel?.Seasons != null)
                 {
@@ -59,7 +53,7 @@ namespace Hazzat.Views
                 }
             });
 
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithTypeList", (sender) =>
+            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithTypeList", (sender) =>
             {
                 if (App.NameViewModel?.TypeList != null)
                 {
@@ -70,7 +64,7 @@ namespace Hazzat.Views
                 }
             });
 
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithTuneList", (sender) =>
+            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithTuneList", (sender) =>
             {
                 if (App.NameViewModel?.TuneList != null)
                 {
@@ -91,8 +85,7 @@ namespace Hazzat.Views
 
         protected void TypeSelected(object sender, ItemTappedEventArgs e)
         {
-            //Unfortunate type name collision
-            hazzat.com.TypeInfo item = (hazzat.com.TypeInfo)e.Item;
+            TypeInfo item = (TypeInfo)e.Item;
             MessagingCenter.Send(this, "MenuItemSelected");
             MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Type);
         }

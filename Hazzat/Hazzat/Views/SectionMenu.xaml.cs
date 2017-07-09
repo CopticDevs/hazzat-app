@@ -1,5 +1,5 @@
-﻿using hazzat.com;
-using Hazzat.HazzatService;
+﻿using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
+using Hazzat.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -48,14 +48,14 @@ namespace Hazzat.Views
             switch (navType)
             {
                 case NavigationType.Season:
-                    App.NameViewModel.createViewModelBySeason(ItemId);
+                    App.NameViewModel.GetSeasonServices(ItemId);
                     break;
                 case NavigationType.Type:
-                    App.NameViewModel.GetSeasonsByType(ItemId);
+                    App.NameViewModel.GetSeasonsByTypeId(ItemId);
                     itemId = ItemId;
                     break;
                 case NavigationType.Tune:
-                    App.NameViewModel.ByTuneGetSeasons(ItemId);
+                    App.NameViewModel.GetSeasonsByTuneId(ItemId);
                     itemId = ItemId;
                     break;
                 default:
@@ -74,12 +74,12 @@ namespace Hazzat.Views
         {
             base.OnDisappearing();
 
-            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "DoneSeason");
+            MessagingCenter.Unsubscribe<MainViewModel>(this, "DoneSeason");
         }
 
         public void SubscribeMessages()
         {
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneSeason", (sender) =>
+            MessagingCenter.Subscribe<MainViewModel>(this, "DoneSeason", (sender) =>
             {
                 if (App.NameViewModel?.HymnsBySeason != null)
                 {
@@ -92,7 +92,7 @@ namespace Hazzat.Views
                 }
             });
 
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithSeasonsListByType", (sender) =>
+            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithSeasonsListByType", (sender) =>
             {
                 if (App.NameViewModel?.TypeSeasons != null)
                 {
@@ -105,7 +105,7 @@ namespace Hazzat.Views
                 }
             });
 
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithSeasonsListByTune", (sender) =>
+            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithSeasonsListByTune", (sender) =>
             {
                 if (App.NameViewModel?.TuneSeasons != null)
                 {
@@ -129,7 +129,7 @@ namespace Hazzat.Views
                     StructureId = structInfo.ItemId
                 });
 
-                App.NameViewModel.FetchServiceHymns(structInfo.ItemId, GetCompletedHymnsBySeason);
+                App.NameViewModel.GetSeasonServiceHymns(structInfo.ItemId, GetCompletedHymnsBySeason);
             }
         }
 
@@ -233,7 +233,7 @@ namespace Hazzat.Views
 
             HymnPage.SubscribeMessage();
 
-            App.NameViewModel.CreateHymnTextViewModel(item.ItemId);
+            App.NameViewModel.GetHymnContent(item.ItemId);
         }
 
 		protected async Task OnToolbarItemClicked(object sender, EventArgs args)

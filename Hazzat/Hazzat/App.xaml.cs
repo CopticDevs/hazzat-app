@@ -1,4 +1,4 @@
-﻿using Hazzat.HazzatService;
+﻿using Hazzat.ViewModels;
 using Hazzat.Views;
 using NodaTime;
 using System;
@@ -38,14 +38,14 @@ namespace Hazzat
 
         private static Dictionary<string, Dictionary<string, List<string>>> AppDataCache { get; set; }    // Designed for BySeasons ViewModel
 
-        private static ByNameMainViewModel nameViewModel = null;
-        internal static ByNameMainViewModel NameViewModel
+        private static MainViewModel nameViewModel = null;
+        internal static MainViewModel NameViewModel
         {
             get
             {
                 if (nameViewModel == null)
                 {
-                    nameViewModel = new ByNameMainViewModel();
+                    nameViewModel = new MainViewModel();
                 }
                 return nameViewModel;
             }

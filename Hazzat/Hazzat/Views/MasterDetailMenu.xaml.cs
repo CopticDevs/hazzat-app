@@ -1,12 +1,6 @@
-﻿using hazzat.com;
-using Hazzat.HazzatService;
+﻿using Hazzat.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -24,20 +18,20 @@ namespace Hazzat.Views
 
             MessagingCenter.Subscribe<MainMenu>(this, "MenuItemSelected", HideMasterPage);
 
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "Loading", ShowReload);
+            MessagingCenter.Subscribe<MainViewModel>(this, "Loading", ShowReload);
 
             Menu = new SectionMenu(Season, SeasonId, NavigationType.Season);
 
             Detail = new NavigationPage(Menu);
         }
 
-        private void ShowReload(ByNameMainViewModel obj)
+        private void ShowReload(MainViewModel obj)
         {
-            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "Loading");
+            MessagingCenter.Unsubscribe<MainViewModel>(this, "Loading");
 
             Timer time = new Timer(Reload, null, 10000, Timeout.Infinite);
 
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "Loading", ShowReload);
+            MessagingCenter.Subscribe<MainViewModel>(this, "Loading", ShowReload);
         }
 
         private void Reload(object state)
