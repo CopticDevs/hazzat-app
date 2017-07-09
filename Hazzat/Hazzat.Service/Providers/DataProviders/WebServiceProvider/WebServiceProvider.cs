@@ -1,7 +1,5 @@
 ﻿using Hazzat.Service.Data;
 using System;
-using System.Diagnostics;
-using System.Net.Http;
 using System.ServiceModel;
 
 namespace Hazzat.Service.Providers.DataProviders.WebServiceProvider
@@ -28,262 +26,122 @@ namespace Hazzat.Service.Providers.DataProviders.WebServiceProvider
 
         public override void GetSeasons(bool isDateSpecific, Action<object, GetSeasonsCompletedEventArgs> callback)
         {
-            HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-            client.GetSeasonsCompleted += new EventHandler<GetSeasonsCompletedEventArgs>(callback);
-
-            //TODO: Move this to WebServiceHelper
-            try
+            WebServiceHelper.Execute(() =>
             {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    client.GetSeasonsAsync(isDateSpecific);
-                }
-
-                testConnection.Dispose();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetSeasonsCompleted += new EventHandler<GetSeasonsCompletedEventArgs>(callback);
+                client.GetSeasonsAsync(isDateSpecific);
+            });
         }
 
         public override void GetSeasonServices(int seasonId, Action<object, GetSeasonServicesCompletedEventArgs> callback)
         {
-            HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-            client.GetSeasonServicesCompleted += new EventHandler<GetSeasonServicesCompletedEventArgs>(callback);
-
-            try
+            WebServiceHelper.Execute(() =>
             {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    client.GetSeasonServicesAsync(seasonId);
-                }
-
-                testConnection.Dispose();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetSeasonServicesCompleted += new EventHandler<GetSeasonServicesCompletedEventArgs>(callback);
+                client.GetSeasonServicesAsync(seasonId);
+            });
         }
 
         public override void GetSeasonServiceHymns(int structureId, Action<object, GetSeasonServiceHymnsCompletedEventArgs> callback)
         {
-            HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-            client.GetSeasonServiceHymnsCompleted += new EventHandler<GetSeasonServiceHymnsCompletedEventArgs>(callback);
-
-            try
+            WebServiceHelper.Execute(() =>
             {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    client.GetSeasonServiceHymnsAsync(structureId);
-                }
-
-                testConnection.Dispose();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetSeasonServiceHymnsCompleted += new EventHandler<GetSeasonServiceHymnsCompletedEventArgs>(callback);
+                client.GetSeasonServiceHymnsAsync(structureId);
+            });
         }
 
         public override void GetSeasonServiceHymnText(int itemId, Action<object, GetSeasonServiceHymnTextCompletedEventArgs> callback)
         {
-            HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-            client.GetSeasonServiceHymnTextCompleted += new EventHandler<GetSeasonServiceHymnTextCompletedEventArgs>(callback);
-
-            try
+            WebServiceHelper.Execute(() =>
             {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    client.GetSeasonServiceHymnTextAsync(itemId);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetSeasonServiceHymnTextCompleted += new EventHandler<GetSeasonServiceHymnTextCompletedEventArgs>(callback);
+                client.GetSeasonServiceHymnTextAsync(itemId);
+            });            
         }
 
         public override void GetSeasonServiceHymnHazzat(int itemId, Action<object, GetSeasonServiceHymnHazzatCompletedEventArgs> callback)
         {
-            HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-            client.GetSeasonServiceHymnHazzatCompleted += new EventHandler<GetSeasonServiceHymnHazzatCompletedEventArgs>(callback);
-
-            try
+            WebServiceHelper.Execute(() =>
             {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    client.GetSeasonServiceHymnHazzatAsync(itemId);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetSeasonServiceHymnHazzatCompleted += new EventHandler<GetSeasonServiceHymnHazzatCompletedEventArgs>(callback);
+                client.GetSeasonServiceHymnHazzatAsync(itemId);
+            });
         }
 
         public override void GetSeasonServiceHymnVerticalHazzat(int itemId, Action<object, GetSeasonServiceHymnVerticalHazzatCompletedEventArgs> callback)
         {
-            HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-            client.GetSeasonServiceHymnVerticalHazzatCompleted += new EventHandler<GetSeasonServiceHymnVerticalHazzatCompletedEventArgs>(callback);
-
-            try
+            WebServiceHelper.Execute(() =>
             {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    client.GetSeasonServiceHymnVerticalHazzatAsync(itemId);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetSeasonServiceHymnVerticalHazzatCompleted += new EventHandler<GetSeasonServiceHymnVerticalHazzatCompletedEventArgs>(callback);
+                client.GetSeasonServiceHymnVerticalHazzatAsync(itemId);
+            });
         }
 
         public override void GetTypeList(Action<object, GetTypeListCompletedEventArgs> callback)
         {
-            HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-            client.GetTypeListCompleted += new EventHandler<GetTypeListCompletedEventArgs>(callback);
-
-            try
+            WebServiceHelper.Execute(() =>
             {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    client.GetTypeListAsync();
-                }
-
-                testConnection.Dispose();
-            }
-
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetTypeListCompleted += new EventHandler<GetTypeListCompletedEventArgs>(callback);
+                client.GetTypeListAsync();
+            });
         }
 
         public override void GetSeasonsByTypeId(int typeId, Action<object, GetSeasonsByTypeIDCompletedEventArgs> callback)
         {
-            HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-            client.GetSeasonsByTypeIDCompleted += new EventHandler<GetSeasonsByTypeIDCompletedEventArgs>(callback);
-
-            try
+            WebServiceHelper.Execute(() =>
             {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    client.GetSeasonsByTypeIDAsync(typeId);
-                }
-
-                testConnection.Dispose();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetSeasonsByTypeIDCompleted += new EventHandler<GetSeasonsByTypeIDCompletedEventArgs>(callback);
+                client.GetSeasonsByTypeIDAsync(typeId);
+            });
         }
 
         public override void GetServiceHymnListBySeasonIdAndTypeId(int seasonId, int typeId, Action<object, GetServiceHymnListBySeasonIdAndTypeIdCompletedEventArgs> callback)
         {
-            HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-            client.GetServiceHymnListBySeasonIdAndTypeIdCompleted += new EventHandler<GetServiceHymnListBySeasonIdAndTypeIdCompletedEventArgs>(callback);
-
-            try
+            WebServiceHelper.Execute(() =>
             {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    client.GetServiceHymnListBySeasonIdAndTypeIdAsync(seasonId, typeId);
-                }
-
-                testConnection.Dispose();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetServiceHymnListBySeasonIdAndTypeIdCompleted += new EventHandler<GetServiceHymnListBySeasonIdAndTypeIdCompletedEventArgs>(callback);
+                client.GetServiceHymnListBySeasonIdAndTypeIdAsync(seasonId, typeId);
+            });
         }
 
         public override void GetServiceHymnListBySeasonIdAndTuneId(int seasonId, int tuneId, Action<object, GetServiceHymnListBySeasonIdAndTuneIdCompletedEventArgs> callback)
         {
-            HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-            client.GetServiceHymnListBySeasonIdAndTuneIdCompleted += new EventHandler<GetServiceHymnListBySeasonIdAndTuneIdCompletedEventArgs>(callback);
-
-            try
+            WebServiceHelper.Execute(() =>
             {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    client.GetServiceHymnListBySeasonIdAndTuneIdAsync(seasonId, tuneId);
-                }
-
-                testConnection.Dispose();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetServiceHymnListBySeasonIdAndTuneIdCompleted += new EventHandler<GetServiceHymnListBySeasonIdAndTuneIdCompletedEventArgs>(callback);
+                client.GetServiceHymnListBySeasonIdAndTuneIdAsync(seasonId, tuneId);
+            });
         }
 
         public override void GetTuneList(Action<object, GetTuneListCompletedEventArgs> callback)
         {
-            HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-            client.GetTuneListCompleted += new EventHandler<GetTuneListCompletedEventArgs>(callback);
-
-            try
+            WebServiceHelper.Execute(() =>
             {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    client.GetTuneListAsync();
-                }
-
-                testConnection.Dispose();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetTuneListCompleted += new EventHandler<GetTuneListCompletedEventArgs>(callback);
+                client.GetTuneListAsync();
+            });
         }
 
         public override void GetSeasonsByTuneId(int tuneId, Action<object, GetSeasonsByTuneIDCompletedEventArgs> callback)
         {
-            HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
-            client.GetSeasonsByTuneIDCompleted += new EventHandler<GetSeasonsByTuneIDCompletedEventArgs>(callback);
-
-            try
+            WebServiceHelper.Execute(() =>
             {
-                HttpClient testConnection = new HttpClient();
-
-                if (!String.IsNullOrWhiteSpace(testConnection.GetAsync("http://hazzat.com").Result.Content.ToString()))
-                {
-                    client.GetSeasonsByTuneIDAsync(tuneId);
-                }
-
-                testConnection.Dispose();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetSeasonsByTuneIDCompleted += new EventHandler<GetSeasonsByTuneIDCompletedEventArgs>(callback);
+                client.GetSeasonsByTuneIDAsync(tuneId);
+            });
         }
     }
 }
