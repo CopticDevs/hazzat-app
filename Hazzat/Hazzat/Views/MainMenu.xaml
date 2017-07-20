@@ -21,41 +21,37 @@
         </ListView>
     </ContentPage>
     <ContentPage Title="Types" x:Name="Types">
-        <StackLayout>
-            <ListView x:Name="TypesMenu" ItemTapped="TypeSelected" ItemsSource="{Binding Types}">
-                <ListView.RowHeight>
-                    <OnPlatform x:TypeArguments="x:Int32" iOS="40" Android="40" WinPhone="50" />
-                </ListView.RowHeight>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Padding="10,10,10,10" Orientation="Horizontal">
-                                <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
-                                <Label Text="{Binding ServiceHymnsCount, StringFormat=(\{0\})}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+        <ListView x:Name="TypesMenu" ItemTapped="TypeSelected" ItemsSource="{Binding Types}">
+            <ListView.RowHeight>
+                <OnPlatform x:TypeArguments="x:Int32" iOS="40" Android="40" WinPhone="50" />
+            </ListView.RowHeight>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10,10,10,10" Orientation="Horizontal">
+                            <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
+                            <Label Text="{Binding ServiceHymnsCount, StringFormat=(\{0\})}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentPage>
     <ContentPage Title="Tunes" x:Name="Tunes">
-        <StackLayout>
-            <ListView x:Name="TunesMenu" ItemTapped="TuneSelected" ItemsSource="{Binding Tunes}">
-                <ListView.RowHeight>
-                    <OnPlatform x:TypeArguments="x:Int32" iOS="40" Android="40" WinPhone="50" />
-                </ListView.RowHeight>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Padding="10,10,10,10" Orientation="Horizontal">
-                                <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
-                                <Label Text="{Binding ServiceHymnsCount, StringFormat=(\{0\})}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+        <ListView x:Name="TunesMenu" ItemTapped="TuneSelected" ItemsSource="{Binding Tunes}">
+            <ListView.RowHeight>
+                <OnPlatform x:TypeArguments="x:Int32" iOS="40" Android="40" WinPhone="50" />
+            </ListView.RowHeight>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10,10,10,10" Orientation="Horizontal">
+                            <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
+                            <Label Text="{Binding ServiceHymnsCount, StringFormat=(\{0\})}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentPage>
 </TabbedPage>
