@@ -105,28 +105,6 @@ namespace Hazzat.ViewModels
         #endregion
 
         #region byTune
-        public void GetTuneList()
-        {
-            App.IsLoaded = false;
-            MessagingCenter.Send(this, "Loading");
-            hazzatController.GetTuneList(OnGetTuneListCompleted);
-        }
-
-        private void OnGetTuneListCompleted(object sender, GetTuneListCompletedEventArgs e)
-        {
-            foreach (var item in e.Result)
-            {
-                if (item?.ServiceHymnsCount != null)
-                {
-                    item.Name = $"{item.Name} ({item.ServiceHymnsCount})";
-                }
-            }
-
-            TuneList = e.Result;
-            MessagingCenter.Send(this, "DoneWithTuneList");
-            App.IsLoaded = true;
-        }
-
         public void GetSeasonsByTuneId(int tuneId)
         {
             App.IsLoaded = false;

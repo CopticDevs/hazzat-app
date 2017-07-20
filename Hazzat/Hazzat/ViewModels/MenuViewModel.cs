@@ -19,11 +19,17 @@ namespace Hazzat.ViewModels
         /// </summary>
         public ObservableRangeCollection<MainMenuItem> Types { get; set; }
 
+        /// <summary>
+        /// List of Tunes
+        /// </summary>
+        public ObservableRangeCollection<MainMenuItem> Tunes { get; set; }
+
         public MenuViewModel() : base()
         {
             Title = "hazzat.com";
             Seasons = new ObservableRangeCollection<MainMenuItem>();
             Types = new ObservableRangeCollection<MainMenuItem>();
+            Tunes = new ObservableRangeCollection<MainMenuItem>();
         }
 
         public void LoadSeasons()
@@ -34,6 +40,11 @@ namespace Hazzat.ViewModels
         public void LoadTypes()
         {
             HazzatController.GetTypeList(OnGetTypeListCompleted);
+        }
+
+        public void LoadTunes()
+        {
+            HazzatController.GetTuneList(OnGetTuneListCompleted);
         }
 
         private void OnGetSeasonsCompleted(object sender, GetSeasonsCompletedEventArgs e)
@@ -74,6 +85,26 @@ namespace Hazzat.ViewModels
             }
 
             Types.ReplaceRange(typesList);
+        }
+
+        private void OnGetTuneListCompleted(object sender, GetTuneListCompletedEventArgs e)
+        {
+            List<MainMenuItem> tunesList = new List<MainMenuItem>();
+
+            foreach (var item in e.Result)
+            {
+                if (item?.ServiceHymnsCount != null)
+                {
+                    tunesList.Add(new MainMenuItem()
+                    {
+                        ItemId = item.ItemId,
+                        Name = item.Name,
+                        ServiceHymnsCount = item.ServiceHymnsCount
+                    });
+                }
+            }
+
+            Tunes.ReplaceRange(tunesList);
         }
     }
 }

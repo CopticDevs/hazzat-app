@@ -28,10 +28,6 @@ namespace Hazzat.Views
             }
 
             BindingContext = App.MenuViewModel;
-
-            SubscribeMessages();
-
-            App.NameViewModel.GetTuneList();
         }
 
         protected override void OnDisappearing()
@@ -54,20 +50,11 @@ namespace Hazzat.Views
             {
                 App.MenuViewModel.LoadTypes();
             }
-        }
 
-        private void SubscribeMessages()
-        {
-            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithTuneList", (sender) =>
+            if (App.MenuViewModel.Tunes.Count == 0)
             {
-                if (App.NameViewModel?.TuneList != null)
-                {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        TunesMenu.ItemsSource = App.NameViewModel.TuneList;
-                    });
-                }
-            });
+                App.MenuViewModel.LoadTunes();
+            }
         }
 
         protected void SeasonSelected(object sender, ItemTappedEventArgs e)
@@ -85,7 +72,7 @@ namespace Hazzat.Views
         }
         protected void TuneSelected(object sender, ItemTappedEventArgs e)
         {
-            TuneInfo item = (TuneInfo)e.Item;
+            MainMenuItem item = (MainMenuItem)e.Item;
             MessagingCenter.Send(this, "MenuItemSelected");
             MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Tune);
         }
