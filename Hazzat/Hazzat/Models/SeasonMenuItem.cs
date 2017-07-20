@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hazzat.ViewModels
+namespace Hazzat.Models
 {
     public class SeasonMenuItem : ObservableObject
     {

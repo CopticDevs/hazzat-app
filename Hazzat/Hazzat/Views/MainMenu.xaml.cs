@@ -1,4 +1,5 @@
-﻿using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
+﻿using Hazzat.Models;
+using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
 using Hazzat.ViewModels;
 
 using Xamarin.Forms;
@@ -78,9 +79,9 @@ namespace Hazzat.Views
 
         protected void SeasonSelected(object sender, ItemTappedEventArgs e)
         {
-            SeasonInfo item = (SeasonInfo)e.Item;
+            SeasonMenuItem item = (SeasonMenuItem)e.Item;
             MessagingCenter.Send(this,"MenuItemSelected");
-            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Season);
+            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.Id, NavigationType.Season);
         }
 
         protected void TypeSelected(object sender, ItemTappedEventArgs e)

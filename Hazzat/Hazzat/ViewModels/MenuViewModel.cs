@@ -1,4 +1,5 @@
 ﻿using Hazzat.Helpers;
+using Hazzat.Models;
 using Hazzat.Service;
 using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
 using System.Collections.Generic;

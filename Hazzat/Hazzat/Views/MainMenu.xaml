@@ -11,9 +11,10 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid Padding="10,10,10,10">
+                        <StackLayout Padding="10,10,10,10" Orientation="Horizontal">
                             <Label Text="{Binding Name}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
-                        </Grid>
+                            <Label Text="{Binding ServiceHymnsCount, StringFormat=(\{0\})}" TextColor="{Binding accent}" LineBreakMode="MiddleTruncation" />
+                        </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
