@@ -31,7 +31,6 @@ namespace Hazzat.Views
 
             SubscribeMessages();
 
-            App.NameViewModel.GetTypeList();
             App.NameViewModel.GetTuneList();
         }
 
@@ -50,21 +49,15 @@ namespace Hazzat.Views
             {
                 App.MenuViewModel.LoadSeasons();
             }
+
+            if (App.MenuViewModel.Types.Count == 0)
+            {
+                App.MenuViewModel.LoadTypes();
+            }
         }
 
         private void SubscribeMessages()
         {
-            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithTypeList", (sender) =>
-            {
-                if (App.NameViewModel?.TypeList != null)
-                {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        TypesMenu.ItemsSource = App.NameViewModel.TypeList;
-                    });
-                }
-            });
-
             MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithTuneList", (sender) =>
             {
                 if (App.NameViewModel?.TuneList != null)
@@ -79,14 +72,14 @@ namespace Hazzat.Views
 
         protected void SeasonSelected(object sender, ItemTappedEventArgs e)
         {
-            SeasonMenuItem item = (SeasonMenuItem)e.Item;
+            MainMenuItem item = (MainMenuItem)e.Item;
             MessagingCenter.Send(this,"MenuItemSelected");
-            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.Id, NavigationType.Season);
+            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Season);
         }
 
         protected void TypeSelected(object sender, ItemTappedEventArgs e)
         {
-            TypeInfo item = (TypeInfo)e.Item;
+            MainMenuItem item = (MainMenuItem)e.Item;
             MessagingCenter.Send(this, "MenuItemSelected");
             MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Type);
         }

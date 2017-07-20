@@ -15,7 +15,6 @@ namespace Hazzat.ViewModels
         public ServiceHymnsContentInfo[] HazzatHymnContentInfo { get; private set; }
         public ServiceHymnsContentInfo[] VerticalHazzatHymnContent { get; private set; }
 
-        public TypeInfo[] TypeList { get; private set; }
         public SeasonInfo[] TypeSeasons { get; private set; }
 
         public TuneInfo[] TuneList { get; private set; }
@@ -75,28 +74,6 @@ namespace Hazzat.ViewModels
         }
 
         #region byType
-        public void GetTypeList()
-        {
-            App.IsLoaded = false;
-            MessagingCenter.Send(this, "Loading");
-            hazzatController.GetTypeList(OnGetTypeListCompleted);
-        }
-
-        private void OnGetTypeListCompleted(object sender, GetTypeListCompletedEventArgs e)
-        {
-            foreach (var item in e.Result)
-            {
-                if (item?.ServiceHymnsCount != null)
-                {
-                    item.Name = $"{item.Name} ({item.ServiceHymnsCount})";
-                }
-            }
-
-            TypeList = e.Result;
-            MessagingCenter.Send(this, "DoneWithTypeList");
-            App.IsLoaded = true;
-        }
-
         public void GetSeasonsByTypeId(int typeId)
         {
             App.IsLoaded = false;

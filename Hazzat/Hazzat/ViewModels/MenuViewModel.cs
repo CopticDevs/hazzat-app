@@ -12,12 +12,18 @@ namespace Hazzat.ViewModels
         /// <summary>
         /// List of Seasons
         /// </summary>
-        public ObservableRangeCollection<SeasonMenuItem> Seasons { get; set; }
+        public ObservableRangeCollection<MainMenuItem> Seasons { get; set; }
+
+        /// <summary>
+        /// List of Types
+        /// </summary>
+        public ObservableRangeCollection<MainMenuItem> Types { get; set; }
 
         public MenuViewModel() : base()
         {
             Title = "hazzat.com";
-            Seasons = new ObservableRangeCollection<SeasonMenuItem>();
+            Seasons = new ObservableRangeCollection<MainMenuItem>();
+            Types = new ObservableRangeCollection<MainMenuItem>();
         }
 
         public void LoadSeasons()
@@ -25,25 +31,49 @@ namespace Hazzat.ViewModels
             HazzatController.GetSeasons(true, OnGetSeasonsCompleted);
         }
 
+        public void LoadTypes()
+        {
+            HazzatController.GetTypeList(OnGetTypeListCompleted);
+        }
+
         private void OnGetSeasonsCompleted(object sender, GetSeasonsCompletedEventArgs e)
         {
-            List<SeasonMenuItem> seasonsList = new List<SeasonMenuItem>();
+            List<MainMenuItem> seasonsList = new List<MainMenuItem>();
 
             foreach (var item in e.Result)
             {
                 if (item?.ServiceHymnsCount != null)
                 {
-                    var currentSeason = new SeasonMenuItem()
+                    seasonsList.Add(new MainMenuItem()
                     {
-                        Id = item.ItemId,
+                        ItemId = item.ItemId,
                         Name = item.Name,
                         ServiceHymnsCount = item.ServiceHymnsCount
-                    };
-                    seasonsList.Add(currentSeason);
+                    });
                 }
             }
 
             Seasons.ReplaceRange(seasonsList);
+        }
+
+        private void OnGetTypeListCompleted(object sender, GetTypeListCompletedEventArgs e)
+        {
+            List<MainMenuItem> typesList = new List<MainMenuItem>();
+
+            foreach (var item in e.Result)
+            {
+                if (item?.ServiceHymnsCount != null)
+                {
+                    typesList.Add(new MainMenuItem()
+                    {
+                        ItemId = item.ItemId,
+                        Name = item.Name,
+                        ServiceHymnsCount = item.ServiceHymnsCount
+                    });
+                }
+            }
+
+            Types.ReplaceRange(typesList);
         }
     }
 }

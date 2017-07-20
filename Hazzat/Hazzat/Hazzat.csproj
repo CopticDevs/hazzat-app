@@ -46,7 +46,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
-    <Compile Include="Models\SeasonMenuItem.cs" />
+    <Compile Include="Models\MainMenuItem.cs" />
     <Compile Include="Views\HymnPage.xaml.cs">
       <DependentUpon>HymnPage.xaml</DependentUpon>
     </Compile>
