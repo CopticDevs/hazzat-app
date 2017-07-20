@@ -4,7 +4,7 @@
              x:Class="Hazzat.Views.MainMenu"
             Title="hazzat.com">
     <ContentPage Title="Seasons" x:Name="Seasons">
-        <ListView x:Name="SeasonsMenu" ItemTapped="SeasonSelected">
+        <ListView x:Name="SeasonsMenu" ItemTapped="SeasonSelected" ItemsSource="{Binding Seasons}">
             <ListView.RowHeight>
                 <OnPlatform x:TypeArguments="x:Int32" iOS="40" Android="40" WinPhone="50" />
             </ListView.RowHeight>

@@ -16,6 +16,8 @@ namespace Hazzat.Views
         {
             InitializeComponent();
 
+            BindingContext = App.MenuViewModel;
+
             MessagingCenter.Subscribe<MainMenu>(this, "MenuItemSelected", HideMasterPage);
 
             MessagingCenter.Subscribe<MainViewModel>(this, "Loading", ShowReload);

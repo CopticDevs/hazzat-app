@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Hazzat.Views"
              x:Class="Hazzat.Views.MasterDetailMenu"
-             Title="hazzat.com"
+             Title="{Binding Title}"
              MasterBehavior="Default">
   <MasterDetailPage.Master IsGestureEnabled="False">
     <local:MainMenu />

@@ -26,9 +26,10 @@ namespace Hazzat.Views
                     break;
             }
 
+            BindingContext = App.MenuViewModel;
+
             SubscribeMessages();
 
-            App.NameViewModel.GetSeasons(true);
             App.NameViewModel.GetTypeList();
             App.NameViewModel.GetTuneList();
         }
@@ -40,19 +41,18 @@ namespace Hazzat.Views
             MessagingCenter.Unsubscribe<MainViewModel>(this, "Done");
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (App.MenuViewModel.Seasons.Count == 0)
+            {
+                App.MenuViewModel.LoadSeasons();
+            }
+        }
+
         private void SubscribeMessages()
         {
-            MessagingCenter.Subscribe<MainViewModel>(this, "Done", (sender) =>
-            {
-                if (App.NameViewModel?.Seasons != null)
-                {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        SeasonsMenu.ItemsSource = App.NameViewModel.Seasons;
-                    });
-                }
-            });
-
             MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithTypeList", (sender) =>
             {
                 if (App.NameViewModel?.TypeList != null)

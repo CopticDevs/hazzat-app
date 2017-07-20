@@ -51,6 +51,19 @@ namespace Hazzat
             }
         }
 
+        private static MenuViewModel menuViewModel = null;
+        internal static MenuViewModel MenuViewModel
+        {
+            get
+            {
+                if (menuViewModel == null)
+                {
+                    menuViewModel = new MenuViewModel();
+                }
+                return menuViewModel;
+            }
+        }
+
         public static string Serialize(Dictionary<string, Dictionary<string, List<string>>> viewModel)
         {
             XmlSerializer serialize = new XmlSerializer(typeof(Dictionary<string, Dictionary<string, List<string>>>));
