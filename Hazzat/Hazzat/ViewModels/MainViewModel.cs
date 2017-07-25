@@ -10,7 +10,6 @@ namespace Hazzat.ViewModels
         /// <summary>
         /// A collection of hazzat.com objects
         /// </summary>
-        public StructureInfo[] HymnsBySeason { get; private set; }
         public ServiceHymnsContentInfo[] TextHymnContentInfo { get; private set; }
         public ServiceHymnsContentInfo[] HazzatHymnContentInfo { get; private set; }
         public ServiceHymnsContentInfo[] VerticalHazzatHymnContent { get; private set; }
@@ -21,27 +20,6 @@ namespace Hazzat.ViewModels
         public SeasonInfo[] TuneSeasons { get; private set; }
 
         private HazzatController hazzatController = new HazzatController();
-
-        public void GetSeasonServices(int seasonId)
-        {
-            App.IsLoaded = false;
-            MessagingCenter.Send(this, "Loading");
-            hazzatController.GetSeasonServices(seasonId, OnGetSeasonServicesCompleted);
-        }
-
-        public void OnGetSeasonServicesCompleted(object sender, GetSeasonServicesCompletedEventArgs e)
-        {
-            HymnsBySeason = e.Result;
-            MessagingCenter.Send(this, "DoneSeason");
-            App.IsLoaded = true;
-        }
-
-        public void GetSeasonServiceHymns(int structureId, Action<object, GetSeasonServiceHymnsCompletedEventArgs> GetCompletedHymnsBySeason)
-        {
-            App.IsLoaded = false;
-            MessagingCenter.Send(this, "Loading");
-            hazzatController.GetSeasonServiceHymns(structureId, GetCompletedHymnsBySeason);
-        }
 
         public void GetHymnContent(int itemId)
         {

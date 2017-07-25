@@ -1,4 +1,5 @@
-﻿using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
+﻿using Hazzat.Models;
+using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
 using Hazzat.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,17 @@ namespace Hazzat.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SectionMenu : ContentPage
     {
+        public SectionMenuViewModel viewModel;
         private static ObservableCollection<ServiceDetails> serviceList;
         private static NavigationType navigationType;
         private static int itemId;
         private static string itemName;
 
-        public SectionMenu(string ItemName, int ItemId, NavigationType navType)
+        public SectionMenu(SectionMenuViewModel viewModel)
         {
             InitializeComponent();
+
+            BindingContext = this.viewModel = viewModel;
 
             switch(Device.RuntimePlatform)
             {
@@ -36,36 +40,18 @@ namespace Hazzat.Views
             {
                 overlay.IsVisible = true;
             });
-            Title = ItemName;
 
             serviceList = new ObservableCollection<ServiceDetails>();
             itemId = 0;
-            itemName = ItemName;
-            navigationType = navType;
+            itemName = viewModel.Title;
+            navigationType = viewModel.NavigationType;
 
             SubscribeMessages();
-
-            switch (navType)
-            {
-                case NavigationType.Season:
-                    App.NameViewModel.GetSeasonServices(ItemId);
-                    break;
-                case NavigationType.Type:
-                    App.NameViewModel.GetSeasonsByTypeId(ItemId);
-                    itemId = ItemId;
-                    break;
-                case NavigationType.Tune:
-                    App.NameViewModel.GetSeasonsByTuneId(ItemId);
-                    itemId = ItemId;
-                    break;
-                default:
-                    break;
-            }
         }
 
         public async void SectionMenuInit(string ItemName, int ItemId, NavigationType navType)
         {
-            SectionMenu newMenu = new SectionMenu(ItemName, ItemId, navType);
+            SectionMenu newMenu = new SectionMenu(new SectionMenuViewModel(ItemId, ItemName, navType));
             await Navigation.PopAsync();
             await Navigation.PushAsync(newMenu, true);
         }
@@ -79,19 +65,6 @@ namespace Hazzat.Views
 
         public void SubscribeMessages()
         {
-            MessagingCenter.Subscribe<MainViewModel>(this, "DoneSeason", (sender) =>
-            {
-                if (App.NameViewModel?.HymnsBySeason != null)
-                {
-                    LoadServiceHymns(App.NameViewModel.HymnsBySeason);
-
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        StructList.ItemsSource = serviceList;
-                    });
-                }
-            });
-
             MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithSeasonsListByType", (sender) =>
             {
                 if (App.NameViewModel?.TypeSeasons != null)
@@ -117,20 +90,6 @@ namespace Hazzat.Views
                     });
                 }
             });
-        }
-
-        private void LoadServiceHymns(StructureInfo[] hymnsBySeason)
-        {
-            foreach (var structInfo in hymnsBySeason.OrderBy(s => s.Service_Order))
-            {
-                serviceList.Add(new ServiceDetails()
-                {
-                    ServiceName = structInfo.Service_Name,
-                    StructureId = structInfo.ItemId
-                });
-
-                App.NameViewModel.GetSeasonServiceHymns(structInfo.ItemId, GetCompletedHymnsBySeason);
-            }
         }
 
         private void LoadServiceHymnsByType(SeasonInfo[] filteredSeasons)
@@ -181,29 +140,6 @@ namespace Hazzat.Views
             }
         }
 
-        private void GetCompletedHymnsBySeason(object sender, GetSeasonServiceHymnsCompletedEventArgs e)
-        {
-            var fetchedHymns = e.Result;
-
-            if (fetchedHymns.Length != 0)
-            {
-                var serviceInfo = serviceList.First(s => s.StructureId == fetchedHymns[0].Structure_ID);
-
-                // Adding a lock on serviceList since multiple services could be modifying the collection
-                lock (serviceList)
-                {
-                    foreach (var hymnInfo in fetchedHymns)
-                    {
-                        serviceInfo.Add(hymnInfo);
-                    }
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        overlay.IsVisible = false;
-                    });
-                }
-            }
-        }
-
         private void GetCompletedHymnsBySeasonAndTypeOrTune(ServiceHymnInfo[] fetchedHymns, ServiceDetails serviceInfo)
         {
             if (fetchedHymns.Length != 0)
@@ -212,7 +148,12 @@ namespace Hazzat.Views
                 {
                     foreach (var hymnInfo in fetchedHymns)
                     {
-                        serviceInfo.Add(hymnInfo);
+                        serviceInfo.Add(new ServiceHymnMenuItem()
+                        {
+                            ItemId = hymnInfo.ItemId,
+                            Title = hymnInfo.Title,
+                            Structure_Name = hymnInfo.Structure_Name
+                        });
                     }
                     Device.BeginInvokeOnMainThread(() =>
                     {
@@ -224,7 +165,7 @@ namespace Hazzat.Views
 
         protected async void ServiceHymnTapped(object sender, ItemTappedEventArgs e)
         {
-            ServiceHymnInfo item = (ServiceHymnInfo)e.Item;
+            ServiceHymnMenuItem item = (ServiceHymnMenuItem)e.Item;
 
             string breadcrumbName = navigationType == NavigationType.Season ? item.Structure_Name : itemName;
             HymnPage HymnPage = new HymnPage(breadcrumbName, item.Title, item.ItemId);

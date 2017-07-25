@@ -112,6 +112,7 @@ namespace Hazzat
 
                 Tuple<string, string> currTime = CurrentTime();
 
+                // TODO: use the first season, instead of hardcoding annual
                 MainPage = new MasterDetailMenu("Annual", 1); //Set to current Season
 
                 return;

@@ -40,7 +40,6 @@
     <Compile Include="Data\DataProvider.cs" />
     <Compile Include="HazzatController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\DataProviders\WebServiceProvider\HazzatServiceExtensions.cs" />
     <Compile Include="Providers\DataProviders\WebServiceProvider\HazzatWebService.cs" />
     <Compile Include="Providers\DataProviders\WebServiceProvider\WebServiceHelper.cs" />
     <Compile Include="Providers\DataProviders\WebServiceProvider\WebServiceProvider.cs" />

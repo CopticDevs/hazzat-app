@@ -21,9 +21,9 @@ namespace Hazzat.Views
             MessagingCenter.Subscribe<MainMenu>(this, "MenuItemSelected", HideMasterPage);
 
             MessagingCenter.Subscribe<MainViewModel>(this, "Loading", ShowReload);
-
-            Menu = new SectionMenu(Season, SeasonId, NavigationType.Season);
-
+            
+            // Initialize page with season
+            Menu = new SectionMenu(new SectionMenuViewModel(SeasonId, Season, NavigationType.Season));
             Detail = new NavigationPage(Menu);
         }
 

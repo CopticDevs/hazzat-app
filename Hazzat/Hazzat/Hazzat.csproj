@@ -40,13 +40,18 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ObservableGroupedCollection.cs" />
     <Compile Include="Helpers\ObservableObject.cs" />
     <Compile Include="Helpers\ObservableRangeCollection.cs" />
+    <Compile Include="Models\ServiceDetails.cs" />
+    <Compile Include="Models\ServiceHymnMenuItem.cs" />
+    <Compile Include="Models\SimplifiedStructureInfo.cs" />
     <Compile Include="NavigationType.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="Models\MainMenuItem.cs" />
+    <Compile Include="ViewModels\SectionMenuViewModel.cs" />
     <Compile Include="Views\HymnPage.xaml.cs">
       <DependentUpon>HymnPage.xaml</DependentUpon>
     </Compile>

@@ -1,6 +1,5 @@
 ﻿using Hazzat.Helpers;
 using Hazzat.Service;
-using Xamarin.Forms;
 
 namespace Hazzat.ViewModels
 {
