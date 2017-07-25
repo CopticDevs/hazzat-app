@@ -1,11 +1,8 @@
 ﻿using Hazzat.Models;
 using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
-using System;
-using System.Collections.Generic;
+using Hazzat.Types;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hazzat.ViewModels
 {
@@ -35,7 +32,7 @@ namespace Hazzat.ViewModels
         public ObservableCollection<HymnGroup> HymnGroups { get; set; }
 
         /// <summary>
-        /// Constructor
+        /// Instantiates a new SectionMenuViewModel with the given parameters.
         /// </summary>
         /// <param name="itemId">Item id.</param>
         /// <param name="title">Item title.</param>

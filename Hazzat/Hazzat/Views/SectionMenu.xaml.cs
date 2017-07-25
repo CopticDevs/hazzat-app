@@ -1,4 +1,5 @@
 ﻿using Hazzat.Models;
+using Hazzat.Types;
 using Hazzat.ViewModels;
 using System;
 using System.Threading.Tasks;

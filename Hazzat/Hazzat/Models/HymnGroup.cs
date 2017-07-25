@@ -22,7 +22,7 @@ namespace Hazzat.Models
         }
 
         /// <summary>
-        /// Initialized a hymn group with the given name
+        /// Initialize a hymn group with the given name
         /// </summary>
         /// <param name="name">Group name.</param>
         public HymnGroup(string name) : base()

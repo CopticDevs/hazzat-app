@@ -1,7 +1,6 @@
 ﻿using Hazzat.Models;
-using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
+using Hazzat.Types;
 using Hazzat.ViewModels;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

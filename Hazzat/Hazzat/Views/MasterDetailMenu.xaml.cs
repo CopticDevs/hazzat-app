@@ -1,7 +1,7 @@
-﻿using Hazzat.ViewModels;
+﻿using Hazzat.Types;
+using Hazzat.ViewModels;
 using System;
 using System.Threading;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
