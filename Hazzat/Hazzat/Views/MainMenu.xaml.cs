@@ -60,20 +60,20 @@ namespace Hazzat.Views
         {
             MainMenuItem item = (MainMenuItem)e.Item;
             MessagingCenter.Send(this,"MenuItemSelected");
-            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Season);
+            MasterDetailMenu.Menu.SectionMenuInit(item.Name, new NavigationInfo(NavigationMethod.Season, item.ItemId));
         }
 
         protected void TypeSelected(object sender, ItemTappedEventArgs e)
         {
             MainMenuItem item = (MainMenuItem)e.Item;
             MessagingCenter.Send(this, "MenuItemSelected");
-            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Type);
+            MasterDetailMenu.Menu.SectionMenuInit(item.Name, new NavigationInfo(NavigationMethod.Type, item.ItemId));
         }
         protected void TuneSelected(object sender, ItemTappedEventArgs e)
         {
             MainMenuItem item = (MainMenuItem)e.Item;
             MessagingCenter.Send(this, "MenuItemSelected");
-            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Tune);
+            MasterDetailMenu.Menu.SectionMenuInit(item.Name, new NavigationInfo(NavigationMethod.Tune, item.ItemId));
         }
     }
 }

@@ -28,9 +28,9 @@ namespace Hazzat.Views
             }
         }
 
-        public async void SectionMenuInit(string ItemName, int ItemId, NavigationType navType)
+        public async void SectionMenuInit(string ItemName, NavigationInfo navInfo)
         {
-            SectionMenu newMenu = new SectionMenu(new SectionMenuViewModel(ItemId, ItemName, navType));
+            SectionMenu newMenu = new SectionMenu(new SectionMenuViewModel(ItemName, navInfo));
             await Navigation.PopAsync();
             await Navigation.PushAsync(newMenu, true);
         }
@@ -39,7 +39,7 @@ namespace Hazzat.Views
         {
             ServiceHymnMenuItem item = (ServiceHymnMenuItem)e.Item;
 
-            string breadcrumbName = viewModel.NavigationType == NavigationType.Season ? item.Structure_Name : viewModel.Title;
+            string breadcrumbName = viewModel.NavigationInfo.Method == NavigationMethod.Season ? item.Structure_Name : viewModel.Title;
             HymnPage HymnPage = new HymnPage(breadcrumbName, item.Title, item.ItemId);
 
             await Navigation.PushAsync(HymnPage, true);

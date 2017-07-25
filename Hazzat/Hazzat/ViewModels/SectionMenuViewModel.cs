@@ -12,19 +12,9 @@ namespace Hazzat.ViewModels
     public class SectionMenuViewModel : BaseViewModel
     {
         /// <summary>
-        /// Gets/sets navigation type.
+        /// Gets/sets navigation info.
         /// </summary>
-        public NavigationType NavigationType { get; set; }
-
-        int itemId = -1;
-        /// <summary>
-        /// Gets/sets the id of the season/tune/type depending on the Navigation type.
-        /// </summary>
-        public int ItemId
-        {
-            get { return itemId; }
-            set { SetProperty(ref itemId, value); }
-        }
+        public NavigationInfo NavigationInfo { get; set; }
 
         /// <summary>
         /// Hymn group list
@@ -34,14 +24,12 @@ namespace Hazzat.ViewModels
         /// <summary>
         /// Instantiates a new SectionMenuViewModel with the given parameters.
         /// </summary>
-        /// <param name="itemId">Item id.</param>
         /// <param name="title">Item title.</param>
         /// <param name="navigationType">Navigation type.</param>
-        public SectionMenuViewModel(int itemId, string title, NavigationType navigationType)
+        public SectionMenuViewModel(string title, NavigationInfo navigationInfo)
         {
-            ItemId = itemId;
             Title = title;
-            NavigationType = navigationType;
+            NavigationInfo = navigationInfo;
             HymnGroups = new ObservableCollection<HymnGroup>();
 
             LoadContentBasedOnNavigationType();
@@ -49,16 +37,16 @@ namespace Hazzat.ViewModels
 
         private void LoadContentBasedOnNavigationType()
         {
-            switch (NavigationType)
+            switch (NavigationInfo.Method)
             {
-                case NavigationType.Season:
-                    GetSeasonServices(ItemId);
+                case NavigationMethod.Season:
+                    GetSeasonServices(NavigationInfo.ItemId);
                     break;
-                case NavigationType.Type:
-                    GetSeasonsByTypeId(ItemId);
+                case NavigationMethod.Type:
+                    GetSeasonsByTypeId(NavigationInfo.ItemId);
                     break;
-                case NavigationType.Tune:
-                    GetSeasonsByTuneId(ItemId);
+                case NavigationMethod.Tune:
+                    GetSeasonsByTuneId(NavigationInfo.ItemId);
                     break;
                 default:
                     break;
@@ -145,7 +133,7 @@ namespace Hazzat.ViewModels
 
                 HazzatController.GetServiceHymnListBySeasonIdAndTypeId(
                     seasonInfo.ItemId,
-                    itemId,
+                    NavigationInfo.ItemId,
                     (sender, e) => GetCompletedHymnsBySeasonAndTypeOrTune(e.Result, groupDetails));
             }
         }
@@ -187,16 +175,16 @@ namespace Hazzat.ViewModels
             IsBusy = false;
         }
 
-        private void LoadServiceHymnsByTune(SeasonInfo[] hymnsBySeason)
+        private void LoadServiceHymnsByTune(SeasonInfo[] filteredSeasons)
         {
-            foreach (var seasonInfo in hymnsBySeason.OrderBy(s => s.Season_Order))
+            foreach (var seasonInfo in filteredSeasons.OrderBy(s => s.Season_Order))
             {
                 var groupDetails = new HymnGroup(seasonInfo.Name);
 
                 HymnGroups.Add(groupDetails);
 
                 HazzatController.GetServiceHymnListBySeasonIdAndTuneId(seasonInfo.ItemId,
-                    itemId,
+                    NavigationInfo.ItemId,
                     (sender, e) => GetCompletedHymnsBySeasonAndTypeOrTune(e.Result, groupDetails));
             }
         }

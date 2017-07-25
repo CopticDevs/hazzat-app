@@ -46,7 +46,8 @@
     <Compile Include="Models\HymnGroup.cs" />
     <Compile Include="Models\ServiceHymnMenuItem.cs" />
     <Compile Include="Models\SimplifiedStructureInfo.cs" />
-    <Compile Include="Types\NavigationType.cs" />
+    <Compile Include="Types\NavigationInfo.cs" />
+    <Compile Include="Types\NavigationMethod.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
