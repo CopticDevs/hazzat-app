@@ -12,8 +12,8 @@
     </ContentPage.ToolbarItems>
     <AbsoluteLayout>
         <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
-            <ListView x:Name="StructList" IsGroupingEnabled="True" ItemsSource="{Binding ServiceList}"
-                      GroupDisplayBinding="{Binding ServiceName}" ItemTapped="ServiceHymnTapped">
+            <ListView x:Name="StructList" IsGroupingEnabled="True" ItemsSource="{Binding HymnGroups}"
+                      GroupDisplayBinding="{Binding Name}" ItemTapped="ServiceHymnTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding Title}" />

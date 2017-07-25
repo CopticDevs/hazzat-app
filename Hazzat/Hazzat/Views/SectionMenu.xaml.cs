@@ -1,13 +1,7 @@
 ﻿using Hazzat.Models;
-using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
 using Hazzat.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,9 +11,6 @@ namespace Hazzat.Views
     public partial class SectionMenu : ContentPage
     {
         public SectionMenuViewModel viewModel;
-        private static ObservableCollection<ServiceDetails> serviceList;
-        private static int itemId;
-        private static string itemName;
 
         public SectionMenu(SectionMenuViewModel viewModel)
         {
@@ -34,10 +25,6 @@ namespace Hazzat.Views
                     TBI.Text = "settings";
                     break;
             }
-
-            serviceList = new ObservableCollection<ServiceDetails>();
-            itemId = -1;
-            itemName = viewModel.Title;
         }
 
         public async void SectionMenuInit(string ItemName, int ItemId, NavigationType navType)
@@ -51,7 +38,7 @@ namespace Hazzat.Views
         {
             ServiceHymnMenuItem item = (ServiceHymnMenuItem)e.Item;
 
-            string breadcrumbName = viewModel.NavigationType == NavigationType.Season ? item.Structure_Name : itemName;
+            string breadcrumbName = viewModel.NavigationType == NavigationType.Season ? item.Structure_Name : viewModel.Title;
             HymnPage HymnPage = new HymnPage(breadcrumbName, item.Title, item.ItemId);
 
             await Navigation.PushAsync(HymnPage, true);

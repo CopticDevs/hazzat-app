@@ -43,7 +43,7 @@
     <Compile Include="Helpers\ObservableGroupedCollection.cs" />
     <Compile Include="Helpers\ObservableObject.cs" />
     <Compile Include="Helpers\ObservableRangeCollection.cs" />
-    <Compile Include="Models\ServiceDetails.cs" />
+    <Compile Include="Models\HymnGroup.cs" />
     <Compile Include="Models\ServiceHymnMenuItem.cs" />
     <Compile Include="Models\SimplifiedStructureInfo.cs" />
     <Compile Include="NavigationType.cs" />
