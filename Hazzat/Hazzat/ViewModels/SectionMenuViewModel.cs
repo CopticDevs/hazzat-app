@@ -15,21 +15,19 @@ namespace Hazzat.ViewModels
     public class SectionMenuViewModel : BaseViewModel
     {
         /// <summary>
-        /// Gets/sets navigation type
+        /// Gets/sets navigation type.
         /// </summary>
         public NavigationType NavigationType { get; set; }
 
         int itemId = -1;
         /// <summary>
-        /// Gets/sets the item id
+        /// Gets/sets the id of the season/tune/type depending on the Navigation type.
         /// </summary>
         public int ItemId
         {
             get { return itemId; }
             set { SetProperty(ref itemId, value); }
         }
-
-        public StructureInfo[] HymnsBySeason { get; private set; }
 
         /// <summary>
         /// Service List
@@ -60,31 +58,29 @@ namespace Hazzat.ViewModels
                     GetSeasonServices(ItemId);
                     break;
                 case NavigationType.Type:
-                    App.NameViewModel.GetSeasonsByTypeId(ItemId);
-                    itemId = ItemId;
+                    GetSeasonsByTypeId(ItemId);
                     break;
                 case NavigationType.Tune:
-                    App.NameViewModel.GetSeasonsByTuneId(ItemId);
-                    itemId = ItemId;
+                    GetSeasonsByTuneId(ItemId);
                     break;
                 default:
                     break;
             }
         }
 
-        public void GetSeasonServices(int seasonId)
+        private void GetSeasonServices(int seasonId)
         {
             IsBusy = true;
             HazzatController.GetSeasonServices(seasonId, OnGetSeasonServicesCompleted);
         }
 
-        public void OnGetSeasonServicesCompleted(object sender, GetSeasonServicesCompletedEventArgs e)
+        private void OnGetSeasonServicesCompleted(object sender, GetSeasonServicesCompletedEventArgs e)
         {
-            HymnsBySeason = e.Result;
+            var hymnsBySeason = e.Result;
 
-            if (HymnsBySeason != null)
+            if (hymnsBySeason != null)
             {
-                LoadServiceHymns(HymnsBySeason);
+                LoadServiceHymns(hymnsBySeason);
             }
 
             IsBusy = false;
@@ -125,6 +121,98 @@ namespace Hazzat.ViewModels
                         });
                     }
                 }
+            }
+        }
+
+        private void GetSeasonsByTypeId(int typeId)
+        {
+            IsBusy = true;
+            HazzatController.GetSeasonsByTypeId(typeId, OnGetSeasonsByTypeIdCompleted);
+        }
+
+        private void OnGetSeasonsByTypeIdCompleted(object sender, GetSeasonsByTypeIDCompletedEventArgs e)
+        {
+            var typeSeasons = e.Result;
+
+            if (typeSeasons != null)
+            {
+                LoadServiceHymnsByType(typeSeasons);
+            }
+
+            IsBusy = false;
+        }
+
+        private void LoadServiceHymnsByType(SeasonInfo[] filteredSeasons)
+        {
+            foreach (var seasonInfo in filteredSeasons.OrderBy(s => s.Season_Order))
+            {
+                var serviceInfo = new ServiceDetails()
+                {
+                    ServiceName = seasonInfo.Name,
+                    StructureId = seasonInfo.ItemId
+                };
+
+                ServiceList.Add(serviceInfo);
+
+                HazzatController.GetServiceHymnListBySeasonIdAndTypeId(
+                    seasonInfo.ItemId,
+                    itemId,
+                    (sender, e) => GetCompletedHymnsBySeasonAndTypeOrTune(e.Result, serviceInfo));
+            }
+        }
+
+        private void GetCompletedHymnsBySeasonAndTypeOrTune(ServiceHymnInfo[] fetchedHymns, ServiceDetails serviceInfo)
+        {
+            if (fetchedHymns != null)
+            {
+                lock (ServiceList)
+                {
+                    foreach (var hymnInfo in fetchedHymns)
+                    {
+                        serviceInfo.Add(new ServiceHymnMenuItem()
+                        {
+                            ItemId = hymnInfo.ItemId,
+                            Title = hymnInfo.Title,
+                            Structure_Name = hymnInfo.Structure_Name
+                        });
+                    }
+                }
+            }
+        }
+
+        private void GetSeasonsByTuneId(int tuneId)
+        {
+            IsBusy = true;
+            HazzatController.GetSeasonsByTuneId(tuneId, OnGetSeasonsByTuneIdCompleted);
+        }
+
+        private void OnGetSeasonsByTuneIdCompleted(object sender, GetSeasonsByTuneIDCompletedEventArgs e)
+        {
+            var tuneSeasons = e.Result;
+
+            if (tuneSeasons != null)
+            {
+                LoadServiceHymnsByTune(tuneSeasons);
+            }
+
+            IsBusy = false;
+        }
+
+        private void LoadServiceHymnsByTune(SeasonInfo[] hymnsBySeason)
+        {
+            foreach (var seasonInfo in hymnsBySeason.OrderBy(s => s.Season_Order))
+            {
+                var serviceInfo = new ServiceDetails()
+                {
+                    ServiceName = seasonInfo.Name,
+                    StructureId = seasonInfo.ItemId
+                };
+
+                ServiceList.Add(serviceInfo);
+
+                HazzatController.GetServiceHymnListBySeasonIdAndTuneId(seasonInfo.ItemId,
+                    itemId,
+                    (sender, e) => GetCompletedHymnsBySeasonAndTypeOrTune(e.Result, serviceInfo));
             }
         }
     }

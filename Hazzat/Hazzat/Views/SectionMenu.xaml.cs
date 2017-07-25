@@ -18,7 +18,6 @@ namespace Hazzat.Views
     {
         public SectionMenuViewModel viewModel;
         private static ObservableCollection<ServiceDetails> serviceList;
-        private static NavigationType navigationType;
         private static int itemId;
         private static string itemName;
 
@@ -36,17 +35,9 @@ namespace Hazzat.Views
                     break;
             }
 
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                overlay.IsVisible = true;
-            });
-
             serviceList = new ObservableCollection<ServiceDetails>();
-            itemId = 0;
+            itemId = -1;
             itemName = viewModel.Title;
-            navigationType = viewModel.NavigationType;
-
-            SubscribeMessages();
         }
 
         public async void SectionMenuInit(string ItemName, int ItemId, NavigationType navType)
@@ -56,118 +47,11 @@ namespace Hazzat.Views
             await Navigation.PushAsync(newMenu, true);
         }
 
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-
-            MessagingCenter.Unsubscribe<MainViewModel>(this, "DoneSeason");
-        }
-
-        public void SubscribeMessages()
-        {
-            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithSeasonsListByType", (sender) =>
-            {
-                if (App.NameViewModel?.TypeSeasons != null)
-                {
-                    LoadServiceHymnsByType(App.NameViewModel.TypeSeasons);
-
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        StructList.ItemsSource = serviceList;
-                    });
-                }
-            });
-
-            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithSeasonsListByTune", (sender) =>
-            {
-                if (App.NameViewModel?.TuneSeasons != null)
-                {
-                    LoadServiceHymnsByTune(App.NameViewModel.TuneSeasons);
-    
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        StructList.ItemsSource = serviceList;
-                    });
-                }
-            });
-        }
-
-        private void LoadServiceHymnsByType(SeasonInfo[] filteredSeasons)
-        {
-            //BUGBUG: For some reason this method is being called multiple times.  As a temporary
-            //hack clear the serviceList first to avoid redundancy
-            serviceList.Clear();
-
-            foreach (var seasonInfo in filteredSeasons.OrderBy(s => s.Season_Order))
-            {
-                // TODO: change the member names to be more generic
-                var serviceInfo = new ServiceDetails()
-                {
-                    ServiceName = seasonInfo.Name,
-                    StructureId = seasonInfo.ItemId
-                };
-
-                serviceList.Add(serviceInfo);
-
-                App.NameViewModel.GetServiceHymnListBySeasonIdAndTypeId(
-                    seasonInfo.ItemId,
-                    itemId,
-                    (sender, e) => GetCompletedHymnsBySeasonAndTypeOrTune(e.Result, serviceInfo));
-            }
-        }
-
-        private void LoadServiceHymnsByTune(SeasonInfo[] hymnsBySeason)
-        {
-            //BUGBUG: For some reason this method is being called multiple times.  As a temporary
-            //hack clear the serviceList first to avoid redundancy
-            serviceList.Clear();
-
-            foreach (var seasonInfo in hymnsBySeason.OrderBy(s => s.Season_Order))
-            {
-                // TODO: change the member names to be more generic
-                var serviceInfo = new ServiceDetails()
-                {
-                    ServiceName = seasonInfo.Name,
-                    StructureId = seasonInfo.ItemId
-                };
-
-                serviceList.Add(serviceInfo);
-
-                App.NameViewModel.GetServiceHymnListBySeasonIdAndTuneId(
-                    seasonInfo.ItemId,
-                    itemId,
-                    (sender, e) => GetCompletedHymnsBySeasonAndTypeOrTune(e.Result, serviceInfo));
-            }
-        }
-
-        private void GetCompletedHymnsBySeasonAndTypeOrTune(ServiceHymnInfo[] fetchedHymns, ServiceDetails serviceInfo)
-        {
-            if (fetchedHymns.Length != 0)
-            {
-                lock (serviceList)
-                {
-                    foreach (var hymnInfo in fetchedHymns)
-                    {
-                        serviceInfo.Add(new ServiceHymnMenuItem()
-                        {
-                            ItemId = hymnInfo.ItemId,
-                            Title = hymnInfo.Title,
-                            Structure_Name = hymnInfo.Structure_Name
-                        });
-                    }
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        overlay.IsVisible = false;
-                    });
-                }
-            }
-        }
-
         protected async void ServiceHymnTapped(object sender, ItemTappedEventArgs e)
         {
             ServiceHymnMenuItem item = (ServiceHymnMenuItem)e.Item;
 
-            string breadcrumbName = navigationType == NavigationType.Season ? item.Structure_Name : itemName;
+            string breadcrumbName = viewModel.NavigationType == NavigationType.Season ? item.Structure_Name : itemName;
             HymnPage HymnPage = new HymnPage(breadcrumbName, item.Title, item.ItemId);
 
             await Navigation.PushAsync(HymnPage, true);

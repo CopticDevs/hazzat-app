@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace Hazzat.Models
 {
+    //TODO: rename service details to be hymnGroupdetails
     public class ServiceDetails : ObservableGroupedCollection<ServiceHymnMenuItem>
     {
         string serviceName = string.Empty;
