@@ -49,7 +49,7 @@
     <Compile Include="Types\NavigationInfo.cs" />
     <Compile Include="Types\NavigationMethod.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\HymnPageViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="Models\MainMenuItem.cs" />
     <Compile Include="ViewModels\SectionMenuViewModel.cs" />

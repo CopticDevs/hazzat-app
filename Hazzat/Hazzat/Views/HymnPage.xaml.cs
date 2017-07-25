@@ -16,7 +16,9 @@ namespace Hazzat.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HymnPage : TabbedPage
     {
-        private string HtmlHeaderFormatString = @"<html><body>
+        private static string foreground = DependencyService.Get<IColorRender>().GetDefault();
+        private static string background = DependencyService.Get<IColorRender>().GetBackground();
+        private static string HtmlHeaderFormatString = @"<html><body>
 <style>
 body
 {{ 
@@ -162,48 +164,40 @@ Hymn text Styles
     text-align: right;
     direction: rtl;
 }
-</style>";
+</style>".Replace("{0}", background).Replace("{1}", foreground);
 
         /// <summary>
         /// Dictionary holding the different tabs, where the id is the order of the tab
         /// </summary>
         private Dictionary<int, Page> orderedPages;
 
-        public int HymnID;
+        private HymnPageViewModel viewModel;
 
-        public HymnPage(string breadcrumbName, string HymnName, int HymnId)
+        public HymnPage(HymnPageViewModel viewModel)
         {
             InitializeComponent();
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                overlay.IsVisible = true;
-            });
-            Title = $"{breadcrumbName} - {HymnName}";
-
-            this.HymnID = HymnId;
-
+            SubscribeMessages();
             orderedPages = new Dictionary<int, Page>();
+            BindingContext = this.viewModel = viewModel;
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
 
-            MessagingCenter.Unsubscribe<MainViewModel>(this, "DoneWithHymnText");
-            MessagingCenter.Unsubscribe<MainViewModel>(this, "DoneWithHazzat");
-            MessagingCenter.Unsubscribe<MainViewModel>(this, "DoneWithVerticalHazzat");
+            MessagingCenter.Unsubscribe<HymnPageViewModel>(this, "DoneWithHymnText");
+            MessagingCenter.Unsubscribe<HymnPageViewModel>(this, "DoneWithHazzat");
+            MessagingCenter.Unsubscribe<HymnPageViewModel>(this, "DoneWithVerticalHazzat");
         }
 
-        public void SubscribeMessage()
+        private void SubscribeMessages()
         {
-			string foreground = DependencyService.Get<IColorRender>().GetDefault();
-			string background = DependencyService.Get<IColorRender>().GetBackground();
             HtmlHeaderFormatString.Replace("{0}", background);
             HtmlHeaderFormatString.Replace("{1}", foreground);
 
-            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithHymnText", (sender) =>
+            MessagingCenter.Subscribe<HymnPageViewModel>(this, "DoneWithHymnText", (sender) =>
             {
-                if (App.NameViewModel?.TextHymnContentInfo?.FirstOrDefault() != null)
+                if (viewModel.TextHymnContentInfo?.FirstOrDefault() != null)
                 {
                     HtmlWebViewSource source = new HtmlWebViewSource();
                     var html = new StringBuilder();
@@ -212,7 +206,7 @@ Hymn text Styles
                     //Append Coptic Font css
                     html.Append(HtmlHeaderFormatString);
 
-                    foreach (var hymnContent in App.NameViewModel.TextHymnContentInfo)
+                    foreach (var hymnContent in viewModel.TextHymnContentInfo)
                     {
                         // Hymn title
                         html.Append($"<font class='HymnTitle'>{hymnContent.Title}</font><br /><br />");
@@ -257,9 +251,9 @@ Hymn text Styles
                 }
             });
 
-            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithHazzat", (sender) =>
+            MessagingCenter.Subscribe<HymnPageViewModel>(this, "DoneWithHazzat", (sender) =>
             {
-                if (App.NameViewModel?.HazzatHymnContentInfo?.FirstOrDefault() != null)
+                if (viewModel.HazzatHymnContentInfo?.FirstOrDefault() != null)
                 {
                     HtmlWebViewSource source = new HtmlWebViewSource();
 
@@ -269,7 +263,7 @@ Hymn text Styles
 					//Append Coptic Font css
 					html.Append(HtmlHeaderFormatString);
 
-                    foreach (var hymnContent in App.NameViewModel.HazzatHymnContentInfo)
+                    foreach (var hymnContent in viewModel.HazzatHymnContentInfo)
                     {
 						// Hymn title
 						html.Append($"<font class='HymnTitle'>{hymnContent.Title}</font><br /><br />");
@@ -310,9 +304,9 @@ Hymn text Styles
                 }
             });
 
-            MessagingCenter.Subscribe<MainViewModel>(this, "DoneWithVerticalHazzat", (sender) =>
+            MessagingCenter.Subscribe<HymnPageViewModel>(this, "DoneWithVerticalHazzat", (sender) =>
             {
-                if (App.NameViewModel?.VerticalHazzatHymnContent?.FirstOrDefault() != null)
+                if (viewModel.VerticalHazzatHymnContent?.FirstOrDefault() != null)
                 {
                     HtmlWebViewSource source = new HtmlWebViewSource();
 
@@ -322,7 +316,7 @@ Hymn text Styles
 					//Append Coptic Font css
 					html.Append(HtmlHeaderFormatString);
 
-                    foreach (var hymnContent in App.NameViewModel.VerticalHazzatHymnContent)
+                    foreach (var hymnContent in viewModel.VerticalHazzatHymnContent)
                     {
 						// Hymn title
 						html.Append($"<font class='HymnTitle'>{hymnContent.Title}</font><br /><br />");

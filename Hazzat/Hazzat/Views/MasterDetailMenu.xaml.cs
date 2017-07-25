@@ -20,7 +20,7 @@ namespace Hazzat.Views
 
             MessagingCenter.Subscribe<MainMenu>(this, "MenuItemSelected", HideMasterPage);
 
-            MessagingCenter.Subscribe<MainViewModel>(this, "Loading", ShowReload);
+            MessagingCenter.Subscribe<MenuViewModel>(this, "Loading", ShowReload);
 
             // Initialize page with season
             var navInfo = new NavigationInfo(NavigationMethod.Season, SeasonId);
@@ -28,13 +28,13 @@ namespace Hazzat.Views
             Detail = new NavigationPage(Menu);
         }
 
-        private void ShowReload(MainViewModel obj)
+        private void ShowReload(MenuViewModel obj)
         {
-            MessagingCenter.Unsubscribe<MainViewModel>(this, "Loading");
+            MessagingCenter.Unsubscribe<MenuViewModel>(this, "Loading");
 
             Timer time = new Timer(Reload, null, 10000, Timeout.Infinite);
 
-            MessagingCenter.Subscribe<MainViewModel>(this, "Loading", ShowReload);
+            MessagingCenter.Subscribe<MenuViewModel>(this, "Loading", ShowReload);
         }
 
         private void Reload(object state)

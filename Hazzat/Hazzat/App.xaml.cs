@@ -38,19 +38,6 @@ namespace Hazzat
 
         private static Dictionary<string, Dictionary<string, List<string>>> AppDataCache { get; set; }    // Designed for BySeasons ViewModel
 
-        private static MainViewModel nameViewModel = null;
-        internal static MainViewModel NameViewModel
-        {
-            get
-            {
-                if (nameViewModel == null)
-                {
-                    nameViewModel = new MainViewModel();
-                }
-                return nameViewModel;
-            }
-        }
-
         private static MenuViewModel menuViewModel = null;
         internal static MenuViewModel MenuViewModel
         {

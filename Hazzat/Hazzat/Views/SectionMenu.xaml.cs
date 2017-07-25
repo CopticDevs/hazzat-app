@@ -11,7 +11,7 @@ namespace Hazzat.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SectionMenu : ContentPage
     {
-        public SectionMenuViewModel viewModel;
+        private SectionMenuViewModel viewModel;
 
         public SectionMenu(SectionMenuViewModel viewModel)
         {
@@ -40,13 +40,9 @@ namespace Hazzat.Views
             ServiceHymnMenuItem item = (ServiceHymnMenuItem)e.Item;
 
             string breadcrumbName = viewModel.NavigationInfo.Method == NavigationMethod.Season ? item.Structure_Name : viewModel.Title;
-            HymnPage HymnPage = new HymnPage(breadcrumbName, item.Title, item.ItemId);
+            HymnPage HymnPage = new HymnPage(new HymnPageViewModel(item.ItemId, $"{breadcrumbName} - {item.Title}"));
 
             await Navigation.PushAsync(HymnPage, true);
-
-            HymnPage.SubscribeMessage();
-
-            App.NameViewModel.GetHymnContent(item.ItemId);
         }
 
 		protected async Task OnToolbarItemClicked(object sender, EventArgs args)

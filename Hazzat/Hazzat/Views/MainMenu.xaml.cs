@@ -29,13 +29,6 @@ namespace Hazzat.Views
             BindingContext = App.MenuViewModel;
         }
 
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-
-            MessagingCenter.Unsubscribe<MainViewModel>(this, "Done");
-        }
-
         protected override void OnAppearing()
         {
             base.OnAppearing();

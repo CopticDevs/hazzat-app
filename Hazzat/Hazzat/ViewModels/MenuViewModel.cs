@@ -4,6 +4,7 @@ using Hazzat.Service;
 using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Xamarin.Forms;
 
 namespace Hazzat.ViewModels
 {
@@ -34,16 +35,19 @@ namespace Hazzat.ViewModels
 
         public void LoadSeasons()
         {
+            MessagingCenter.Send(this, "Loading");
             HazzatController.GetSeasons(true, OnGetSeasonsCompleted);
         }
 
         public void LoadTypes()
         {
+            MessagingCenter.Send(this, "Loading");
             HazzatController.GetTypeList(OnGetTypeListCompleted);
         }
 
         public void LoadTunes()
         {
+            MessagingCenter.Send(this, "Loading");
             HazzatController.GetTuneList(OnGetTuneListCompleted);
         }
 
