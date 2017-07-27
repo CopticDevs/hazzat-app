@@ -3,6 +3,7 @@ using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
 using Hazzat.Types;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace Hazzat.ViewModels
 {
@@ -68,6 +69,8 @@ namespace Hazzat.ViewModels
                 LoadServiceHymns(hymnsBySeason);
             }
 
+            MessagingCenter.Send(this, "GetHymnGroupsCompleted");
+
             IsBusy = false;
         }
 
@@ -120,6 +123,8 @@ namespace Hazzat.ViewModels
                 LoadServiceHymnsByType(typeSeasons);
             }
 
+            MessagingCenter.Send(this, "GetHymnGroupsCompleted");
+
             IsBusy = false;
         }
 
@@ -171,6 +176,8 @@ namespace Hazzat.ViewModels
             {
                 LoadServiceHymnsByTune(tuneSeasons);
             }
+
+            MessagingCenter.Send(this, "GetHymnGroupsCompleted");
 
             IsBusy = false;
         }

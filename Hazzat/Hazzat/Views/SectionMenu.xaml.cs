@@ -26,6 +26,20 @@ namespace Hazzat.Views
                     TBI.Text = "settings";
                     break;
             }
+
+            SubscribeMessages();
+        }
+
+        private void SubscribeMessages()
+        {
+            //SDKBUG: Seems like XAMARIN's Android/iOS do not support binding for grouped ListView
+            MessagingCenter.Subscribe<SectionMenuViewModel>(this, "GetHymnGroupsCompleted", (sender) =>
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    StructList.ItemsSource = viewModel.HymnGroups;
+                });
+            });
         }
 
         public async void SectionMenuInit(string ItemName, NavigationInfo navInfo)

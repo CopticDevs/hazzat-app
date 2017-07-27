@@ -12,7 +12,7 @@
     </ContentPage.ToolbarItems>
     <AbsoluteLayout>
         <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
-            <ListView x:Name="StructList" IsGroupingEnabled="True" ItemsSource="{Binding HymnGroups}"
+            <ListView x:Name="StructList" IsGroupingEnabled="True"
                       GroupDisplayBinding="{Binding Name}" ItemTapped="ServiceHymnTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
