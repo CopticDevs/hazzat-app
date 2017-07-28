@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Hazzat.Views.HymnPage">
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="Hazzat.Views.HymnPage"
+            Title="{Binding Title}"
+            ItemsSource="{Binding ContentTabs}">
+    <TabbedPage.ItemTemplate>
+        <DataTemplate>
+            <ContentPage Title="{Binding Title}" Icon="{Binding Icon}" Content="{Binding Content}" />
+        </DataTemplate>
+    </TabbedPage.ItemTemplate>
     <ContentPage>
         <AbsoluteLayout>
-            <ContentView x:Name="overlay" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" IsVisible="True">
-                <ActivityIndicator x:Name="activityIndicator" IsRunning="True" IsVisible="True" VerticalOptions="Center" />
+            <ContentView x:Name="overlay" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsBusy}">
+                <ActivityIndicator x:Name="activityIndicator" IsRunning="True" VerticalOptions="Center" />
             </ContentView>
         </AbsoluteLayout>
     </ContentPage>
