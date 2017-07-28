@@ -1,4 +1,4 @@
-﻿using Hazzat.Models;
+﻿﻿using Hazzat.Models;
 using Hazzat.Types;
 using Hazzat.ViewModels;
 using System;
@@ -94,7 +94,7 @@ namespace Hazzat.Views
 
         protected async Task OnToolbarItemClicked(object sender, EventArgs args)
 		{
-			var result = await DisplayAlert("Notice", "This is a beta version for a proof of concept.", "Okay", "Link");
+			var result = await DisplayAlert("Notice", "2017 © hazzat.com", "Okay", "Link");
 
 			if (!result)
 			{
