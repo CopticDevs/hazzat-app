@@ -4,12 +4,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using Xamarin.Forms;
+using System;
 
 namespace Hazzat.ViewModels
 {
     public class HymnPageViewModel : BaseViewModel
     {
-
         private static string foreground = DependencyService.Get<IColorRender>().GetDefault();
         private static string background = DependencyService.Get<IColorRender>().GetBackground();
         private static string HtmlHeaderFormatString = @"<html><body>
@@ -183,6 +183,7 @@ Hymn text Styles
         private void GetHymnContent(int serviceHymnId)
         {
             IsBusy = true;
+
             HazzatController.GetSeasonServiceHymnText(serviceHymnId, OnGetSeasonServiceHymnTextCompleted);
             HazzatController.GetSeasonServiceHymnHazzat(serviceHymnId, OnGetSeasonServiceHymnHazzatCompleted);
             HazzatController.GetSeasonServiceHymnVerticalHazzat(serviceHymnId, OnGetSeasonServiceHymnVerticalHazzatCompleted);

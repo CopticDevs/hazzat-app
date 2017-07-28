@@ -41,5 +41,16 @@ namespace Hazzat.Models
             get { return structure_Name; }
             set { SetProperty(ref structure_Name, value); }
         }
+
+        bool hasSupportedContent = false;
+
+        /// <summary>
+        /// Gets/Sets a flag indicating if the hymn has any supported content
+        /// </summary>
+        public bool HasSupportedContent
+        {
+            get { return hasSupportedContent; }
+            set { SetProperty(ref hasSupportedContent, value); }
+        }
     }
 }
