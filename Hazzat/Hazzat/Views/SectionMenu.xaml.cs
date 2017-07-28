@@ -54,13 +54,45 @@ namespace Hazzat.Views
         {
             ServiceHymnMenuItem item = (ServiceHymnMenuItem)e.Item;
 
+            if (!item.HasSupportedContent)
+            {
+                DisplayNoContentAlert();
+                return;
+            }
+
             string breadcrumbName = viewModel.NavigationInfo.Method == NavigationMethod.Season ? item.Structure_Name : viewModel.Title;
             HymnPage HymnPage = new HymnPage(new HymnPageViewModel(item.ItemId, $"{breadcrumbName} - {item.Title}"));
 
             await Navigation.PushAsync(HymnPage, true);
         }
 
-		protected async Task OnToolbarItemClicked(object sender, EventArgs args)
+        private async void DisplayNoContentAlert()
+        {
+            string link = "http://hazzat.com";
+            // setup link
+            switch (viewModel.NavigationInfo.Method)
+            {
+                case NavigationMethod.Season:
+                    link = $"http://www.hazzat.com/Seasons/tabid/57/ctl/ListSeasonHymns/mid/404/Season/{viewModel.NavigationInfo.ItemId}/Default.aspx";
+                    break;
+                case NavigationMethod.Type:
+                    link = $"http://www.hazzat.com/Types/tabid/58/ctl/ListHymnsType/mid/405/Type/{viewModel.NavigationInfo.ItemId}/Default.aspx";
+                    break;
+                case NavigationMethod.Tune:
+                    link = $"http://www.hazzat.com/Tunes/tabid/59/ctl/ListHymnsTune/mid/403/Tune/{viewModel.NavigationInfo.ItemId}/Default.aspx";
+                    break;
+                default:
+                    break;
+            }
+            var result = await DisplayAlert("No supported content", "Please visit http://hazzat.com to view this hymn's content.", "Okay", "Link");
+
+            if (!result)
+            {
+                Device.OpenUri(new Uri(link));
+            }
+        }
+
+        protected async Task OnToolbarItemClicked(object sender, EventArgs args)
 		{
 			var result = await DisplayAlert("Notice", "This is a beta version for a proof of concept.", "Okay", "Link");
 

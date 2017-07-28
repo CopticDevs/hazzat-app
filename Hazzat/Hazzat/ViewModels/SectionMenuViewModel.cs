@@ -64,6 +64,8 @@ namespace Hazzat.ViewModels
 
             if (hymnsBySeason != null)
             {
+                // filter out seasons that have no supported content
+                hymnsBySeason = hymnsBySeason.Where(s => s.Has_Text || s.Has_Hazzat || s.Has_VerticalHazzat).ToArray();
                 LoadServiceHymns(hymnsBySeason);
             }
 
@@ -78,8 +80,6 @@ namespace Hazzat.ViewModels
             {
                 var groupDetails = new HymnGroup(structInfo.Service_Name);
 
-                HymnGroups.Add(groupDetails);
-
                 HazzatController.GetSeasonServiceHymns(
                     structInfo.ItemId,
                     (sender, e) => GetCompletedHymnsBySeason(e.Result, groupDetails));
@@ -90,18 +90,24 @@ namespace Hazzat.ViewModels
         {
             if (fetchedHymns.Length != 0)
             {
-                // Adding a lock on serviceList since multiple services could be modifying the collection
+                // filter out hymns that have no supported content
+                fetchedHymns = fetchedHymns.Where(h => h.Has_Text || h.Has_Hazzat || h.Has_VerticalHazzat).ToArray();
+
+                foreach (var hymnInfo in fetchedHymns)
+                {
+                    groupDetails.Add(new ServiceHymnMenuItem()
+                    {
+                        ItemId = hymnInfo.ItemId,
+                        Title = hymnInfo.Title,
+                        Structure_Name = hymnInfo.Structure_Name,
+                        HasSupportedContent = true
+                    });
+                }
+
+                // Adding a lock since multiple services could be modifying the collection concurrently
                 lock (HymnGroups)
                 {
-                    foreach (var hymnInfo in fetchedHymns)
-                    {
-                        groupDetails.Add(new ServiceHymnMenuItem()
-                        {
-                            ItemId = hymnInfo.ItemId,
-                            Title = hymnInfo.Title,
-                            Structure_Name = hymnInfo.Structure_Name
-                        });
-                    }
+                    HymnGroups.Add(groupDetails);
                 }
             }
         }
@@ -132,8 +138,6 @@ namespace Hazzat.ViewModels
             {
                 var groupDetails = new HymnGroup(seasonInfo.Name);
 
-                HymnGroups.Add(groupDetails);
-
                 HazzatController.GetServiceHymnListBySeasonIdAndTypeId(
                     seasonInfo.ItemId,
                     NavigationInfo.ItemId,
@@ -143,20 +147,26 @@ namespace Hazzat.ViewModels
 
         private void GetCompletedHymnsBySeasonAndTypeOrTune(ServiceHymnInfo[] fetchedHymns, HymnGroup groupDetails)
         {
-            if (fetchedHymns != null)
+            if (fetchedHymns == null)
             {
-                lock (HymnGroups)
+                return;
+            }
+
+            foreach (var hymnInfo in fetchedHymns)
+            {
+                groupDetails.Add(new ServiceHymnMenuItem()
                 {
-                    foreach (var hymnInfo in fetchedHymns)
-                    {
-                        groupDetails.Add(new ServiceHymnMenuItem()
-                        {
-                            ItemId = hymnInfo.ItemId,
-                            Title = hymnInfo.Title,
-                            Structure_Name = hymnInfo.Structure_Name
-                        });
-                    }
-                }
+                    ItemId = hymnInfo.ItemId,
+                    Title = hymnInfo.Title,
+                    Structure_Name = hymnInfo.Structure_Name,
+                    HasSupportedContent = hymnInfo.Has_Text || hymnInfo.Has_Hazzat || hymnInfo.Has_VerticalHazzat
+                });
+            }
+
+            // Adding a lock since multiple services could be modifying the collection concurrently
+            lock (HymnGroups)
+            {
+                HymnGroups.Add(groupDetails);
             }
         }
 
@@ -185,8 +195,6 @@ namespace Hazzat.ViewModels
             foreach (var seasonInfo in filteredSeasons.OrderBy(s => s.Season_Order))
             {
                 var groupDetails = new HymnGroup(seasonInfo.Name);
-
-                HymnGroups.Add(groupDetails);
 
                 HazzatController.GetServiceHymnListBySeasonIdAndTuneId(seasonInfo.ItemId,
                     NavigationInfo.ItemId,
