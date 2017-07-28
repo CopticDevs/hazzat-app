@@ -1,12 +1,6 @@
-﻿using hazzat.com;
-using Hazzat.HazzatService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Hazzat.Models;
+using Hazzat.Types;
+using Hazzat.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -32,75 +26,47 @@ namespace Hazzat.Views
                     break;
             }
 
-            SubscribeMessages();
-
-            App.NameViewModel.createSeasonsViewModel(true);
-            App.NameViewModel.GetHymnsByType();
-            App.NameViewModel.GetHymnsByTune();
+            BindingContext = App.MenuViewModel;
         }
 
-        protected override void OnDisappearing()
+        protected override void OnAppearing()
         {
-            base.OnDisappearing();
+            base.OnAppearing();
 
-            MessagingCenter.Unsubscribe<ByNameMainViewModel>(this, "Done");
-        }
-
-        private void SubscribeMessages()
-        {
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "Done", (sender) =>
+            if (App.MenuViewModel.Seasons.Count == 0)
             {
-                if (App.NameViewModel?.Seasons != null)
-                {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        SeasonsMenu.ItemsSource = App.NameViewModel.Seasons;
-                    });
-                }
-            });
+                App.MenuViewModel.LoadSeasons();
+            }
 
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithTypeList", (sender) =>
+            if (App.MenuViewModel.Types.Count == 0)
             {
-                if (App.NameViewModel?.TypeList != null)
-                {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        TypesMenu.ItemsSource = App.NameViewModel.TypeList;
-                    });
-                }
-            });
+                App.MenuViewModel.LoadTypes();
+            }
 
-            MessagingCenter.Subscribe<ByNameMainViewModel>(this, "DoneWithTuneList", (sender) =>
+            if (App.MenuViewModel.Tunes.Count == 0)
             {
-                if (App.NameViewModel?.TuneList != null)
-                {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        TunesMenu.ItemsSource = App.NameViewModel.TuneList;
-                    });
-                }
-            });
+                App.MenuViewModel.LoadTunes();
+            }
         }
 
         protected void SeasonSelected(object sender, ItemTappedEventArgs e)
         {
-            SeasonInfo item = (SeasonInfo)e.Item;
+            MainMenuItem item = (MainMenuItem)e.Item;
             MessagingCenter.Send(this,"MenuItemSelected");
-            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Season);
+            MasterDetailMenu.Menu.SectionMenuInit(item.Name, new NavigationInfo(NavigationMethod.Season, item.ItemId));
         }
 
         protected void TypeSelected(object sender, ItemTappedEventArgs e)
         {
-            //Unfortunate type name collision
-            hazzat.com.TypeInfo item = (hazzat.com.TypeInfo)e.Item;
+            MainMenuItem item = (MainMenuItem)e.Item;
             MessagingCenter.Send(this, "MenuItemSelected");
-            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Type);
+            MasterDetailMenu.Menu.SectionMenuInit(item.Name, new NavigationInfo(NavigationMethod.Type, item.ItemId));
         }
         protected void TuneSelected(object sender, ItemTappedEventArgs e)
         {
-            TuneInfo item = (TuneInfo)e.Item;
+            MainMenuItem item = (MainMenuItem)e.Item;
             MessagingCenter.Send(this, "MenuItemSelected");
-            MasterDetailMenu.Menu.SectionMenuInit(item.Name, item.ItemId, NavigationType.Tune);
+            MasterDetailMenu.Menu.SectionMenuInit(item.Name, new NavigationInfo(NavigationMethod.Tune, item.ItemId));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Hazzat.HazzatService;
+﻿using Hazzat.ViewModels;
 using Hazzat.Views;
 using NodaTime;
 using System;
@@ -38,16 +38,16 @@ namespace Hazzat
 
         private static Dictionary<string, Dictionary<string, List<string>>> AppDataCache { get; set; }    // Designed for BySeasons ViewModel
 
-        private static ByNameMainViewModel nameViewModel = null;
-        internal static ByNameMainViewModel NameViewModel
+        private static MenuViewModel menuViewModel = null;
+        internal static MenuViewModel MenuViewModel
         {
             get
             {
-                if (nameViewModel == null)
+                if (menuViewModel == null)
                 {
-                    nameViewModel = new ByNameMainViewModel();
+                    menuViewModel = new MenuViewModel();
                 }
-                return nameViewModel;
+                return menuViewModel;
             }
         }
 
@@ -99,6 +99,7 @@ namespace Hazzat
 
                 Tuple<string, string> currTime = CurrentTime();
 
+                // TODO: use the first season, instead of hardcoding annual
                 MainPage = new MasterDetailMenu("Annual", 1); //Set to current Season
 
                 return;
