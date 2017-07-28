@@ -1,7 +1,7 @@
-﻿using Hazzat.ViewModels;
+﻿using Hazzat.Types;
+using Hazzat.ViewModels;
 using System;
 using System.Threading;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,22 +16,25 @@ namespace Hazzat.Views
         {
             InitializeComponent();
 
+            BindingContext = App.MenuViewModel;
+
             MessagingCenter.Subscribe<MainMenu>(this, "MenuItemSelected", HideMasterPage);
 
-            MessagingCenter.Subscribe<MainViewModel>(this, "Loading", ShowReload);
+            MessagingCenter.Subscribe<MenuViewModel>(this, "Loading", ShowReload);
 
-            Menu = new SectionMenu(Season, SeasonId, NavigationType.Season);
-
+            // Initialize page with season
+            var navInfo = new NavigationInfo(NavigationMethod.Season, SeasonId);
+            Menu = new SectionMenu(new SectionMenuViewModel(Season, navInfo));
             Detail = new NavigationPage(Menu);
         }
 
-        private void ShowReload(MainViewModel obj)
+        private void ShowReload(MenuViewModel obj)
         {
-            MessagingCenter.Unsubscribe<MainViewModel>(this, "Loading");
+            MessagingCenter.Unsubscribe<MenuViewModel>(this, "Loading");
 
             Timer time = new Timer(Reload, null, 10000, Timeout.Infinite);
 
-            MessagingCenter.Subscribe<MainViewModel>(this, "Loading", ShowReload);
+            MessagingCenter.Subscribe<MenuViewModel>(this, "Loading", ShowReload);
         }
 
         private void Reload(object state)
@@ -75,6 +78,7 @@ namespace Hazzat.Views
 
         public void HideMasterPage(MainMenu obj)
         {
+            //TODO: Change this to be view specific, not device specific
             if (Device.RuntimePlatform != Device.Windows)
             {
                 IsPresented = false;
