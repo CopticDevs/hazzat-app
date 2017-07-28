@@ -28,6 +28,7 @@ namespace Hazzat.Views
             }
 
             SubscribeMessages();
+            viewModel.LoadContentBasedOnNavigationType();
         }
 
         private void SubscribeMessages()

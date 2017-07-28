@@ -69,6 +69,7 @@ namespace Hazzat.ViewModels
             }
 
             Seasons.ReplaceRange(seasonsList);
+            App.IsLoaded = true;
         }
 
         private void OnGetTypeListCompleted(object sender, GetTypeListCompletedEventArgs e)
@@ -89,6 +90,7 @@ namespace Hazzat.ViewModels
             }
 
             Types.ReplaceRange(typesList);
+            App.IsLoaded = true;
         }
 
         private void OnGetTuneListCompleted(object sender, GetTuneListCompletedEventArgs e)
@@ -109,6 +111,7 @@ namespace Hazzat.ViewModels
             }
 
             Tunes.ReplaceRange(tunesList);
+            App.IsLoaded = true;
         }
     }
 }
