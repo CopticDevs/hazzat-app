@@ -28,7 +28,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.hazzat.hazzatapp</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.2.1</string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Icon-60@2x</string>
