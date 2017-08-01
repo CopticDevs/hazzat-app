@@ -17,7 +17,8 @@ namespace Hazzat.Views
         {
             InitializeComponent();
 
-            BindingContext = this.viewModel = viewModel;
+            this.viewModel = viewModel;
+            BindingContext = this.viewModel;
 
             switch(Device.RuntimePlatform)
             {
@@ -26,9 +27,6 @@ namespace Hazzat.Views
                     TBI.Text = "settings";
                     break;
             }
-
-            SubscribeMessages();
-            viewModel.LoadContentBasedOnNavigationType();
         }
 
         private void SubscribeMessages()

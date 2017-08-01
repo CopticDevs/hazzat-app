@@ -32,6 +32,8 @@ namespace Hazzat.ViewModels
             Title = title;
             NavigationInfo = navigationInfo;
             HymnGroups = new ObservableCollection<HymnGroup>();
+
+            LoadContentBasedOnNavigationType();
         }
 
         public void LoadContentBasedOnNavigationType()
