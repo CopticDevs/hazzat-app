@@ -182,14 +182,14 @@ Hymn text Styles
 
         public static LanguageHtmlProperties CopticHtmlProperties = new LanguageHtmlProperties()
         {
-            BootstrapColCssClass = "col-xs-4",
+            BootstrapColCssClass = "col-xs-5",
             FontCssClass = "CopticFont",
             IsRTL = false
         };
 
         public static LanguageHtmlProperties ArabicHtmlProperties = new LanguageHtmlProperties()
         {
-            BootstrapColCssClass = "col-xs-4",
+            BootstrapColCssClass = "col-xs-3",
             FontCssClass = "ArabicFont",
             IsRTL = true
         };
