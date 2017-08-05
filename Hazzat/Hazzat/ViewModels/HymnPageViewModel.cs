@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 using System;
+using Hazzat.Service.Providers.DataProviders.WebServiceProvider;
+using Hazzat.Types;
 
 namespace Hazzat.ViewModels
 {
@@ -160,6 +162,34 @@ Hymn text Styles
 }
 </style>".Replace("{0}", background).Replace("{1}", foreground);
 
+        public static string BootsrapContainerCssClass = "container-fluid";
+        public static string BootstrapCol12CssClass = "col-md-12";
+
+        public static LanguageHtmlProperties EnglishHtmlProperties = new LanguageHtmlProperties()
+        {
+            BootstrapColCssClass = "col-md-4",
+            FontCssClass = "EnglishFont",
+            IsRTL = false
+        };
+
+        public static LanguageHtmlProperties CopticHtmlProperties = new LanguageHtmlProperties()
+        {
+            BootstrapColCssClass = "col-md-6",
+            FontCssClass = "CopticFont",
+            IsRTL = false
+        };
+
+        public static LanguageHtmlProperties ArabicHtmlProperties = new LanguageHtmlProperties()
+        {
+            BootstrapColCssClass = "col-md-2",
+            FontCssClass = "ArabicFont",
+            IsRTL = true
+        };
+
+        private string textDelimiter;
+        private ServiceHymnsContentInfo[] textHymnContentInfo;
+        private Object textContentLock = new Object();
+
         /// <summary>
         /// Dictionary holding the different tabs, where the id is the order of the tab
         /// </summary>
@@ -184,69 +214,98 @@ Hymn text Styles
         {
             IsBusy = true;
 
+            HazzatController.GetTextRowDelimiterToken(OnGetTextRowDelimiterTokenCompleted);
             HazzatController.GetSeasonServiceHymnText(serviceHymnId, OnGetSeasonServiceHymnTextCompleted);
             HazzatController.GetSeasonServiceHymnHazzat(serviceHymnId, OnGetSeasonServiceHymnHazzatCompleted);
             HazzatController.GetSeasonServiceHymnVerticalHazzat(serviceHymnId, OnGetSeasonServiceHymnVerticalHazzatCompleted);
         }
 
+        private void OnGetTextRowDelimiterTokenCompleted(object senter, GetTextRowDelimiterTokenCompletedEventArgs e)
+        {
+            lock (textContentLock)
+            {
+                textDelimiter = e.Result;
+            }
+
+            RenderText();
+        }
+
         private void OnGetSeasonServiceHymnTextCompleted(object sender, GetSeasonServiceHymnTextCompletedEventArgs e)
         {
-            var textHymnContentInfo = e.Result;
-
-            if (textHymnContentInfo?.FirstOrDefault() != null)
+            lock (textContentLock)
             {
-                HtmlWebViewSource source = new HtmlWebViewSource();
-                var html = new StringBuilder();
-                source.BaseUrl = DependencyService.Get<IWebAssets>().Get();
-
-                //Append Coptic Font css
-                html.Append(HtmlHeaderFormatString);
-
-                foreach (var hymnContent in textHymnContentInfo)
-                {
-                    // Hymn title
-                    html.Append($"<font class='HymnTitle'>{hymnContent.Title}</font><br /><br />");
-
-                    // English content
-                    if (!string.IsNullOrWhiteSpace(hymnContent.Content_English))
-                    {
-                        html.Append(@"<div><font class=""EnglishFont"">");
-                        html.Append(hymnContent.Content_English);
-                        html.Append(@"</font></div>");
-                    }
-
-                    // Coptic content
-                    if (!string.IsNullOrWhiteSpace(hymnContent.Content_Coptic))
-                    {
-                        html.Append(@"<div><font class=""CopticFont"">");
-                        html.Append(hymnContent.Content_Coptic);
-                        html.Append(@"</font></div>");
-                    }
-
-                    // Arabic Content
-                    if (!string.IsNullOrWhiteSpace(hymnContent.Content_Arabic))
-                    {
-                        html.Append(@"<div style=""text-align: right; direction: rtl; padding-right: 15px""><font class=""ArabicFont"">");
-                        html.Append(hymnContent.Content_Arabic);
-                        html.Append(@"</font></div>");
-                    }
-
-                    // hymn content separator
-                    html.Append("<br /><br />");
-                    html.Append("<br /><br />");
-                    html.Append("<hr /><br />");
-                }
-
-                source.Html = html.Append("</body></html>").ToString();
-                orderedPages[0] = new ContentPage
-                {
-                    Icon = Device.RuntimePlatform == Device.iOS ? "file.png" : null,
-                    Title = "Text",
-                    Content = new WebView { Source = source }
-                };
-
-                UpdateTabs();
+                textHymnContentInfo = e.Result;
             }
+
+            RenderText();
+        }
+
+        private void RenderText()
+        {
+            lock (textContentLock)
+            {
+                if (textHymnContentInfo == null || textHymnContentInfo.FirstOrDefault() == null || textDelimiter == null)
+                {
+                    // waiting on service call to be completed, or no text content available
+                    return;
+                }
+            }
+
+            HtmlWebViewSource source = new HtmlWebViewSource();
+            var html = new StringBuilder();
+            source.BaseUrl = DependencyService.Get<IWebAssets>().Get();
+
+            //Append Coptic Font css
+            html.Append(HtmlHeaderFormatString);
+
+            foreach (var hymnContent in textHymnContentInfo)
+            {
+                // setup container
+                html.AppendLine($"<div class=\"{BootsrapContainerCssClass}\">");
+
+                RenderHymnTitleRow(html, hymnContent.Title);
+
+                var Text_English = hymnContent.Content_English;
+                var Text_Coptic = hymnContent.Content_Coptic;
+                var Text_Arabic = hymnContent.Content_Arabic;
+
+                // A loop to extract each row and display in a grid format
+                do
+                {
+                    // variables that hold the current cell content
+                    string currentEnglish = ExtractNextTextContent(ref Text_English, textDelimiter).Trim();
+                    string currentCoptic = ExtractNextTextContent(ref Text_Coptic, textDelimiter).Trim();
+                    string currentArabic = ExtractNextTextContent(ref Text_Arabic, textDelimiter).Trim();
+
+                    // open new content row
+                    html.AppendLine("<div class=\"row\">");
+
+                    RenderHymnContentColumn2(html, EnglishHtmlProperties, currentEnglish);
+                    RenderHymnContentColumn2(html, CopticHtmlProperties, currentCoptic);
+                    RenderHymnContentColumn2(html, ArabicHtmlProperties, currentArabic);
+
+                    // close row
+                    html.AppendLine("</div>");
+
+                } while (!string.IsNullOrWhiteSpace(Text_English) ||
+                !string.IsNullOrWhiteSpace(Text_Coptic) ||
+                !string.IsNullOrWhiteSpace(Text_Arabic));
+
+                RenderContentSeparator(html);
+
+                // close container
+                html.AppendLine("</div>");
+            }
+
+            source.Html = html.Append("</body></html>").ToString();
+            orderedPages[0] = new ContentPage
+            {
+                Icon = Device.RuntimePlatform == Device.iOS ? "file.png" : null,
+                Title = "Text",
+                Content = new WebView { Source = source }
+            };
+
+            UpdateTabs();
 
             IsBusy = false;
         }
@@ -267,8 +326,7 @@ Hymn text Styles
 
                 foreach (var hymnContent in hazzatHymnContentInfo)
                 {
-                    // Hymn title
-                    html.Append($"<font class='HymnTitle'>{hymnContent.Title}</font><br /><br />");
+                    RenderHymnTitleRow(html, hymnContent.Title);
 
                     if (!string.IsNullOrWhiteSpace(hymnContent.Content_Coptic))
                     {
@@ -326,8 +384,7 @@ Hymn text Styles
 
                 foreach (var hymnContent in verticalHazzatHymnContent)
                 {
-                    // Hymn title
-                    html.Append($"<font class='HymnTitle'>{hymnContent.Title}</font><br /><br />");
+                    RenderHymnTitleRow(html, hymnContent.Title);
 
                     if (!string.IsNullOrWhiteSpace(hymnContent.Content_Coptic))
                     {
@@ -394,5 +451,94 @@ Hymn text Styles
                 }                
             }
         }
+
+        private static void RenderHymnTitleRow(StringBuilder html, string hymnTitle)
+        {
+            html.AppendLine("<div class=\"row\">");
+            html.AppendLine($"<div class=\"{BootstrapCol12CssClass}\">");
+            html.AppendLine($"<font class=\"HymnTitle\">{hymnTitle}</font>");
+            html.AppendLine("</div>");
+            html.AppendLine("</div>");
+        }
+
+        private static string ExtractNextTextContent(ref string contentString, string textDelimiter)
+        {
+            int breakPos = contentString.IndexOf(textDelimiter);
+
+            if (breakPos == -1)
+            {
+                // Last row to be typed or empty row
+                string returnString = contentString;
+                contentString = String.Empty;
+                return returnString;
+            }
+            else
+            {
+                string returnString = contentString.Substring(0, breakPos);
+                contentString = contentString.Remove(0, breakPos + textDelimiter.Length);
+                return returnString;
+            }
+        }
+
+        private static void RenderHymnContentColumn(StringBuilder html, LanguageHtmlProperties htmlProperties, string contentText)
+        {
+            if (string.IsNullOrWhiteSpace(contentText))
+            {
+                return;
+            }
+
+            // open column
+            html.AppendLine($"<div class=\"{htmlProperties.BootstrapColCssClass}\">");
+
+            html.Append("<div style=\"text-align: justify; padding: 5px;");
+
+            if (htmlProperties.IsRTL)
+            {
+                html.Append(" direction: rtl;");
+            }
+
+            html.AppendLine(">");
+            html.AppendLine($"<font class=\"{htmlProperties.FontCssClass}\">{contentText}</font>");
+            html.AppendLine("</div>");
+
+            // close column
+            html.AppendLine("</div>");
+        }
+
+        private static void RenderHymnContentColumn2(StringBuilder html, LanguageHtmlProperties htmlProperties, string contentText)
+        {
+            if (string.IsNullOrWhiteSpace(contentText))
+            {
+                return;
+            }
+
+            // open column
+            html.Append($"<div class=\"{htmlProperties.BootstrapColCssClass}\" style=\"text-align: justify; ");
+
+            if (htmlProperties.IsRTL)
+            {
+                html.Append(" direction: rtl;");
+            }
+
+            html.AppendLine("\">");
+            html.AppendLine($"<font class=\"{htmlProperties.FontCssClass}\">{contentText}</font>");
+
+            // close column
+            html.AppendLine("</div>");
+        }
+
+        private static void RenderContentSeparator(StringBuilder html)
+        {
+            html.AppendLine("<div class=\"row\">");
+            html.AppendLine($"<div class=\"{BootstrapCol12CssClass}\">");
+            
+            // hymn content separator
+            html.Append("<br /><br />");
+            html.Append("<hr /><br />");
+
+            html.AppendLine("</div>");
+            html.AppendLine("</div>");
+        }
+
     }
 }

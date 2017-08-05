@@ -115,9 +115,19 @@ namespace Hazzat.Service
             DataProvider.Instance().GetTuneList(callback);
         }
 
+        /// <summary>
+        /// Gets the list of seasons containing hymns of the given tune id, then calls the callback method upon completion.
+        /// </summary>
+        /// <param name="tuneId">The tune id.</param>
+        /// <param name="callback">Call back method upon completion.</param>
         public void GetSeasonsByTuneId(int tuneId, Action<object, GetSeasonsByTuneIDCompletedEventArgs> callback)
         {
             DataProvider.Instance().GetSeasonsByTuneId(tuneId, callback);
+        }
+
+        public void GetTextRowDelimiterToken(Action<object, GetTextRowDelimiterTokenCompletedEventArgs> callback)
+        {
+            DataProvider.Instance().GetTextRowDelimiterToken(callback);
         }
     }
 }

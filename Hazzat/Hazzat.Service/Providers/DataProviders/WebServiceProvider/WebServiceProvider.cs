@@ -143,5 +143,15 @@ namespace Hazzat.Service.Providers.DataProviders.WebServiceProvider
                 client.GetSeasonsByTuneIDAsync(tuneId);
             });
         }
+
+        public override void GetTextRowDelimiterToken(Action<object, GetTextRowDelimiterTokenCompletedEventArgs> callback)
+        {
+            WebServiceHelper.Execute(() =>
+            {
+                HazzatWebServiceSoapClient client = new HazzatWebServiceSoapClient(HazzatServiceBinding, new EndpointAddress(HazzatServiceEndpoint));
+                client.GetTextRowDelimiterTokenCompleted += new EventHandler<GetTextRowDelimiterTokenCompletedEventArgs>(callback);
+                client.GetTextRowDelimiterTokenAsync();
+            });
+        }
     }
 }

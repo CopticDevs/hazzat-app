@@ -47,6 +47,7 @@ namespace Hazzat.Service.Data
         public abstract void GetServiceHymnListBySeasonIdAndTuneId(int seasonId, int tuneId, Action<object, GetServiceHymnListBySeasonIdAndTuneIdCompletedEventArgs> callback);
         public abstract void GetTuneList(Action<object, GetTuneListCompletedEventArgs> callback);
         public abstract void GetSeasonsByTuneId(int tuneId, Action<object, GetSeasonsByTuneIDCompletedEventArgs> callback);
+        public abstract void GetTextRowDelimiterToken(Action<object, GetTextRowDelimiterTokenCompletedEventArgs> callback);
 
         #endregion
     }
