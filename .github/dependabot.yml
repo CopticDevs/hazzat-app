@@ -1,0 +1,14 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  reviewers:
+  - behoyh
+  - fadyham
+  ignore:
+  - dependency-name: CommonServiceLocator
+    versions:
+    - 2.0.5
